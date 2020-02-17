@@ -1,0 +1,6 @@
+[
+    { "title": "Jardinería", "subtitle": "Un pasto bien cuidado...<br>Comienza con el equipo adecuado.", "image": "assets/images/productos/Cover/podadora.jpg", "url": ""},
+    { "title": "Agricultura", "subtitle": "Tu proyecto merece el mejor respaldo.", "image": "assets/images/productos/Cover/motocultor.jpg" },
+
+    { "title": "Aspersoras", "subtitle": "Para cuidar tu esfuerzo,<br>es bueno contar con el mejor equipo", "image": "assets/images/productos/Cover/aspersora.jpg" }
+]
