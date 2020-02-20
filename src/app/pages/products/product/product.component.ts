@@ -7,8 +7,8 @@ import {Data, AppService} from '../../../app.service';
 import {Product} from '../../../app.models';
 import {emailValidator} from '../../../theme/utils/app-validators';
 import {ProductZoomComponent} from './product-zoom/product-zoom.component';
-import { Title, Meta } from '@angular/platform-browser';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import {Title, Meta} from '@angular/platform-browser';
+import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import {DialogComponent} from '../../../shared/dialog/dialog.component';
 import {ProductDialogComponent} from '../../../shared/products-carousel/product-dialog/product-dialog.component';
 
@@ -43,6 +43,8 @@ export class ProductComponent implements OnInit {
     json;
     faWhatsapp = faWhatsapp;
     public distributions = [];
+    window;
+
     constructor(public appService: AppService,
                 private activatedRoute: ActivatedRoute,
                 public dialog: MatDialog,
@@ -55,8 +57,11 @@ export class ProductComponent implements OnInit {
 
     ngOnInit() {
 
+        this.window = (typeof window !== "undefined") ? window : null;
         this.sub = this.activatedRoute.params.subscribe(params => {
-            setTimeout(() => { this.scrollToTop(); }, 300);
+            setTimeout(() => {
+                this.scrollToTop();
+            }, 300);
 
             this.getProductByName(params.product);
             this.getRelatedProducts(params.product);
@@ -64,7 +69,7 @@ export class ProductComponent implements OnInit {
             // this.scrollToTop();
         });
 
-        if (window.innerWidth < 1280) {
+        if (this.window.innerWidth < 1280) {
             this.sidenavOpen = false;
         }
 
@@ -99,7 +104,7 @@ export class ProductComponent implements OnInit {
 
     @HostListener('window:resize')
     public onWindowResize(): void {
-        (window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true;
+        (this.window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true;
     }
 
     /*public getBrands() {
@@ -130,30 +135,30 @@ export class ProductComponent implements OnInit {
     private getProductByName(product) {
         this.appService.getProductByName(product).subscribe(data => {
             // @ts-ignore
-            if (data == 0){
+            if (data == 0) {
                 this.router.navigate(['/busqueda/no-encontrado']);
                 return;
             }
             this.product = data;
             this.json = {
-                "@context" : "http://schema.org",
-                "@type" : "Product",
-                "name" : this.product.name,
-                "mpn": this.product.mpn,
-                "brand": this.product.brand,
-                "image" : data.images[0].medium,
-                "description" : this.product.description,
-                "offers" : {
-                    "@type" : "Offer",
-                    "price" : this.product.newPrice
+                '@context': 'http://schema.org',
+                '@type': 'Product',
+                'name': this.product.name,
+                'mpn': this.product.mpn,
+                'brand': this.product.brand,
+                'image': data.images[0].medium,
+                'description': this.product.description,
+                'offers': {
+                    '@type': 'Offer',
+                    'price': this.product.newPrice
                 }
             };
             this.dataSheet = this.product.dataSheet;
             this.image = data.images[0].medium;
             this.zoomImage = data.images[0].big;
-            this.meta.updateTag({name: 'description', content: this.product.metaDescription.substr(0,150)});
+            this.meta.updateTag({name: 'description', content: this.product.metaDescription.substr(0, 150)});
             this.meta.updateTag({name: 'keywords', content: this.product.keywords});
-            this.title.setTitle(this.product.metaTitle.substr(0,70));
+            this.title.setTitle(this.product.metaTitle.substr(0, 70));
             this.refreshPage();
         });
     }
@@ -177,7 +182,7 @@ export class ProductComponent implements OnInit {
     }
 
     public onMouseMove(e) {
-        if (window.innerWidth >= 1280) {
+        if (this.window.innerWidth >= 1280) {
             let image, offsetX, offsetY, x, y, zoomer;
             image = e.currentTarget;
             offsetX = e.offsetX;
@@ -209,12 +214,13 @@ export class ProductComponent implements OnInit {
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
+
     public createForm() {
         this.form = this.formBuilder.group({
             comentario: [null, Validators.minLength(4)],
             nombre: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
             telefono: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')])],
-            email: [null, Validators.compose([Validators.required, emailValidator ])],
+            email: [null, Validators.compose([Validators.required, emailValidator])],
             whatsapp: [null, Validators.compose([Validators.minLength(10), Validators.pattern('[0-9]*')])],
             producto: [this.productName, Validators.compose([Validators.required])],
         });
@@ -254,19 +260,21 @@ export class ProductComponent implements OnInit {
     }
 
     public scrollToTop() {
-        const scrollDuration = 20;
-        const scrollStep = -window.pageYOffset / (scrollDuration / 20);
-        const scrollInterval = setInterval(() => {
-            if (window.pageYOffset !== 0) {
-                window.scrollBy(0, scrollStep);
-            } else {
-                clearInterval(scrollInterval);
+        if(this.window){
+            const scrollDuration = 20;
+            const scrollStep = -this.window.pageYOffset / (scrollDuration / 20);
+            const scrollInterval = setInterval(() => {
+                if (this.window.pageYOffset !== 0) {
+                    this.window.scrollBy(0, scrollStep);
+                } else {
+                    clearInterval(scrollInterval);
+                }
+            }, 10);
+            if (this.window.innerWidth <= 768) {
+                setTimeout(() => {
+                    this.window.scrollTo(0, 0);
+                });
             }
-        }, 10);
-        if (window.innerWidth <= 768) {
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-            });
         }
     }
 

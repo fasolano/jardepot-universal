@@ -10,8 +10,8 @@ import {sanitizeHtmlPipe} from './sanitizeHtml.pipe';
 import {TruncatePipe} from './truncate.pipe';
 
 @NgModule({
-    imports: [ 
-        CommonModule 
+    imports: [
+        CommonModule
     ],
     declarations: [
         FilterByIdPipe,

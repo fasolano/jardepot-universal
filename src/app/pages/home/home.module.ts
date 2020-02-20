@@ -10,12 +10,12 @@ export const routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        SharedModule,
-        NgxJsonLdModule
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    SharedModule,
+    NgxJsonLdModule
+  ],
   declarations: [
     HomeComponent
   ]

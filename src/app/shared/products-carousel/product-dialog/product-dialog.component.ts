@@ -5,60 +5,60 @@ import {Data, AppService} from '../../../app.service';
 import {Product} from '../../../app.models';
 
 @Component({
-    selector: 'app-product-dialog',
-    templateUrl: './product-dialog.component.html',
-    styleUrls: ['./product-dialog.component.scss'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-product-dialog',
+  templateUrl: './product-dialog.component.html',
+  styleUrls: ['./product-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class ProductDialogComponent implements OnInit {
-    public config: SwiperConfigInterface = {};
+  public config: SwiperConfigInterface = {};
 
-    constructor(public appService: AppService,
-                public dialogRef: MatDialogRef<ProductDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public product: Product) {
-    }
+  constructor(public appService: AppService,
+              public dialogRef: MatDialogRef<ProductDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public product: Product) {
+  }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
-    ngAfterViewInit() {
-        this.config = {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            keyboard: true,
-            navigation: true,
-            pagination: false,
-            grabCursor: true,
-            loop: false,
-            preloadImages: false,
-            lazy: true,
-            effect: 'fade',
-            fadeEffect: {
-                crossFade: true
-            }
-        };
-    }
+  ngAfterViewInit() {
+    this.config = {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      keyboard: true,
+      navigation: true,
+      pagination: false,
+      grabCursor: true,
+      loop: false,
+      preloadImages: false,
+      lazy: true,
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      }
+    };
+  }
 
-    public close(): void {
-        this.dialogRef.close();
-    }
+  public close(): void {
+    this.dialogRef.close();
+  }
 
-    public changeString($productType, $brand, $mpn){
-        $brand = $brand.replace(/ /g, "_");
-        $mpn = $mpn.replace(/-/g, "_");
-        $productType = $productType.replace(/ /g, "_");
-        return $productType + '-' + $brand + '-' + $mpn;
-    }
+  public changeString($productType, $brand, $mpn){
+    $brand = $brand.replace(/ /g, "_");
+    $mpn = $mpn.replace(/-/g, "_");
+    $productType = $productType.replace(/ /g, "_");
+    return $productType + '-' + $brand + '-' + $mpn;
+  }
 
-    public changeStringBrand($brand){
-        return $brand.replace(/ /g, "_");
-    }
-    public handleImgError(ev: any) {
-        const source = ev.srcElement;
-        const imgSrc = `assets/images/images/generico2.jpg`;
-        source.src = imgSrc;
-    }
+  public changeStringBrand($brand){
+    return $brand.replace(/ /g, "_");
+  }
+  public handleImgError(ev: any) {
+    const source = ev.srcElement;
+    const imgSrc = `assets/images/images/generico2.jpg`;
+    source.src = imgSrc;
+  }
 }

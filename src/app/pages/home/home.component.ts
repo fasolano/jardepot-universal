@@ -18,11 +18,11 @@ export class HomeComponent implements OnInit {
     public productTypes: Array<any>;
     public additional = [];
     json;
-    public text = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM, FEDEX).<br>" +
-        "NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>" +
-        "NO aplica con otras paqueterías<br>" +
-        "El tiempo de entrega estimado y sujeto a existencias es de 2 a 6 días hábiles, (Mínimo/Máximo) contados a partir de las siguientes " +
-        "24 hrs de que su depósito se ha verificado y de recibir su correo con los datos completos para facturar y enviar su producto.<br><br>";
+    public text = 'Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM, FEDEX).<br>' +
+        'NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>' +
+        'NO aplica con otras paqueterías<br>' +
+        'El tiempo de entrega estimado y sujeto a existencias es de 2 a 6 días hábiles, (Mínimo/Máximo) contados a partir de las siguientes ' +
+        '24 hrs de que su depósito se ha verificado y de recibir su correo con los datos completos para facturar y enviar su producto.<br><br>';
 
     constructor(public appService: AppService,
                 public dialog: MatDialog,
@@ -38,32 +38,31 @@ export class HomeComponent implements OnInit {
         this.getAdditional();
         this.getMetas();
         this.json = {
-            "@context": "http://schema.org",
-            "@type": "Organization",
-            "name": "Jardepot",
-            "url": "http://jardepot.com",
-            "address": "Av. Emiliano Zapata 129, Tlaltenango, 62170 Cuernavaca, Mor., México",
-            "sameAs": [
-                "https://www.facebook.com/Jardepot",
-                "https://www.instagram.com/jardepotsade",
-                "https://twitter.com/jardepot",
-                "https://www.youtube.com/channel/UCym0cCHYeEDqs70RD7Zs2-g"
+            '@context': 'http://schema.org',
+            '@type': 'Organization',
+            'name': 'Jardepot',
+            'url': 'http://jardepot.com',
+            'address': 'Av. Emiliano Zapata 129, Tlaltenango, 62170 Cuernavaca, Mor., México',
+            'sameAs': [
+                'https://www.facebook.com/Jardepot',
+                'https://www.instagram.com/jardepotsade',
+                'https://twitter.com/jardepot',
+                'https://www.youtube.com/channel/UCym0cCHYeEDqs70RD7Zs2-g'
             ]
         };
     }
+
     public getMetas() {
         this.appService.getDescriptionNivel2('index', 'index').subscribe(data => {
             const res = JSON.parse(JSON.stringify(data));
-            this.meta.updateTag({name: 'description', content: res.result.metadescription.substr(0,150)});
+            this.meta.updateTag({name: 'description', content: res.result.metadescription.substr(0, 150)});
             this.meta.updateTag({name: 'keywords', content: res.result.keywords});
-            this.title.setTitle(res.result.metatitle.substr(0,70));
+            this.title.setTitle(res.result.metatitle.substr(0, 70));
         });
     }
 
     public getBanners() {
-        this.appService.getBanners().subscribe(data => {
-            this.banners = data;
-        });
+        this.banners = this.appService.getBanners();
     }
 
     public getDistributions() {
@@ -91,12 +90,12 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    public openDeliveryTermsDialog(){
-        const textBody = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM, FEDEX).<br>" +
-            "NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>" +
-            "NO aplica con otras paqueterías<br>" +
-            "El tiempo de entrega estimado y sujeto a existencias es de 2 a 6 días hábiles, (Mínimo/Máximo) contados a partir de las siguientes " +
-            "24 hrs de que su depósito se ha verificado y de recibir su correo con los datos completos para facturar y enviar su producto.<br><br>";
+    public openDeliveryTermsDialog() {
+        const textBody = 'Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM, FEDEX).<br>' +
+            'NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>' +
+            'NO aplica con otras paqueterías<br>' +
+            'El tiempo de entrega estimado y sujeto a existencias es de 2 a 6 días hábiles, (Mínimo/Máximo) contados a partir de las siguientes ' +
+            '24 hrs de que su depósito se ha verificado y de recibir su correo con los datos completos para facturar y enviar su producto.<br><br>';
         const dialogRef = this.dialog.open(DialogComponent, {
             panelClass: 'generic-dialog',
             direction: 'ltr'

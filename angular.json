@@ -4,6 +4,8 @@
   "newProjectRoot": "projects",
   "projects": {
     "emporium": {
+
+
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -30,13 +32,13 @@
         }
       },
       "root": "",
-      "sourceRoot": "src", 
-      "prefix": "app", 
+      "sourceRoot": "src",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -136,9 +138,43 @@
               "devServerTarget": "emporium:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "bundleDependencies": "none"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "app-shell": {
+          "builder": "@angular-devkit/build-angular:app-shell",
+          "options": {
+            "browserTarget": "emporium:build",
+            "serverTarget": "emporium:server",
+            "route": "shell"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "emporium:build:production",
+              "serverTarget": "emporium:server:production"
+            }
+          }
         }
       }
-    } 
+    }
   },
   "defaultProject": "emporium"
 }
+

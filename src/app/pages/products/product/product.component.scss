@@ -44,7 +44,7 @@
     }
     .mat-chip-list{
         position: absolute;
-        top: 10px; 
+        top: 10px;
         left: 10px;
         pointer-events: none;
     }
@@ -62,7 +62,7 @@
             }
         }
     }
-    .swiper-button-next.swiper-button-disabled, 
+    .swiper-button-next.swiper-button-disabled,
     .swiper-button-prev.swiper-button-disabled{
         opacity: 0;
     }
@@ -127,7 +127,7 @@
     font-size: 12px;
 }
 
-@media (min-width: 1280px) {  
+@media (min-width: 1280px) {
     .mat-card.product-image img{
         cursor: zoom-in;
         cursor:url('../../../../assets/images/others/zoom.svg') 10 10, zoom-in;

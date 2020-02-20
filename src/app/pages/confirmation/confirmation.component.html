@@ -7,8 +7,9 @@
             </button>
             <i class="c-icon hq-icon hq-icon-category-pole-saws hq-icon-large " title=""></i>
             <h2 class="py-2">Gracias por tu compra por {{payment}}.</h2>
-            <h2 class="py-1">Tu pedido se procesará en breve y te informaremos el número de guía de paquetería que le corresponde.</h2>
-            <h2 class="py-2">Si tienes alguna duda por favor contáctanos 800 212 9225.</h2>
+            <h2 class="py-1">Tu pedido ha comenzado a procesarse.</h2>
+            <h2 class="py-1">En breve te compartiremos tu número de guia y la factura correspondiente.</h2>
+            <h2 class="py-2">Si tienes alguna duda por favor contactanos 800 212 9225.</h2>
         </div>
     </div>
     <div *ngIf="state == 'pending'" fxLayout="row" fxLayoutAlign="center center">
@@ -18,7 +19,7 @@
             </button>
             <h2 class="py-2">Estamos validando tu pago con {{payment}}.</h2>
             <h2 class="py-1">En breve comenzaremos a procesar tu pedido.</h2>
-            <h2 class="py-2">Si tienes alguna duda por favor contáctanos 800 212 9225.</h2>
+            <h2 class="py-2">Si tienes alguna duda por favor contactanos 800 212 9225.</h2>
         </div>
     </div>
     <div *ngIf="state == 'failure'" fxLayout="row" fxLayoutAlign="center center">
@@ -29,7 +30,7 @@
             <h2 class="py-2">Algo ha salido mal, {{payment}} no ha procesado correctamente tu compra.</h2>
             <h2 class="py-1">Sabemos que en ocasiones esto puede ser frustrante. Comunicate con nosotros, te apoyaremos en lo que necesites.</h2>
             <h2 class="py-1">Por favor intentalo de nuevo.</h2>
-            <h2 class="py-2">Estamos aquí para ayudarte contáctanos 800 212 9225</h2>
+            <h2 class="py-2">Estamos aquí para ayudarte contactanos 800 212 9225</h2>
         </div>
     </div>
 </div>

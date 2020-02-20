@@ -47,21 +47,18 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 import {PipesModule} from '../theme/pipes/pipes.module';
-import {RatingComponent} from './rating/rating.component';
 import {ControlsComponent} from './controls/controls.component';
-import {MainCarouselComponent} from './main-carousel/main-carousel.component';
 import {BrandsCarouselComponent} from './brands-carousel/brands-carousel.component';
 import {ProductsCarouselComponent} from './products-carousel/products-carousel.component';
 import {ProductDialogComponent} from './products-carousel/product-dialog/product-dialog.component';
-import {TelephoneDialogComponent} from '../theme/components/menu/telephone-dialog/telephone-dialog.component';
 import {BannersComponent} from './banners/banners.component';
-import {CategoryListComponent} from './category-list/category-list.component';
-import {SectionsPanelComponent} from './sections-panel/sections-panel.component';
-import {TelephoneBarComponent} from './telephone-bar/telephone-bar.component';
+import { TelephoneDialogComponent } from '../theme/components/menu/telephone-dialog/telephone-dialog.component';
+import { SectionsPanelComponent } from './sections-panel/sections-panel.component';
+import { TelephoneBarComponent } from './telephone-bar/telephone-bar.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {SectionsSideComponent} from './sections-side/sections-side.component';
-import {DialogComponent} from './dialog/dialog.component';
-import {JsonLdComponent} from './json-ld/json-ld.component';
+import { SectionsSideComponent } from './sections-side/sections-side.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { JsonLdComponent } from './json-ld/json-ld.component';
 
 @NgModule({
     imports: [
@@ -141,33 +138,27 @@ import {JsonLdComponent} from './json-ld/json-ld.component';
         MatStepperModule,
         PerfectScrollbarModule,
         PipesModule,
-        RatingComponent,
         ControlsComponent,
-        MainCarouselComponent,
         BrandsCarouselComponent,
         ProductsCarouselComponent,
-        TelephoneDialogComponent,
         ProductDialogComponent,
         BannersComponent,
-        CategoryListComponent,
         SectionsPanelComponent,
+        TelephoneDialogComponent,
         TelephoneBarComponent,
         SectionsSideComponent,
         DialogComponent,
         JsonLdComponent
     ],
     declarations: [
-        RatingComponent,
         ControlsComponent,
-        MainCarouselComponent,
         BrandsCarouselComponent,
         ProductsCarouselComponent,
         ProductDialogComponent,
         TelephoneDialogComponent,
         BannersComponent,
-        CategoryListComponent,
-        SectionsPanelComponent,
         TelephoneBarComponent,
+        SectionsPanelComponent,
         SectionsSideComponent,
         DialogComponent,
         JsonLdComponent

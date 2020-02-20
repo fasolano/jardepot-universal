@@ -3,9 +3,9 @@
 </div>
 <div mat-dialog-content>
     <div fxLayout="row wrap">
-        <div fxFlex="100" fxFlex.gt-sm="50"> 
+        <div fxFlex="100" fxFlex.gt-sm="50">
             <div class="swiper-container h-100" [swiper]="config">
-                <div class="swiper-wrapper">      
+                <div class="swiper-wrapper">
                     <div *ngFor="let image of product.images" class="swiper-slide">
                         <img [attr.data-src]="image.medium" class="swiper-lazy" title="{{product?.productType+' '+product?.brand+' '+product?.mpn}}"
                              alt="{{product?.productType+' '+product?.brand+' '+product?.mpn}}" (error)="handleImgError($event)"/>
@@ -44,7 +44,7 @@
                     Ver ficha completa <button [mat-dialog-close] mat-icon-button matTooltip="Ver ficha completa"><mat-icon>arrow_forward</mat-icon></button>
                 </a>
             </div>
-      </div>
+        </div>
 
 
     </div>

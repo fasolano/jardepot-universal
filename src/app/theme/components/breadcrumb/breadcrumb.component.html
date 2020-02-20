@@ -5,13 +5,13 @@
                 <mat-icon>home</mat-icon>
                 <span class="breadcrumb-title">Inicio</span>
             </a>
-            <div *ngFor="let breadcrumb of breadcrumbs; let i = index;" class="breadcrumb-item" fxLayout="row" fxLayoutAlign="start center">                 
+            <div *ngFor="let breadcrumb of breadcrumbs; let i = index;" class="breadcrumb-item" fxLayout="row" fxLayoutAlign="start center">
                 <a *ngIf="i < (breadcrumbs.length - 2)">{{breadcrumb.name}}</a>
                 <a *ngIf="i == (breadcrumbs.length - 2) && breadcrumb.url == '/'" [routerLink]="[breadcrumb.url, breadcrumb.level1, breadcrumb.level2]">{{breadcrumb.name}}</a>
                 <a *ngIf="i == (breadcrumbs.length - 2) && breadcrumb.url != '/'" >{{breadcrumb.name}}</a>
                 <span *ngIf="i == (breadcrumbs.length - 1)" class="active"><b>{{breadcrumb.name}}</b></span>
-            </div> 
+            </div>
         </mat-card>
-    </div> 
+    </div>
 </div>
 

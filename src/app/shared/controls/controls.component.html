@@ -1,14 +1,14 @@
 <!-- Diseño en el grid de todos los productos -->
 <div *ngIf="type!='cart' && type!='product'" fxLayout="column" fxLayout.xs="column" [fxLayoutAlign]="align" class="text-muted" style="height: 40px;">
-<!--    <div *ngIf="product?.availibilityCount > 0 && type!='carousel'">-->
-<!--        <bdi>-->
-<!--            <span class="fw-500">Cantidad:</span>-->
-<!--            <br>-->
-<!--            <button mat-icon-button matTooltip="Quitar" (click)="decrement()"><mat-icon>remove</mat-icon></button>-->
-<!--            <span> {{count}} </span>-->
-<!--            <button mat-icon-button matTooltip="Más" (click)="increment()"><mat-icon>add</mat-icon></button>-->
-<!--        </bdi>-->
-<!--    </div>-->
+    <!--    <div *ngIf="product?.availibilityCount > 0 && type!='carousel'">-->
+    <!--        <bdi>-->
+    <!--            <span class="fw-500">Cantidad:</span>-->
+    <!--            <br>-->
+    <!--            <button mat-icon-button matTooltip="Quitar" (click)="decrement()"><mat-icon>remove</mat-icon></button>-->
+    <!--            <span> {{count}} </span>-->
+    <!--            <button mat-icon-button matTooltip="Más" (click)="increment()"><mat-icon>add</mat-icon></button>-->
+    <!--        </bdi>-->
+    <!--    </div>-->
     <div *ngIf="product?.stock">
         <button mat-button matTooltip="Agregar" [disabled]="busy" *ngIf="product?.availibilityCount > 0" (click)="addToCart(product)"><mat-icon class="fn-color-jd">shopping_cart</mat-icon> Agregar al carrito</button>
         <button *ngIf="type!='all'" mat-icon-button matTooltip="Vista rápida" (click)="openProductDialog(product)"><mat-icon>remove_red_eye</mat-icon></button>

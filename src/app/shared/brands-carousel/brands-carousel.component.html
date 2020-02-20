@@ -1,7 +1,7 @@
-<div class="brands-carousel"> 
+<div class="brands-carousel">
     <div class="swiper-container h-100" [swiper]="config">
         <p class="mat-card-title">Nuestros canales de distribución en México</p>
-        <div class="swiper-wrapper h-100">      
+        <div class="swiper-wrapper h-100">
             <div *ngFor="let brand of brands" class="swiper-slide">
                 <div class="p-0" fxLayout="column" fxLayoutAlign="center center" style="height: 112px;">
                     <a href="{{brand.url}}" target="_blank" class="brand-item" style="text-decoration: none;">

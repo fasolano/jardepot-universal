@@ -18,19 +18,19 @@ export class CartComponent implements OnInit {
 
     ngOnInit() {
         this.appService.Data.cartList.forEach(product => {
-            this.total.push({"id":product.id, "total":product.cartCount * product.newPrice});
+            this.total.push({'id': product.id, 'total': product.cartCount * product.newPrice});
             this.grandTotal += product.cartCount * product.newPrice;
-            this.cartItemCount.push({"id":product.id, "soldQuantity":product.cartCount});
+            this.cartItemCount.push({'id': product.id, 'soldQuantity': product.cartCount});
             this.cartItemCountTotal += product.cartCount;
         });
     }
 
-    public getTotal($producto){
-        if(this.total.length == 0){
+    public getTotal($producto) {
+        if (this.total.length == 0) {
             this.appService.Data.cartList.forEach(product => {
-                this.total.push({"id":product.id, "total":product.cartCount * product.newPrice});
+                this.total.push({'id': product.id, 'total': product.cartCount * product.newPrice});
                 this.grandTotal += product.cartCount * product.newPrice;
-                this.cartItemCount.push({"id":product.id, "soldQuantity":product.cartCount});
+                this.cartItemCount.push({'id': product.id, 'soldQuantity': product.cartCount});
                 this.cartItemCountTotal += product.cartCount;
             });
         }
@@ -42,17 +42,17 @@ export class CartComponent implements OnInit {
             // this.total[value.productId] = value.total;
             // let indexOf = this.total.findIndex({"id":value.productId, "total":((value.total / value.soldQuantity) * (value.soldQuantity-1))});
             let indexOf = this.total.findIndex(item => item.id == value.productId);
-            if(indexOf >= 0){
+            if (indexOf >= 0) {
                 this.total[indexOf].total = value.total;
-            }else{
-                this.total.push({"id":value.productId, "total":value.total});
+            } else {
+                this.total.push({'id': value.productId, 'total': value.total});
             }
             // this.cartItemCount[value.productId] = value.soldQuantity;
             indexOf = this.cartItemCount.findIndex(item => item.id == value.productId);
-            if(indexOf >= 0){
+            if (indexOf >= 0) {
                 this.cartItemCount[indexOf].soldQuantity = value.soldQuantity;
-            }else{
-                this.cartItemCount.push({"id":value.productId, "soldQuantity":value.soldQuantity});
+            } else {
+                this.cartItemCount.push({'id': value.productId, 'soldQuantity': value.soldQuantity});
             }
             this.grandTotal = 0;
             this.total.forEach((price, index) => {
@@ -69,7 +69,7 @@ export class CartComponent implements OnInit {
             this.appService.Data.cartList.forEach(product => {
                 this.cartItemCount.forEach((count, index) => {
                     if (product.id == count.id) {
-                        if(value.productId == product.id){
+                        if (value.productId == product.id) {
                             productTemp = product;
                         }
                         product.cartCount = count.soldQuantity;
@@ -110,11 +110,11 @@ export class CartComponent implements OnInit {
             this.appService.Data.cartList.splice(index, 1);
             this.grandTotal = this.grandTotal - this.total[index].total;
             this.appService.Data.totalPrice = this.grandTotal;
-            this.total.splice(index,1);
+            this.total.splice(index, 1);
 
             this.cartItemCountTotal = this.cartItemCountTotal - this.cartItemCount[index].soldQuantity;
             this.appService.Data.totalCartCount = this.cartItemCountTotal;
-            this.cartItemCount.splice(index,1);
+            this.cartItemCount.splice(index, 1);
             this.appService.resetProductCartCount(product);
             this.appService.removeFromCart(product);
         }
@@ -129,15 +129,15 @@ export class CartComponent implements OnInit {
         this.appService.Data.totalCartCount = 0;
     }
 
-    public changeString($productType, $brand, $mpn){
-        $brand = $brand.replace(/ /g, "_");
-        $mpn = $mpn.replace(/-/g, "_");
-        $productType = $productType.replace(/ /g, "_");
+    public changeString($productType, $brand, $mpn) {
+        $brand = $brand.replace(/ /g, '_');
+        $mpn = $mpn.replace(/-/g, '_');
+        $productType = $productType.replace(/ /g, '_');
         return $productType + '-' + $brand + '-' + $mpn;
     }
 
-    public changeStringBrand($brand){
-        return $brand.replace(/ /g, "_");
+    public changeStringBrand($brand) {
+        return $brand.replace(/ /g, '_');
     }
 
 }

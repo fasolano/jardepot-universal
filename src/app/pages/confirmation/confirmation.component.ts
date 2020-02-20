@@ -25,27 +25,28 @@ export class ConfirmationComponent implements OnInit {
             let temp: string;
             this.state = params['state'];
             temp = params['data'];
+            /*if (params['token'] == undefined){
+                alert("Sin token");
+            }else{
+                alert("Con token");
+            }*/
             this.framengData = temp.split('?');
             this.payment = this.framengData[0];
             this.data = this.framengData[1];
             this.activatedRoute.queryParams.subscribe(getParams => {
                 this.data = getParams;
-                if (JSON.stringify(this.data) == "{}"){
-                }else{
-                    setTimeout(() => { this.spinner.show(); }, 1000);
-                    this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data)).subscribe(response => {
-                        if (this.cookieService.check('session')) {
-                            this.cookieService.delete('session', '/');
-                        }
-                        this.done = true;
-                        // @ts-ignore
-                        this.state = response.data;
-                        this.spinner.hide();
-                    });
-                }
-
+                this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data)).subscribe(response => {
+                    if (this.cookieService.check('session')) {
+                        this.cookieService.delete('session', '/');
+                    }
+                    this.done = true;
+                    // @ts-ignore
+                    this.state = response.data;
+                    this.spinner.hide();
+                });
             });
         });
+        setTimeout(() => { this.spinner.show(); }, 1000);
     }
 
 }
