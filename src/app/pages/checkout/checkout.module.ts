@@ -11,13 +11,13 @@ export const routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
-    SharedModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule,
+        SharedModule,
+        FormsModule
+    ],
   declarations: [
     CheckoutComponent
   ]

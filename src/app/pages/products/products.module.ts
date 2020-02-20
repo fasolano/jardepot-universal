@@ -13,25 +13,25 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgxJsonLdModule} from '@ngx-lite/json-ld';
 
 export const routes = [
-  { path: 'ofertas', component: ProductsComponent, breadcrumb: ':ofertas;' },
-  { path: 'busqueda/:search', component: ProductsComponent, breadcrumb: ':busqueda;' },
-  { path: 'catalogo/:brand/:product', component: ProductComponent, breadcrumb: ':product' },
-  { path: ':nivel1/:nivel2', component: ProductsComponent, breadcrumb: ':nivel1;:nivel2' }
+    { path: 'ofertas', component: ProductsComponent, breadcrumb: ':ofertas;' },
+    { path: 'busqueda/:search', component: ProductsComponent, breadcrumb: ':busqueda;' },
+    { path: 'catalogo/:brand/:product', component: ProductComponent, breadcrumb: ':product' },
+    { path: ':nivel1/:nivel2', component: ProductsComponent, breadcrumb: ':nivel1;:nivel2' }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    FormsModule,
-    ReactiveFormsModule,
-    SwiperModule,
-    NgxPaginationModule,
-    SharedModule,
-    PipesModule,
-    FontAwesomeModule,
-    NgxJsonLdModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        FormsModule,
+        ReactiveFormsModule,
+        SwiperModule,
+        NgxPaginationModule,
+        SharedModule,
+        PipesModule,
+        FontAwesomeModule,
+        NgxJsonLdModule
+    ],
   declarations: [
     ProductsComponent,
     ProductComponent,

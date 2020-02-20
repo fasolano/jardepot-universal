@@ -1,6 +1,6 @@
 <mat-sidenav-container style="display: flex;">
 
-    <mat-sidenav #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="filter-sidenav" [style.position]="sidenav.opened ? 'initial' : 'absolute'" perfectScrollbar>
+    <mat-sidenav #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="filter-sidenav" [style.position]="sidenavOpen ? 'initial' : 'absolute'" perfectScrollbar>
 
         <mat-expansion-panel  expanded *ngIf="busqueda">
             <mat-expansion-panel-header>
@@ -308,7 +308,7 @@
             <mat-card *ngIf="searchSend == true" class="text-center">
                 <div fxLayout="row" fxLayoutAlign="center" class="prices">
                     <div fxLayout="column" fxLayoutAlign="center" class="text-center">
-                        <h2 class="mt-1">Jardepot agradece tu confianza.</h2>
+                         <h2 class="mt-1">Jardepot agradece tu confianza.</h2>
                         <div class="divider"></div>
                         <p fxLayout="row" fxLayoutAlign="center" class="mt-1" >Nuestro equipo responderá tu solicitud a la brevedad.</p>
                         <p fxLayout="row" fxLayoutAlign="center" class="mt-1">Puedes contactarnos a través del correo: ventas@jardepot.com, o por el telefono al (777) 399 08 09</p>

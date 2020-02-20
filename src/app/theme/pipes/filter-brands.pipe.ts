@@ -8,8 +8,8 @@ export class FilterBrandsPipe implements PipeTransform {
         if(firstLetter == 'all'){
             return brands;
         }
-        else{            
+        else{
             return brands.filter(brand => brand.name.charAt(0) == firstLetter.toLowerCase());
-        }    
+        }
     }
 }

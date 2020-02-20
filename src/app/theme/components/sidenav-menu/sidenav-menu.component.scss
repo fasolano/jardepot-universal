@@ -32,16 +32,16 @@
     @include menu-level-padding();
     max-height: 0;
     overflow: hidden;
-    -webkit-transition: max-height 0.25s ease-out;
-    -moz-transition: max-height 0.25s ease-out;
-    transition: max-height 0.25s ease-out;
+    -webkit-transition: max-height 0.25s ease-out;  
+    -moz-transition: max-height 0.25s ease-out;  
+    transition: max-height 0.25s ease-out;    
     .mat-button{
-        padding-left: 36px;
-    }
+        padding-left: 36px;      
+    } 
     &.show{
         max-height: 500px;
         -webkit-transition: max-height 0.25s ease-in;
         -moz-transition: max-height 0.25s ease-in;
         transition: max-height 0.25s ease-in;
-    }
+    }    
 }

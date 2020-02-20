@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router, ActivatedRouteSnapshot, UrlSegment, NavigationEnd } from "@angular/router";
+import { ActivatedRoute, Router, ActivatedRouteSnapshot, UrlSegment, NavigationEnd } from "@angular/router"; 
 import { Title } from '@angular/platform-browser';
 import { AppService } from '../../../app.service';
 import { Settings, AppSettings } from '../../../app.settings';
 import { SidenavMenuService } from '../../../theme/components/sidenav-menu/sidenav-menu.service';
 import { Observable } from 'rxjs';
 import { map, filter, scan } from 'rxjs/operators';
-import {MatSnackBar} from '@angular/material';
 
 @Component({
-    selector: 'app-breadcrumb',
-    templateUrl: './breadcrumb.component.html',
-    styleUrls: ['./breadcrumb.component.scss'],
-    providers: [ SidenavMenuService ]
+  selector: 'app-breadcrumb',
+  templateUrl: './breadcrumb.component.html',
+  styleUrls: ['./breadcrumb.component.scss'],
+  providers: [ SidenavMenuService ]
 })
 export class BreadcrumbComponent {
 
@@ -24,7 +23,6 @@ export class BreadcrumbComponent {
         level1: string;
         level2: string;
     }[] = [];
-    window;
 
     public settings: Settings;
     constructor(public appSettings:AppSettings,
@@ -33,14 +31,14 @@ export class BreadcrumbComponent {
                 public activatedRoute: ActivatedRoute,
                 public title:Title,
                 public sidenavMenuService:SidenavMenuService){
-        this.window = (typeof window !== "undefined") ? window : null;
-        this.settings = this.appSettings.settings;
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                this.breadcrumbs = [];
-                this.parseRoute(this.router.routerState.snapshot.root);
-                this.previousUrl = event.url;
-            }
+
+            this.settings = this.appSettings.settings;
+            this.router.events.subscribe(event => {
+                if (event instanceof NavigationEnd) {
+                    this.breadcrumbs = [];
+                    this.parseRoute(this.router.routerState.snapshot.root);
+                    this.previousUrl = event.url;
+                }
         })
     }
 
@@ -91,7 +89,7 @@ export class BreadcrumbComponent {
     }
 
     public closeSubMenus() {
-        if(this.window.innerWidth < 960) {
+        if(window.innerWidth < 960) {
             this.sidenavMenuService.closeAllSubMenus();
         }
     }

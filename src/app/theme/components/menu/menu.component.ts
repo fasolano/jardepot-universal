@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import {AppService} from '../../../app.service';
 
 @Component({
@@ -22,8 +22,19 @@ export class MenuComponent implements OnInit {
         });
     }
 
-    public changeString($strign) {
-        return $strign.replace(/ /g, '-').toLowerCase();
+    public changeString($strign){
+        return $strign.replace(/ /g, "-").toLowerCase();
+    }
+
+    openMegaMenu() {
+        let pane = document.getElementsByClassName('cdk-overlay-pane');
+        [].forEach.call(pane, function(el) {
+            if (el.children.length > 0) {
+                if (el.children[0].classList.contains('mega-menu')) {
+                    el.classList.add('mega-menu-pane');
+                }
+            }
+        });
     }
 
 

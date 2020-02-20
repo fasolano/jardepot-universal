@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild, HostListener, Input, Injectable, ChangeDetectorRef} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MatDialog} from '@angular/material';
-import {ProductDialogComponent} from '../../shared/products-carousel/product-dialog/product-dialog.component';
-import {AppService} from '../../app.service';
-import {Product} from '../../app.models';
-import {Settings, AppSettings} from 'src/app/app.settings';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Meta, Title} from '@angular/platform-browser';
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
-import {DialogComponent} from '../../shared/dialog/dialog.component';
+import { Component, OnInit, ViewChild, HostListener, Input, Injectable, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { ProductDialogComponent } from '../../shared/products-carousel/product-dialog/product-dialog.component';
+import { AppService } from '../../app.service';
+import { Product } from '../../app.models';
+import { Settings, AppSettings } from 'src/app/app.settings';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { DialogComponent } from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-products',
@@ -48,13 +48,11 @@ export class ProductsComponent implements OnInit {
     public busquedaEmpty: boolean = false;
     public textSearch: string = '';
     public searchSend: boolean = false;
-    window;
     public form: FormGroup;
     public faWhatsapp = faWhatsapp;
     public descriptionNivel2: string;
     public titleProducts: string;
     public distributions = [];
-
     constructor(public appSettings: AppSettings,
                 private activatedRoute: ActivatedRoute,
                 public appService: AppService,
@@ -67,13 +65,12 @@ export class ProductsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.window = (typeof window !== 'undefined') ? window : null;
         this.products = [];
         this.count = this.counts[0];
         this.sort = this.sortings[0];
 
         this.form = this.formBuilder.group({
-            comentario: [null, Validators.compose([Validators.minLength(4)])],
+            comentario: [null,  Validators.compose([Validators.minLength(4)])],
             nombre: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
             telefono: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')])]
         });
@@ -98,12 +95,12 @@ export class ProductsComponent implements OnInit {
                     const res = JSON.parse(JSON.stringify(data));
                     this.descriptionNivel2 = res.result.texto;
 
-                    this.meta.updateTag({name: 'description', content: res.result.metadescription.substr(0, 150)});
+                    this.meta.updateTag({name: 'description', content: res.result.metadescription.substr(0,150)});
                     this.meta.updateTag({name: 'keywords', content: res.result.keywords});
-                    this.title.setTitle(res.result.metatitle.substr(0, 70));
+                    this.title.setTitle(res.result.metatitle.substr(0,70));
                 });
                 this.titleProducts = this.nivel2;
-            } else if (params['search'] !== undefined) {
+            } else if(params['search'] !== undefined) {
                 this.busqueda = false;
                 this.busquedaEmpty = false;
                 this.appService.getProductsSearch(params['search']).subscribe(data => {
@@ -141,11 +138,11 @@ export class ProductsComponent implements OnInit {
             }
         });
 
-        if (this.window.innerWidth < 960) {
+        if (window.innerWidth < 960) {
             this.sidenavOpen = false;
         }
 
-        if (this.window.innerWidth < 1280) {
+        if (window.innerWidth < 1280) {
             this.viewCol = 33.3;
         }
 
@@ -161,13 +158,13 @@ export class ProductsComponent implements OnInit {
         source.src = imgSrc;
     }
 
-    public setTypeProductFilter($nivel1) {
+    public setTypeProductFilter($nivel1){
         $nivel1 = $nivel1.toLowerCase();
-        if ($nivel1 == 'accesorios y consumibles' || $nivel1 == 'equipos' || $nivel1 == 'herramientas manuales' || $nivel1 == 'refacciones' || $nivel1 == 'fumigación') {
+        if($nivel1 == "accesorios y consumibles" || $nivel1 == "equipos" || $nivel1 == "herramientas manuales" || $nivel1 == "refacciones" || $nivel1 == "fumigación"){
             this.typeProductFilter = 'marcas';
-        } else if ($nivel1 == 'marcas' || $nivel1 == 'agricultura' || $nivel1 == 'jardinería' || $nivel1 == 'fumigación') {
+        }else if($nivel1 == "marcas" || $nivel1 == "agricultura" || $nivel1 == "jardinería" || $nivel1 == "fumigación"){
             this.typeProductFilter = 'equipos';
-        } else {
+        }else{
             this.typeProductFilter = '';
         }
     }
@@ -206,6 +203,7 @@ export class ProductsComponent implements OnInit {
             this.activeFilters['range'] = [];
         }
         this.getProducts();
+        this.closeSideMenu();
     }
 
     public addCharacteristicFilter($characteristic, $filter, $event) {
@@ -231,6 +229,7 @@ export class ProductsComponent implements OnInit {
             this.activeFilters['characteristic'].push({id: characteristic, value: $characteristic, type: $filter.type});
         }
         this.getProducts();
+        this.closeSideMenu();
     }
 
     public changeString($productType, $brand, $mpn) {
@@ -284,6 +283,7 @@ export class ProductsComponent implements OnInit {
             }
         });
         this.getProducts();
+        this.closeSideMenu();
     }
 
     public getSectionsProducts(nivel1, nivel2) {
@@ -294,8 +294,8 @@ export class ProductsComponent implements OnInit {
 
     @HostListener('window:resize')
     public onWindowResize(): void {
-        (this.window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true;
-        (this.window.innerWidth < 1280) ? this.viewCol = 33.3 : this.viewCol = 25;
+        (window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true;
+        (window.innerWidth < 1280) ? this.viewCol = 33.3 : this.viewCol = 25;
     }
 
     public changeCount(count) {
@@ -338,11 +338,9 @@ export class ProductsComponent implements OnInit {
     }
 
     public onPageChanged(event) {
-        if(this.window) {
-            this.page = event;
-            // this.getProducts();
-            this.window.scrollTo(0, 0);
-        }
+        this.page = event;
+        // this.getProducts();
+        window.scrollTo(0, 0);
     }
 
     public onSubmitTeLlamamos(values: Object): void {
@@ -373,5 +371,11 @@ export class ProductsComponent implements OnInit {
 
     public getDistributions() {
         this.distributions = this.appService.getDistributions();
+    }
+
+    public closeSideMenu(){
+        if(!this.sidenavOpen){
+            this.sidenav.close();
+        }
     }
 }

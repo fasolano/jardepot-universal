@@ -10,7 +10,7 @@ export class Settings {
 export class AppSettings {
     public settings = new Settings(
         'Jardepot',  // theme name
-        'jardepot',     // green, blue, red, pink, purple, grey
+        'jardepot',     // green, blue, red, pink, purple, grey, jardepot, orange
         false       // true = rtl, false = ltr
     )
 }

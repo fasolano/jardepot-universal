@@ -24,7 +24,6 @@ export class NotExistComponent implements OnInit {
     public form: FormGroup;
     public textSearch: string = '';
     public settings: Settings;
-    window;
 
     constructor(public appSettings: AppSettings,
                 public router: Router,
@@ -32,31 +31,26 @@ export class NotExistComponent implements OnInit {
                 public appService: AppService,
                 private activatedRoute: ActivatedRoute) {
         this.settings = this.appSettings.settings;
-        // console.log('Native window obj', winRef.nativeWindow);
     }
 
 
     ngOnInit() {
-        this.window = (typeof window !== "undefined") ? window : null;
-        if(this.window){
-            if (this.window.innerWidth < 1280) {
-                this.sidenavOpen = false;
-            }
-            /*this.form = this.formBuilder.group({
-                comentario: [null,  Validators.compose([Validators.minLength(4)])],
-                nombre: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
-                telefono: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')])]
-            });*/
 
-            if (this.window.innerWidth < 1280) {
-                this.sidenavOpen = false;
-            }
+
+        this.form = this.formBuilder.group({
+            comentario: [null,  Validators.compose([Validators.minLength(4)])],
+            nombre: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+            telefono: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')])]
+        });
+
+        if (window.innerWidth < 1280) {
+            this.sidenavOpen = false;
         }
     }
 
     @HostListener('window:resize')
     public onWindowResize(): void {
-        (this.window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true;
+        (window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true;
     }
 
     public onSubmitTeLlamamos(values: Object): void {

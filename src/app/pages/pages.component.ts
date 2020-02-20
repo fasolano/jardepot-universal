@@ -7,8 +7,10 @@ import {SidenavMenuService} from '../theme/components/sidenav-menu/sidenav-menu.
 import {TelephoneDialogComponent} from '../theme/components/menu/telephone-dialog/telephone-dialog.component';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {CookieService} from 'ngx-cookie-service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {CartComponent} from './cart/cart.component';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import {DialogComponent} from '../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-pages',
@@ -17,8 +19,8 @@ import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
     encapsulation: ViewEncapsulation.None,
     providers: [SidenavMenuService]
 })
-export class PagesComponent implements OnInit, AfterViewInit {
-    // tslint:disable-next-line:no-inferrable-types
+export class PagesComponent implements OnInit, AfterViewInit  {
+  // tslint:disable-next-line:no-inferrable-types
     @Output() onOpenTelephoneDialog: EventEmitter<any> = new EventEmitter();
     public showBackToTop: boolean = false;
     public categories: Category[];
@@ -39,7 +41,6 @@ export class PagesComponent implements OnInit, AfterViewInit {
     public settings: Settings;
     formSearch: FormGroup;
     faWhatsapp = faWhatsapp;
-    window = null;
 
     constructor(public appSettings: AppSettings,
                 public appService: AppService,
@@ -49,17 +50,18 @@ export class PagesComponent implements OnInit, AfterViewInit {
                 public dialog: MatDialog,
                 private cookieService: CookieService,
                 private fb: FormBuilder,
-                public snackBar: MatSnackBar) {
+                public snackBar: MatSnackBar
+    ) {
 
         this.router.events.subscribe(event => {
             this.actualUrl = this.router.url;
             this.actualUrls = this.actualUrl.split('/');
-            if (this.actualUrls[1] == 'catalogo') {
+            if(this.actualUrls[1] == 'catalogo'){
                 this.productoLink = this.actualUrls[3];
                 this.productFormat = this.productoLink.replace(/-/g, ' ').replace(/_/g, '-');
                 this.whatsappText = 'mas de ' + this.productFormat;
                 this.visibleCart = true;
-            } else {
+            }else{
                 this.whatsappText = '';
                 this.visibleCart = false;
             }
@@ -68,8 +70,8 @@ export class PagesComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-        this.window = (typeof window !== "undefined") ? window : null;
-        // this.getProductsCart();
+        this.getProductsCart();
+        this.getCategories();
         this.sidenavMenuItems = this.sidenavMenuService.getSidenavMenuItems();
         this.getBrands();
         this.getProductTypes();
@@ -101,9 +103,9 @@ export class PagesComponent implements OnInit, AfterViewInit {
         cartItemCountTotal = 0;*/
         if (this.cookieService.check('session')) {
             this.appService.getProductsCart().subscribe(res => {
-                if (res == null) {
+                if(res == null){
                     this.cookieService.delete('session', '/');
-                } else {
+                }else{
                     this.appService.Data.cartList = JSON.parse(res[0]);
                     this.appService.Data.totalPrice = null;
                     this.appService.Data.totalCartCount = null;
@@ -117,7 +119,7 @@ export class PagesComponent implements OnInit, AfterViewInit {
     }
 
     public getAdditional() {
-        this.appService.getAdditional().subscribe(data => {
+        this.appService.getAdditional().subscribe( data => {
             this.additional = data;
         });
     }
@@ -128,16 +130,22 @@ export class PagesComponent implements OnInit, AfterViewInit {
         });
     }
 
-    public changeCategory(event) {
-        if (typeof window !== "undefined"){
-            if (event.target) {
-                this.category = this.categories.filter(category => category.name === event.target.innerText)[0];
-            }
-            if (this.window.innerWidth < 960) {
-                this.stopClickPropagate(event);
-            }
-        }
+    public getCategories() {
+        this.appService.getCategories().subscribe(data => {
+            this.categories = data;
+            this.category = data[0];
+            this.appService.Data.categories = data;
 
+        });
+    }
+
+    public changeCategory(event) {
+        if (event.target) {
+            this.category = this.categories.filter(category => category.name === event.target.innerText)[0];
+        }
+        if (window.innerWidth < 960) {
+            this.stopClickPropagate(event);
+        }
     }
 
     public remove(product) {
@@ -166,29 +174,26 @@ export class PagesComponent implements OnInit, AfterViewInit {
 
     public search() {
         const valor = this.formSearch.value.valorSearch;
-        if (valor !== '') {
+        if ( valor !== '') {
             this.router.navigate(['/busqueda/', valor]);
         }
     }
 
     public scrollToTop() {
-        if(this.window) {
-            const scrollDuration = 200;
-            const scrollStep = -this.window.pageYOffset / (scrollDuration / 20);
-            const scrollInterval = setInterval(() => {
-                if (this.window.pageYOffset !== 0) {
-                    this.window.scrollBy(0, scrollStep);
-                } else {
-                    clearInterval(scrollInterval);
-                }
-            }, 10);
-            if (this.window.innerWidth <= 768) {
-                setTimeout(() => {
-                    this.window.scrollTo(0, 0);
-                });
+        const scrollDuration = 200;
+        const scrollStep = -window.pageYOffset / (scrollDuration / 20);
+        const scrollInterval = setInterval(() => {
+            if (window.pageYOffset !== 0) {
+                window.scrollBy(0, scrollStep);
+            } else {
+                clearInterval(scrollInterval);
             }
+        }, 10);
+        if (window.innerWidth <= 768) {
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            });
         }
-
     }
 
     @HostListener('window:scroll', ['$event'])
@@ -206,26 +211,26 @@ export class PagesComponent implements OnInit, AfterViewInit {
     }
 
     public closeSubMenus() {
-        if (this.window.innerWidth < 960) {
+        if (window.innerWidth < 960) {
             this.sidenavMenuService.closeAllSubMenus();
         }
     }
 
     public openTelephoneDialog() {
-        const dialogRef = this.dialog.open(TelephoneDialogComponent, {
+         const dialogRef = this.dialog.open(TelephoneDialogComponent, {
             panelClass: 'telephone-dialog',
             direction: 'ltr'
         });
     }
 
-    public getProductByUrl() {
-        this.appService.getProductByName(this.productoLink).subscribe(data => {
+    public getProductByUrl(){
+        this.appService.getProductByName(this.productoLink).subscribe(data =>{
             this.addProducToCart(data);
         });
     }
 
-    public addProducToCart(product: Product) {
-        if (this.busy) {
+    public addProducToCart(product:Product){
+        if(this.busy){
             const currentProduct = this.appService.Data.cartList.filter(item => item.id == product.id)[0];
             if (currentProduct) {
                 if ((currentProduct.cartCount + 1) <= product.availibilityCount) {
@@ -244,9 +249,7 @@ export class PagesComponent implements OnInit, AfterViewInit {
                 product.cartCount = 1;
             }
             this.appService.addToCart(product);
-            setTimeout(() => {
-                this.busy = true;
-            }, 500);
+            setTimeout(() => { this.busy = true; }, 500);
         }
     }
 
@@ -257,16 +260,14 @@ export class PagesComponent implements OnInit, AfterViewInit {
     }
 
     public fixDisappearIOSBug() {
-        if (typeof document !== 'undefined') {
-            const styleNode = document.createElement('style');
-            styleNode.type = 'text/css';
-            styleNode.id = 'panel-fix';
-            styleNode.appendChild(document.createTextNode('.mat-menu-panel{overflow: initial !important;}'));
-            document.getElementsByTagName('head')[0].appendChild(styleNode);
-            setTimeout(() => {
-                styleNode.remove();
-            }, 500);
-        }
+        const styleNode = document.createElement('style');
+        styleNode.type = 'text/css';
+        styleNode.id = 'panel-fix';
+        styleNode.appendChild(document.createTextNode('.mat-menu-panel{overflow: initial !important;}'));
+        document.getElementsByTagName('head')[0].appendChild(styleNode);
+        setTimeout(() => {
+            styleNode.remove();
+        }, 500);
     }
 
 }

@@ -14,17 +14,17 @@
                 <div fxLayout="row wrap" fxFlex="100">
                     <div fxFlex="100" fxFlex.gt-sm="40">
                         <mat-card class="product-image" style="overflow: hidden;">
-                            <!--                    <mat-chip-list *ngIf="product?.discount"><mat-chip class="bg-color-oferta" selected="true">{{product?.discount}}</mat-chip></mat-chip-list>-->
-                            <div *ngIf="product?.discount" class="ribbon ribbon-top-right">
-                                <span>Oferta</span>
-                            </div>
-                            <button mat-icon-button (click)="openZoomViewer()" fxHide="false" fxHide.gt-md>
-                                <mat-icon>fullscreen</mat-icon>
-                            </button>
-                            <img *ngIf="image" [src]="image" (mousemove)="onMouseMove($event)" title="{{product?.productType+' '+product?.brand+' '+product?.mpn}}"
-                                 (mouseleave)="onMouseLeave($event)" alt="{{product?.productType+' '+product?.brand+' '+product?.mpn}}" (error)="handleImgError($event)"
-                                 style="max-width: 100%;"/>
-                            <img src="../assets/images/otros/gratis.png" class="free-delivery">
+<!--                    <mat-chip-list *ngIf="product?.discount"><mat-chip class="bg-color-oferta" selected="true">{{product?.discount}}</mat-chip></mat-chip-list>-->
+                                <div *ngIf="product?.discount" class="ribbon ribbon-top-right">
+                                    <span>Oferta</span>
+                                </div>
+                                <button mat-icon-button (click)="openZoomViewer()" fxHide="false" fxHide.gt-md>
+                                    <mat-icon>fullscreen</mat-icon>
+                                </button>
+                                <img *ngIf="image" [src]="image" (mousemove)="onMouseMove($event)" title="{{product?.productType+' '+product?.brand+' '+product?.mpn}}"
+                                     (mouseleave)="onMouseLeave($event)" alt="{{product?.productType+' '+product?.brand+' '+product?.mpn}}" (error)="handleImgError($event)"
+                                     style="max-width: 100%;"/>
+                                <img src="../assets/images/otros/gratis.png" class="free-delivery">
                         </mat-card>
 
                         <div class="small-carousel">
@@ -103,7 +103,7 @@
                                 <div class="py-2 text-shopping">
                                     <h2 class="new-price" *ngIf="product?.stock"><span style="color: #de1f21;"> ${{product?.newPrice | number : '1.2-2'}} </span><span class="text-bold-tiny">IVA incluido</span></h2>
                                 </div>
-                                <!--                                <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">local_shipping</mat-icon> Envío Gratis <a style="color: rgba(0, 0, 0, 0.87);" href="javascript: void(0)" (click)="openDeliveryTermsDialog()">*Condiciones</a></p>-->
+<!--                                <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">local_shipping</mat-icon> Envío Gratis <a style="color: rgba(0, 0, 0, 0.87);" href="javascript: void(0)" (click)="openDeliveryTermsDialog()">*Condiciones</a></p>-->
                                 <div class="py-1">
                                     <app-controls [product]="product" [type]="'product'" [align]="'start end'"></app-controls>
                                 </div>
@@ -112,7 +112,7 @@
                                     <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">monetization_on</mat-icon> Pagos seguros con </p>
                                     <ul style="list-style-type: disc; padding-left: 2em;">
                                         <li>Paypal</li>
-                                        <!--                                        <li>Mercado pago</li>-->
+<!--                                        <li>Mercado pago</li>-->
                                         <li>Depósito bancario</li>
                                     </ul>
                                 </div>
