@@ -1,0 +1,36 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.gt-sm="center center" fxLayoutAlign.sm="center center" class="mat-elevation-z3 text-muted">
+
+    <div *ngIf="state == 'success'" fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayoutAlign="center center" class="p-2 text-center">
+            <button mat-fab class="bg-color-jd">
+                <mat-icon>check</mat-icon>
+            </button>
+            <i class="c-icon hq-icon hq-icon-category-pole-saws hq-icon-large " title=""></i>
+            <h2 class="py-2">Gracias por tu compra por {{payment}}.</h2>
+            <h2 class="py-1">Tu pedido ha comenzado a procesarse.</h2>
+            <h2 class="py-1">En breve te compartiremos tu número de guia y la factura correspondiente.</h2>
+            <h2 class="py-2">Si tienes alguna duda por favor contactanos 800 212 9225.</h2>
+        </div>
+    </div>
+    <div *ngIf="state == 'pending'" fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayoutAlign="center center" class="p-2 text-center">
+            <button mat-fab class="bg-color-jd">
+                <mat-icon>report_problem</mat-icon>
+            </button>
+            <h2 class="py-2">Estamos validando tu pago con {{payment}}.</h2>
+            <h2 class="py-1">En breve comenzaremos a procesar tu pedido.</h2>
+            <h2 class="py-2">Si tienes alguna duda por favor contactanos 800 212 9225.</h2>
+        </div>
+    </div>
+    <div *ngIf="state == 'failure'" fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayoutAlign="center center" class="p-2 text-center">
+            <button mat-fab class="bg-color-jd">
+                <mat-icon>cancel</mat-icon>
+            </button>
+            <h2 class="py-2">Algo ha salido mal, {{payment}} no ha procesado correctamente tu compra.</h2>
+            <h2 class="py-1">Sabemos que en ocasiones esto puede ser frustrante. Comunicate con nosotros, te apoyaremos en lo que necesites.</h2>
+            <h2 class="py-1">Por favor intentalo de nuevo.</h2>
+            <h2 class="py-2">Estamos aquí para ayudarte contactanos 800 212 9225</h2>
+        </div>
+    </div>
+</div>

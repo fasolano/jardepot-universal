@@ -1,0 +1,71 @@
+
+
+<ngx-json-ld [json]="json"></ngx-json-ld>
+<app-banners [banners]="banners"></app-banners>
+
+<div fxLayout="row wrap" class="info-bar" fxShow="" fxHide.lt-md="">
+    <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+        <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start start">
+            <mat-icon class="mat-icon-xlg m-0 fn-color-jd mt-2">build</mat-icon>
+            <div class="content">
+                <p style="color: rgba(0, 0, 0, 0.87) !important;">Garantía y Refacciones</p>
+                <span class="text-muted m-0">Todos nuestros equipos cuentan con garantía, contra defectos de fábrica y contamos con las refacciones originales de los mismos.</span>
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+        <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start start">
+            <mat-icon class="mat-icon-xlg fn-color-jd mt-2">local_shipping</mat-icon>
+            <div class="content">
+                <p style="color: rgba(0, 0, 0, 0.87) !important;">Envío Gratis</p>
+                <!--                <span class="text-muted m-0" title="{{text}}" [innerHTML]="text  | truncate :120 "></span>-->
+                <span class="text-muted m-0">En compras superiores a $3,000 pesos.</span>
+                <p> <a href="javascript: void(0)" (click)="openDeliveryTermsDialog()" style="color: rgba(0, 0, 0, 0.54) !important;">*Condiciones</a></p>
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+        <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start start">
+            <mat-icon class="mat-icon-xlg m-0 fn-color-jd mt-2">monetization_on</mat-icon>
+            <div class="content">
+                <p style="color: rgba(0, 0, 0, 0.87) !important;">Paga Seguro</p>
+                <!--                <span class="text-muted m-0">Aceptamos pagos mediante PayPal, Mercado Pago, transferencia y Deposito Bancario.</span>-->
+                <span class="text-muted m-0">Aceptamos pagos mediante PayPal, transferencia y Deposito Bancario.</span>
+            </div>
+        </mat-card>
+    </div>
+    <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
+        <mat-card class="light-block" fxLayout="row" fxLayoutAlign="start start">
+            <mat-icon class="mat-icon-xlg m-0 fn-color-jd mt-2">perm_phone_msg</mat-icon>
+            <div class="content">
+                <p style="color: rgba(0, 0, 0, 0.87) !important;">Soporte y Asesoría</p>
+                <span class="text-muted m-0">¿Dudas sobre tu equipo?, nuestros ingenieros te pueden apoyar por teléfono, Whatsapp o en nuestras tiendas.</span>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<app-sections-panel [productTypes]="productTypes" [brands]="brands" [additional]="additional"></app-sections-panel>
+<!--<div class="products-tabs">
+
+    <mat-tab-group mat-stretch-tabs (selectedTabChange)="onLinkClick($event)">
+       
+        <mat-tab label="Featured">           
+           <app-products-carousel [products]="featuredProducts"></app-products-carousel>
+        </mat-tab>
+        <mat-tab label="On Sale">
+           <app-products-carousel [products]="onSaleProducts"></app-products-carousel>
+        </mat-tab>
+        <mat-tab label="Top Rated">
+            <app-products-carousel [products]="topRatedProducts"></app-products-carousel>
+        </mat-tab>
+        <mat-tab label="New Arrivals">
+            <app-products-carousel [products]="newArrivalsProducts"></app-products-carousel>
+        </mat-tab>
+    </mat-tab-group> 
+
+
+</div>-->
+
+<app-brands-carousel [brands]="distributions"></app-brands-carousel>
+
