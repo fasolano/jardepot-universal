@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, HostListener} from '@angular/core';
+import {Component, OnInit, HostListener} from '@angular/core';
 import {AppService} from '../../app.service';
 
 @Component({
@@ -8,7 +8,26 @@ import {AppService} from '../../app.service';
 })
 export class BannersComponent implements OnInit {
 
-    @Input('banners') banners: Array<any> = [];
+    public banners: Array<any> = [
+        {
+            'title': 'Jardinería',
+            'subtitle': 'Un pasto bien cuidado...<br>Comienza con el equipo adecuado.',
+            'image': 'assets/images/productos/Cover/podadora.jpg',
+            'mobile': 'assets/images/productos/Cover/podadora-mob.jpg'
+        },
+        {
+            'title': 'Agricultura',
+            'subtitle': 'Tu proyecto merece el mejor respaldo.',
+            'image': 'assets/images/productos/Cover/motocultor.jpg',
+            'mobile': 'assets/images/productos/Cover/motocultor-mob.jpg'
+        },
+        {
+            'title': 'Aspersoras',
+            'subtitle': 'Para cuidar tu esfuerzo,<br>es bueno contar con el mejor equipo',
+            'image': 'assets/images/productos/Cover/aspersora.jpg',
+            'mobile': 'assets/images/productos/Cover/aspersora-mob.jpg'
+        }
+    ];
     bannerResize: Array<any> = [];
     window;
 
@@ -17,34 +36,29 @@ export class BannersComponent implements OnInit {
 
     ngOnInit() {
         this.window = (typeof window !== 'undefined') ? window : null;
-        this.appService.getBanners().subscribe(data => {
-            this.banners = data;
-            if (this.window) {
-                if (this.window.innerWidth < 960) {
-                    this.bannerResize[0] = {
-                        'background-image': 'url(' + data[0].mobile + ')'
-                    };
-                    this.bannerResize[1] = {
-                        'background-image': 'url(' + data[1].mobile + ')'
-                    };
-                    this.bannerResize[2] = {
-                        'background-image': 'url(' + data[2].mobile + ')'
-                    };
-                } else {
-                    this.bannerResize[0] = {
-                        'background-image': 'url(' + data[0].image + ')'
-                    };
-                    this.bannerResize[1] = {
-                        'background-image': 'url(' + data[1].image + ')'
-                    };
-                    this.bannerResize[2] = {
-                        'background-image': 'url(' + data[2].image + ')'
-                    };
-                }
+        if (this.window) {
+            if (this.window.innerWidth < 960) {
+                this.bannerResize[0] = {
+                    'background-image': 'url(' + this.banners[0].mobile + ')'
+                };
+                this.bannerResize[1] = {
+                    'background-image': 'url(' + this.banners[1].mobile + ')'
+                };
+                this.bannerResize[2] = {
+                    'background-image': 'url(' + this.banners[2].mobile + ')'
+                };
+            } else {
+                this.bannerResize[0] = {
+                    'background-image': 'url(' + this.banners[0].image + ')'
+                };
+                this.bannerResize[1] = {
+                    'background-image': 'url(' + this.banners[1].image + ')'
+                };
+                this.bannerResize[2] = {
+                    'background-image': 'url(' + this.banners[2].image + ')'
+                };
             }
-
-
-        });
+        }
     }
 
     @HostListener('window:resize')

@@ -36,6 +36,7 @@ export class PagesComponent implements OnInit, AfterViewInit  {
     public whatsappText: string;
     public productFormat: string;
     @ViewChild('sidenav', {static: true}) sidenav: any;
+    window;
 
     public settings: Settings;
     formSearch: FormGroup;
@@ -53,6 +54,7 @@ export class PagesComponent implements OnInit, AfterViewInit  {
                 private _compiler: Compiler
     ) {
 
+        this.window = (typeof window !== "undefined") ? window : null;
         this.router.events.subscribe(event => {
             this.actualUrl = this.router.url;
             this.actualUrls = this.actualUrl.split('/');
@@ -171,19 +173,21 @@ export class PagesComponent implements OnInit, AfterViewInit  {
     }
 
     public scrollToTop() {
-        const scrollDuration = 200;
-        const scrollStep = -window.pageYOffset / (scrollDuration / 20);
-        const scrollInterval = setInterval(() => {
-            if (window.pageYOffset !== 0) {
-                window.scrollBy(0, scrollStep);
-            } else {
-                clearInterval(scrollInterval);
+        if(this.window){
+            const scrollDuration = 200;
+            const scrollStep = -this.window.pageYOffset / (scrollDuration / 20);
+            const scrollInterval = setInterval(() => {
+                if (this.window.pageYOffset !== 0) {
+                    this.window.scrollBy(0, scrollStep);
+                } else {
+                    clearInterval(scrollInterval);
+                }
+            }, 10);
+            if (this.window.innerWidth <= 768) {
+                setTimeout(() => {
+                    this.window.scrollTo(0, 0);
+                });
             }
-        }, 10);
-        if (window.innerWidth <= 768) {
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-            });
         }
     }
 
@@ -202,8 +206,10 @@ export class PagesComponent implements OnInit, AfterViewInit  {
     }
 
     public closeSubMenus() {
-        if (window.innerWidth < 960) {
-            this.sidenavMenuService.closeAllSubMenus();
+        if(this.window){
+            if (this.window.innerWidth < 960) {
+                this.sidenavMenuService.closeAllSubMenus();
+            }
         }
     }
 
