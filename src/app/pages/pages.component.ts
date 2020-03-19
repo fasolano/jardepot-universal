@@ -36,7 +36,8 @@ export class PagesComponent implements OnInit, AfterViewInit  {
     public whatsappText: string;
     public productFormat: string;
     @ViewChild('sidenav', {static: true}) sidenav: any;
-    window;
+    public window: any;
+    public loading:boolean = true;
 
     public settings: Settings;
     formSearch: FormGroup;
