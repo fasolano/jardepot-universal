@@ -5,16 +5,29 @@
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Nombre(s)</mat-label>
-            <input matInput placeholder="Nombre(s)" formControlName="firstName" required>
-            <mat-error *ngIf="billingForm.controls.firstName.errors?.required">Nombre es requerido
+            <input matInput placeholder="Nombre(s)" formControlName="firstName" maxlength="50" required>
+            <mat-error *ngIf="billingForm.controls.firstName.errors?.required">
+              Nombre es requerido
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.firstName.hasError('minlength')">
+              El nombre es muy corto, mínimo 3 caracteres
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.firstName.hasError('pattern')">
+              Escribe en nombre válido
             </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Apellidos</mat-label>
-            <input matInput placeholder="Apellido" formControlName="lastName" required>
+            <input matInput placeholder="Apellido" formControlName="lastName" maxlength="50" required>
             <mat-error *ngIf="billingForm.controls.lastName.errors?.required">Apellido es requerido
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.lastName.hasError('minlength')">
+              El apellido es muy corto, mínimo 3 caracteres
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.lastName.hasError('pattern')">
+              Escribe un apellido válido
             </mat-error>
           </mat-form-field>
         </div>
@@ -22,43 +35,68 @@
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email" formControlName="email" required>
-            <mat-error *ngIf="billingForm.controls.email.errors?.required">Corre eletrónico es requerido</mat-error>
+            <mat-error *ngIf="billingForm.controls.email.errors?.required">Correo electrónico es requerido</mat-error>
+            <mat-error *ngIf="billingForm.controls.email.hasError('invalidEmail')">El Correo electrónico es invalido</mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Teléfono</mat-label>
-            <input matInput placeholder="Teléfono" formControlName="phone" required>
+            <input matInput placeholder="Teléfono" formControlName="phone" maxlength="10" required>
             <mat-error *ngIf="billingForm.controls.phone.errors?.required">Teléfono es requerido</mat-error>
+            <mat-error *ngIf="billingForm.controls.phone.hasError('pattern')">
+              El teléfono es invalido, ingresa números
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.phone.hasError('minlength')">
+              El teléfono es muy corto, son 10 números
+            </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Estado</mat-label>
-            <input matInput placeholder="Estado" formControlName="state">
+            <input matInput placeholder="Estado" formControlName="state" maxlength="50" required>
             <mat-error *ngIf="billingForm.controls.state.errors?.required">Estado es requerido</mat-error>
+            <mat-error *ngIf="billingForm.controls.state.hasError('minlength')">
+              El estado es muy corto, mínimo 5 caracteres
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.state.hasError('pattern')">
+              Escribe un estado válido
+            </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Ciudad/Municipio</mat-label>
-            <input matInput placeholder="Ciudad/Municipio" formControlName="city" required>
+            <input matInput placeholder="Ciudad/Municipio" formControlName="city" maxlength="50" required>
             <mat-error *ngIf="billingForm.controls.city.errors?.required">Ciudad es requerida</mat-error>
+            <mat-error *ngIf="billingForm.controls.city.hasError('minlength')">
+              El municipio es muy corto, mínimo 5 caracteres
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.city.hasError('pattern')">
+              Escribe un municipio válido
+            </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Código postal</mat-label>
-            <input matInput placeholder="Código postal" formControlName="zip" required>
+            <input matInput placeholder="Código postal" formControlName="zip" maxlength="5" required>
             <mat-error *ngIf="billingForm.controls.zip.errors?.required">Código postal es requerido
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.zip.hasError('pattern')">
+              El Código postal es invalido, ingresa números
             </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Colonia</mat-label>
-            <input matInput placeholder="Código postal" formControlName="suburb" required>
-            <mat-error *ngIf="billingForm.controls.zip.errors?.required">La colonia es requerido
+            <input matInput placeholder="Colonia" formControlName="suburb" maxlength="50" required>
+            <mat-error *ngIf="billingForm.controls.suburb.errors?.required">La colonia es requerido
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.suburb.hasError('minlength')">
+              El nombre de la colonia es muy corto, mínimo 5 caracteres
             </mat-error>
           </mat-form-field>
         </div>
@@ -66,8 +104,11 @@
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Dirección</mat-label>
             <input matInput placeholder="Dirección (Calle número interior, número exterior )"
-                   formControlName="address" required>
+                   formControlName="address" maxlength="100" required>
             <mat-error *ngIf="billingForm.controls.address.errors?.required">La dirección es requerida</mat-error>
+            <mat-error *ngIf="billingForm.controls.address.hasError('minlength')">
+              La dirección es muy corta, mínimo 5 caracteres
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -261,8 +302,14 @@
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Razón social</mat-label>
-              <input matInput placeholder="Razón social" formControlName="socialReason" required>
+              <input matInput placeholder="Razón social" formControlName="socialReason" maxlength="100" required>
               <mat-error *ngIf="billMandatoryForm.controls.socialReason.errors?.required">Razón social es requerido
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.socialReason.hasError('pattern')">
+                La razón social es invalida
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.socialReason.hasError('minlength')">
+                La razón social es muy corta, mínimo 5 caracteres
               </mat-error>
             </mat-form-field>
           </div>
@@ -272,13 +319,20 @@
               <input matInput placeholder="RFC" formControlName="rfc" required>
               <mat-error *ngIf="billMandatoryForm.controls.rfc.errors?.required">RFC es requerido
               </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.rfc.hasError('minlength')">
+                El RFC es muy corto, mínimo 12 caracteres
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.rfc.hasError('maxlength')">
+                El RFC es muy largo, máximo 13 caracteres
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Corre eletrónico</mat-label>
+              <mat-label>Corre electrónico</mat-label>
               <input matInput placeholder="Email" formControlName="email" required>
-              <mat-error *ngIf="billMandatoryForm.controls.email.errors?.required">Corre eletrónico es requerido</mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.email.errors?.required">Corre electrónico es requerido</mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.email.hasError('invalidEmail')">El Correo electrónico es invalido</mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
@@ -286,6 +340,12 @@
               <mat-label>Estado</mat-label>
               <input matInput placeholder="Estado" formControlName="state">
               <mat-error *ngIf="billMandatoryForm.controls.state.errors?.required">Estado es requerido</mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.state.hasError('minlength')">
+                El estado es muy corto, mínimo 5 caracteres
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.state.hasError('pattern')">
+                Escribe un estado válido
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
@@ -293,6 +353,12 @@
               <mat-label>Ciudad/Municipio</mat-label>
               <input matInput placeholder="Ciudad/Municipio" formControlName="city" required>
               <mat-error *ngIf="billMandatoryForm.controls.city.errors?.required">Ciudad es requerida</mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.city.hasError('minlength')">
+                El municipio es muy corto, mínimo 5 caracteres
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.city.hasError('pattern')">
+                Escribe un municipio válido
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
@@ -300,6 +366,9 @@
               <mat-label>Código postal</mat-label>
               <input matInput placeholder="Código postal" formControlName="zip" required>
               <mat-error *ngIf="billMandatoryForm.controls.zip.errors?.required">Código postal es requerido
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.zip.hasError('pattern')">
+                El Código postal es invalido, ingresa números
               </mat-error>
             </mat-form-field>
           </div>
@@ -309,6 +378,9 @@
               <input matInput placeholder="Dirección (Calle número interior, número exterior )"
                      formControlName="address" required>
               <mat-error *ngIf="billMandatoryForm.controls.address.errors?.required">La dirección es requerida</mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.address.hasError('minlength')">
+                La dirección es muy corta, mínimo 5 caracteres
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -402,60 +474,97 @@
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Nombre(s)</mat-label>
-            <input matInput placeholder="Nombre(s)" formControlName="firstName" required>
+            <input matInput placeholder="Nombre(s)" formControlName="firstName" maxlength="50" required>
             <mat-error *ngIf="billingForm.controls.firstName.errors?.required">Nombre es requerido
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.firstName.hasError('minlength')">
+              El nombre es muy corto, mínimo 3 caracteres
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.firstName.hasError('pattern')">
+              Escribe en nombre válido
             </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Apellidos</mat-label>
-            <input matInput placeholder="Apellido" formControlName="lastName" required>
+            <input matInput placeholder="Apellido" formControlName="lastName" maxlength="50" required>
             <mat-error *ngIf="billingForm.controls.lastName.errors?.required">Apellido es requerido
             </mat-error>
           </mat-form-field>
+          <mat-error *ngIf="billingForm.controls.lastName.hasError('minlength')">
+            El apellido es muy corto, mínimo 3 caracteres
+          </mat-error>
+          <mat-error *ngIf="billingForm.controls.lastName.hasError('pattern')">
+            Escribe un apellido válido
+          </mat-error>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email" formControlName="email" required>
             <mat-error *ngIf="billingForm.controls.email.errors?.required">Corre eletrónico es requerido</mat-error>
+            <mat-error *ngIf="billingForm.controls.email.hasError('invalidEmail')">El Correo eletrónico es invalido</mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Teléfono</mat-label>
-            <input matInput placeholder="Teléfono" formControlName="phone" required>
+            <input matInput placeholder="Teléfono" formControlName="phone" maxlength="10"  required>
             <mat-error *ngIf="billingForm.controls.phone.errors?.required">Teléfono es requerido</mat-error>
+            <mat-error *ngIf="billingForm.controls.phone.hasError('pattern')">
+              El teléfono es invalido, ingresa números
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.phone.hasError('minlength')">
+              El teléfono es muy corto, son 10 números
+            </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Estado</mat-label>
-            <input matInput placeholder="Estado" formControlName="state">
+            <input matInput placeholder="Estado" formControlName="state" maxlength="50" required>
             <mat-error *ngIf="billingForm.controls.state.errors?.required">Estado es requerido</mat-error>
+            <mat-error *ngIf="billingForm.controls.state.hasError('minlength')">
+              El estado es muy corto, mínimo 5 caracteres
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.state.hasError('pattern')">
+              Escribe un estado válido
+            </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Ciudad/Municipio</mat-label>
-            <input matInput placeholder="Ciudad/Municipio" formControlName="city" required>
+            <input matInput placeholder="Ciudad/Municipio" formControlName="city" maxlength="50" required>
             <mat-error *ngIf="billingForm.controls.city.errors?.required">Ciudad es requerida</mat-error>
+            <mat-error *ngIf="billingForm.controls.city.hasError('minlength')">
+              El municipio es muy corto, mínimo 5 caracteres
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.city.hasError('pattern')">
+              Escribe un municipio válido
+            </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Código postal</mat-label>
-            <input matInput placeholder="Código postal" formControlName="zip" required>
+            <input matInput placeholder="Código postal" formControlName="zip" maxlength="5" required>
             <mat-error *ngIf="billingForm.controls.zip.errors?.required">Código postal es requerido
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.zip.hasError('pattern')">
+              El Código postal es invalido, ingresa números
             </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Colonia</mat-label>
-            <input matInput placeholder="Código postal" formControlName="suburb" required>
-            <mat-error *ngIf="billingForm.controls.zip.errors?.required">La colonia es requerido
+            <input matInput placeholder="Colonia" formControlName="suburb" maxlength="50" required>
+            <mat-error *ngIf="billingForm.controls.suburb.errors?.required">La colonia es requerido
+            </mat-error>
+            <mat-error *ngIf="billingForm.controls.suburb.hasError('minlength')">
+              El nombre de la colonia es muy corto, mínimo 5 caracteres
             </mat-error>
           </mat-form-field>
         </div>
@@ -463,9 +572,12 @@
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Dirección</mat-label>
             <input matInput placeholder="Dirección (Calle número interior, número exterior )"
-                   formControlName="address" required>
+                   formControlName="address" maxlength="100" required>
             <mat-error *ngIf="billingForm.controls.address.errors?.required">La dirección es requerida</mat-error>
           </mat-form-field>
+          <mat-error *ngIf="billingForm.controls.address.hasError('minlength')">
+            La dirección es muy corta, mínimo 5 caracteres
+          </mat-error>
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center" class="mt-2 p-1">
@@ -660,24 +772,37 @@
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Razón social</mat-label>
-              <input matInput placeholder="Razón social" formControlName="socialReason" required>
-              <mat-error *ngIf="billMandatoryForm.controls.socialReason.errors?.required">Razón social es requerido
+              <input matInput placeholder="Razón social" formControlName="socialReason" maxlength="100" required>
+              <mat-error *ngIf="billMandatoryForm.controls.socialReason.errors?.required">Razón social es requerida
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.socialReason.hasError('pattern')">
+                La razón social es invalida
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.socialReason.hasError('minlength')">
+                La razón social es muy corta, mínimo 5 caracteres
               </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>RFC</mat-label>
-              <input matInput placeholder="RFC" formControlName="rfc" required>
+              <input matInput placeholder="RFC" formControlName="rfc" maxlength="13" required>
               <mat-error *ngIf="billMandatoryForm.controls.rfc.errors?.required">RFC es requerido
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.rfc.hasError('minlength')">
+                El RFC es muy corto, mínimo 12 caracteres
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.rfc.hasError('maxlength')">
+                El RFC es muy largo, máximo 13 caracteres
               </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Corre eletrónico</mat-label>
+              <mat-label>Corre electrónico</mat-label>
               <input matInput placeholder="Email" formControlName="email" required>
-              <mat-error *ngIf="billMandatoryForm.controls.email.errors?.required">Corre eletrónico es requerido</mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.email.errors?.required">Corre electrónico es requerido</mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.email.hasError('invalidEmail')">El Correo electrónico es invalido</mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
@@ -685,6 +810,12 @@
               <mat-label>Estado</mat-label>
               <input matInput placeholder="Estado" formControlName="state">
               <mat-error *ngIf="billMandatoryForm.controls.state.errors?.required">Estado es requerido</mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.state.hasError('minlength')">
+                El estado es muy corto, mínimo 5 caracteres
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.state.hasError('pattern')">
+                Escribe un estado válido
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
@@ -692,6 +823,12 @@
               <mat-label>Ciudad/Municipio</mat-label>
               <input matInput placeholder="Ciudad/Municipio" formControlName="city" required>
               <mat-error *ngIf="billMandatoryForm.controls.city.errors?.required">Ciudad es requerida</mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.city.hasError('minlength')">
+                El municipio es muy corto, mínimo 5 caracteres
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.city.hasError('pattern')">
+                Escribe un municipio válido
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxFlex.gt-sm="25" class="px-1">
@@ -699,6 +836,9 @@
               <mat-label>Código postal</mat-label>
               <input matInput placeholder="Código postal" formControlName="zip" required>
               <mat-error *ngIf="billMandatoryForm.controls.zip.errors?.required">Código postal es requerido
+              </mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.zip.hasError('pattern')">
+                El Código postal es invalido, ingresa números
               </mat-error>
             </mat-form-field>
           </div>
@@ -708,6 +848,9 @@
               <input matInput placeholder="Dirección (Calle número interior, número exterior )"
                      formControlName="address" required>
               <mat-error *ngIf="billMandatoryForm.controls.address.errors?.required">La dirección es requerida</mat-error>
+              <mat-error *ngIf="billMandatoryForm.controls.address.hasError('minlength')">
+                La dirección es muy corta, mínimo 5 caracteres
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -793,4 +936,3 @@
 
   </mat-step>
 </mat-vertical-stepper>
-

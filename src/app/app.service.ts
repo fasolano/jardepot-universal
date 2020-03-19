@@ -4,6 +4,8 @@ import {Observable, throwError} from 'rxjs';
 import {MatSnackBar} from '@angular/material';
 import {Category, Product} from './app.models';
 import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
+
 
 export class Data {
     constructor(public categories: Category[],
@@ -17,6 +19,7 @@ export class Data {
 
 @Injectable()
 export class AppService {
+
     public Data = new Data(
         [], // categories
         [], // compareList
@@ -30,73 +33,74 @@ export class AppService {
     public url = 'assets/data/';
     public urlAPI = 'https://jardepot.com/jardepotAPI';
     // public urlAPI = 'https://seragromex.com/jardepotAPI';
-    // public urlAPI = 'http://koot.mx/jardepotAPI';
+    // public urlAPI = 'https://fasolano.com/jardepotAPI';
     // public urlAPI = 'http://localhost/jardepotAPI';
     // public urlAPI = 'http://192.168.1.88/jardepotAPI';
 
-    constructor(public http: HttpClient, public snackBar: MatSnackBar, private cookieService: CookieService) {
+    constructor(public http: HttpClient, public snackBar: MatSnackBar, private cookieService: CookieService, private route: Router) {
     }
 
-    public getProductsRelated(product): Observable<Product[]> {
-        const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    public getCategories(): Observable<Category[]> {
+        return this.http.get<Category[]>(this.url + 'categories.json');
+    }
+
+    public getProductsRelated(product): Observable<Product[]>{
+        const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         const params = new HttpParams().set('product', product);
-        return this.http.get<Product[]>(this.urlAPI + '/public/api/products/related', {headers, params});
+        return this.http.get<Product[]>(this.urlAPI+'/public/api/products/related', {headers, params});
     }
 
     public getProducts(nivel1, nivel2, brandFilter, characteristicFilter): Observable<Product[]>{
-        const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-        const params = new HttpParams().set('nivel1', nivel1).set('nivel2', this.filterHilo(nivel2)).set('brands', brandFilter).set('characteristics', characteristicFilter);
-        return this.http.get<Product[]>(this.urlAPI + '/public/api/products', {headers, params});
+        const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+        const params = new HttpParams().set('nivel1',nivel1).set('nivel2', this.filterHilo(nivel2)).set('brands', brandFilter).set('characteristics', characteristicFilter);
+        return this.http.get<Product[]>(this.urlAPI+'/public/api/products', {headers, params});
     }
 
     public getSectionsProducts(nivel1, nivel2): Observable<Product[]>{
-        let headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-        let params = new HttpParams().set('nivel1', nivel1).set('nivel2', this.filterHilo(nivel2));
-        return this.http.get<Product[]>(this.urlAPI+ '/public/api/products/sections', {headers, params});
+        let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+        let params = new HttpParams().set('nivel1',nivel1).set('nivel2', this.filterHilo(nivel2));
+        return this.http.get<Product[]>(this.urlAPI+'/public/api/products/sections', {headers, params});
     }
 
     public getProductByName(product): Observable<Product> {
-        let headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-        let params = new HttpParams().set('product', product);
-        return this.http.get<Product>(this.urlAPI + '/public/api/product',{headers, params});
+
+        let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+        let params = new HttpParams().set('product',product);
+        return this.http.get<Product>(this.urlAPI+'/public/api/product',{headers, params});
     }
 
-    public getBanners(): any[]{
-        return [
-            { title: "Jardinería", subtitle: "Un pasto bien cuidado...<br>Comienza con el equipo adecuado.", image: "assets/images/productos/Cover/podadora.jpg", url: ""},
-            { title: "Agricultura", subtitle: "Tu proyecto merece el mejor respaldo.", image: "assets/images/productos/Cover/motocultor.jpg" },
-            { title: "Aspersoras", subtitle: "Para cuidar tu esfuerzo,<br>es bueno contar con el mejor equipo", image: "assets/images/productos/Cover/aspersora.jpg" }
-        ];
+    public getBanners(): Observable<any[]> {
+        return this.http.get<any[]>(this.url + 'banners.json');
     }
 
     public getMenu() {
-        let headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+        let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = '';
-        return this.http.get<any[]>(this.urlAPI + '/public/api/menu/navbar', { headers });
+        return this.http.get<any[]>(this.urlAPI+'/public/api/menu/navbar', { headers });
     }
 
     public getProductTypes() {
-        let headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+        let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = '';
-        return this.http.get<any[]>(this.urlAPI + '/public/api/menu/productsTypes', { headers });
+        return this.http.get<any[]>(this.urlAPI+'/public/api/menu/productsTypes', { headers });
     }
 
     public getBrands() {
-        let headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+        let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = '';
-        return this.http.get<any[]>(this.urlAPI + '/public/api/menu/brands', { headers });
+        return this.http.get<any[]>(this.urlAPI+'/public/api/menu/brands', { headers });
     }
 
     public getAdditional() {
-        let headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+        let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = '';
-        return this.http.get<any[]>(this.urlAPI + '/public/api/menu/additional', { headers });
+        return this.http.get<any[]>(this.urlAPI+'/public/api/menu/additional', { headers });
     }
 
     public getFilters(productType){
-        let headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+        let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = new HttpParams().set('productType', this.filterHilo(productType) );
-        return this.http.get<any[]>(this.urlAPI + '/public/api/products/filters', { headers, params});
+        return this.http.get<any[]>(this.urlAPI+'/public/api/products/filters', { headers, params});
     }
 
     public addToCompare(product: Product) {
@@ -133,15 +137,15 @@ export class AppService {
             this.Data.totalPrice = null;
             this.Data.totalCartCount = null;
 
-            const index = this.Data.cartList.findIndex(item => item.id == product.id);
+            let index = this.Data.cartList.findIndex(item => item.id == product.id);
 
             if (index >= 0) {
                 this.Data.cartList[index] = product;
-            } else {
+            }else{
                 this.Data.cartList.push(product);
             }
 
-            this.Data.cartList.forEach( product => {
+            this.Data.cartList.forEach(product => {
                 this.Data.totalPrice = this.Data.totalPrice + (product.cartCount * product.newPrice);
                 this.Data.totalCartCount = this.Data.totalCartCount + product.cartCount;
             });
@@ -149,9 +153,9 @@ export class AppService {
             message = 'El producto ' + product.name + ' ha sido agregado al carrito.';
             status = 'success';
             this.snackBar.open(message, '×', {panelClass: [status], verticalPosition: 'top', duration: 3000});
-            const params = {'product':JSON.stringify(product), 'quantity':product.cartCount, 'sessionCookie':session};
-            this.http.post(this.urlAPI+'/public/api/cart/addProduct', params).subscribe(res => {
-            });
+            const params = { 'product' : JSON.stringify(product), 'quantity' : product.cartCount, 'sessionCookie' : session };
+
+            return this.http.post(this.urlAPI+'/public/api/cart/addProduct', params)
         } else {
             const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
             this.http.get(this.urlAPI + '/public/api/session', {headers}).subscribe(data => {
@@ -209,7 +213,7 @@ export class AppService {
     public getPaymentMethods() {
         return [
             {value: 'PayPal', name: 'Paypal', desc: 'Realiza el pago con Paypal para empezar a procesar tu pedido de forma inmediata *Genera un comisión del 4%', cost:1.04},
-            // {value: 'MercadoPago', name: 'Mercado Pago', desc: 'Realiza el pago con Mercado pago para empezar a procesar tu pedido de forma inmediata *Genera un comisión del 4%', cost:1.04},
+            {value: 'MercadoPago', name: 'Mercado Pago', desc: 'Realiza el pago con Mercado pago para empezar a procesar tu pedido de forma inmediata *Genera un comisión del 4%', cost:1.04},
             {value: 'Transferencia', name: 'Transferencia Bancaria', desc: 'Realiza transferencia bancaria y envia el comprobante', cost:1}
         ];
     }
@@ -248,6 +252,16 @@ export class AppService {
         return this.http.post(this.urlAPI+'/public/api/checkout/createOrder', params);
     }
 
+    public createMercadopago(order, products, client, delivery){
+        const params = {'order': JSON.stringify(order), 'products': JSON.stringify(products), 'client': JSON.stringify(client), 'delivery': JSON.stringify(delivery)};
+        return this.http.post('https://fasolano.com/jardepotAPI/public/api/checkout/mercadopago', params);
+    }
+
+    public confirmMercadopago($data){
+        const params = {'data':$data};
+        return this.http.post('https://fasolano.com/jardepotAPI/public/api/confirm/mercadopago', params);
+    }
+
     public enviarBusqueda(forms, busqueda) {
         //  let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let session = this.cookieService.get('session');
@@ -255,8 +269,12 @@ export class AppService {
         return this.http.post(this.urlAPI+'/public/api/products/sendSearch', params);
     }
 
-    public sendConfirmationPayment($state, $payment, $data){
-        const params = {'state':$state, 'payment':$payment, 'data':$data};
+    public sendConfirmationPayment($state, $payment, $data, $token){
+        let session = "";
+        if(this.cookieService.check('session')){
+            session = this.cookieService.get('session');
+        }
+        const params = {'state':$state, 'payment':$payment, 'data':$data, 'token': $token, 'sessionCookie':session};
         return this.http.post(this.urlAPI+'/public/api/confirm/checkout', params);
     }
 
@@ -278,6 +296,22 @@ export class AppService {
     public defineBreadcrumb($params, $previousUrl, $component){
         let params = new HttpParams().set('params', $params ).set('previousUrl', $previousUrl).set('component', $component);
         return this.http.get(this.urlAPI+'/public/api/menu/breadcrumb', {params});
+    }
+
+    public payPalPayment($id){
+        let products = [];
+        this.Data.cartList.forEach(obj => {
+            const price = obj.newPrice * obj.cartCount
+            const product = {
+                'reference_id': obj.name,
+                'amount': {
+                    'currency_code': 'MXN',
+                    'value': price
+                }
+            }
+            products.push(product)
+        });
+        return products;
     }
 
 }

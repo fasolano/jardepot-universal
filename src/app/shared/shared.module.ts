@@ -59,6 +59,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { SectionsSideComponent } from './sections-side/sections-side.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { JsonLdComponent } from './json-ld/json-ld.component';
+import {PaypalButtonComponent} from './paypal-button/paypal-button.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -99,7 +101,8 @@ import { JsonLdComponent } from './json-ld/json-ld.component';
         MatStepperModule,
         PerfectScrollbarModule,
         PipesModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        ReactiveFormsModule
     ],
     exports: [
         RouterModule,
@@ -148,7 +151,8 @@ import { JsonLdComponent } from './json-ld/json-ld.component';
         TelephoneBarComponent,
         SectionsSideComponent,
         DialogComponent,
-        JsonLdComponent
+        JsonLdComponent,
+        PaypalButtonComponent
     ],
     declarations: [
         ControlsComponent,
@@ -161,13 +165,15 @@ import { JsonLdComponent } from './json-ld/json-ld.component';
         SectionsPanelComponent,
         SectionsSideComponent,
         DialogComponent,
-        JsonLdComponent
+        JsonLdComponent,
+        PaypalButtonComponent
     ],
     entryComponents: [
         ProductDialogComponent,
         TelephoneDialogComponent,
         DialogComponent,
-        JsonLdComponent
+        JsonLdComponent,
+        PaypalButtonComponent
     ],
     providers: [
         {provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}

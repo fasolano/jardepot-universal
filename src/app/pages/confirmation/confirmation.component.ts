@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Data, AppService} from '../../app.service';
+import {AppService} from '../../app.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -25,28 +25,57 @@ export class ConfirmationComponent implements OnInit {
             let temp: string;
             this.state = params['state'];
             temp = params['data'];
-            /*if (params['token'] == undefined){
-                alert("Sin token");
-            }else{
-                alert("Con token");
-            }*/
             this.framengData = temp.split('?');
             this.payment = this.framengData[0];
             this.data = this.framengData[1];
             this.activatedRoute.queryParams.subscribe(getParams => {
                 this.data = getParams;
-                this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data)).subscribe(response => {
-                    if (this.cookieService.check('session')) {
-                        this.cookieService.delete('session', '/');
+                if (this.data != ""){
+                    this.state = this.data.status.toLocaleLowerCase();
+                    this.state = this.state == 'completed' ? 'success':this.state;
+                    this.appService.sendConfirmationPayment(this.state, 'button', JSON.stringify(this.data), params['token']).subscribe(response => {
+                        if (this.cookieService.check('session')) {
+                            this.cookieService.delete('session', '/');
+                        }
+                        this.done = true;
+                        // @ts-ignore
+                        this.state = response.data;
+                        if(this.state == 'success'){
+                            this.appService.Data.cartList = [];
+                            this.appService.Data.totalPrice = 0;
+                            this.appService.Data.totalCartCount = 0;
+                        }
+                        this.spinner.hide();
+                    });
+                }else if(JSON.stringify(this.data) == "{}"){
+                    setTimeout(() => { this.spinner.show(); }, 1000);
+                    if(this.payment == 'MercadoPago'){
+                        this.appService.confirmMercadopago(JSON.stringify(this.data)).subscribe(responseMP =>{
+                            // @ts-ignore
+                            this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), responseMP.data).subscribe(response => {
+                                if (this.cookieService.check('session')) {
+                                    this.cookieService.delete('session', '/');
+                                }
+                                this.done = true;
+                                // @ts-ignore
+                                this.state = response.data;
+                                this.spinner.hide();
+                            });
+                        });
+                    }else{
+                        this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), "").subscribe(response => {
+                            if (this.cookieService.check('session')) {
+                                this.cookieService.delete('session', '/');
+                            }
+                            this.done = true;
+                            // @ts-ignore
+                            this.state = response.data;
+                            this.spinner.hide();
+                        });
                     }
-                    this.done = true;
-                    // @ts-ignore
-                    this.state = response.data;
-                    this.spinner.hide();
-                });
+                }
             });
         });
-        setTimeout(() => { this.spinner.show(); }, 1000);
     }
 
 }

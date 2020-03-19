@@ -1,31 +1,29 @@
 <div class="banners-container" fxLayout="column" fxLayout.gt-sm="row" *ngIf="banners.length > 0"
      style="max-height: 400px;" style="max-width: 100%;">
     <div fxLayout="row" fxLayout.gt-sm="column" fxLayout.xs="column" fxFlex="100" fxFlex.gt-sm="40">
-        <div class="banner" fxFlex="50" fxFlex.gt-sm="60" [ngStyle]="getBgImage(0)"  style="min-height: 117px; background-position-y: inherit;">
+        <div class="banner" fxFlex="50" fxFlex.gt-sm="60" [ngStyle]="bannerResize[0]" style="min-height: 117px; background-position-y: inherit;">
             <a [routerLink]="['/Equipos/Podadoras']" style="text-decoration: none; width: 100%;">
                 <div class="info" fxLayoutAlign="start start">
                     <div class="px-2" fxLayout="column" fxLayoutAlign="start start">
-                        <h1 class="title" style="text-align: left;">{{getBanner(0).title}}</h1>
+                        <h2 class="title" style="text-align: left; font-size: 36px; font-weight: 500;">{{getBanner(0).title}}</h2>
                         <h3 class="subtitle" [innerHTML]="getBanner(0).subtitle" style="text-align: left;"></h3>
-                        <!--             <a        [routerLink]="['/products']" mat-raised-button class="mt-2 bg-color-jd">Comprar ahora1</a>-->
                     </div>
                 </div>
             </a>
         </div>
         <div fxLayout="row" fxFlex="100" fxFlex.gt-sm="40">
             <a [routerLink]="['/Equipos/Motocultores']" style="text-decoration: none; width: 100%;">
-                <div class="banner" fxFlex [ngStyle]="getBgImage(1)" style="min-height: 117px; background-position-y: inherit;">
+                <div class="banner" fxFlex [ngStyle]="bannerResize[1]"
+                     style="min-height: 117px; background-position-y: inherit;">
                     <div class="info" fxLayoutAlign="end end">
                         <div class="px-2" fxLayout="column" fxLayoutAlign="end end">
-                            <h1 class="title">{{getBanner(1).title}}</h1>
+                            <h2 class="title" style="font-size: 36px; font-weight: 500;">{{getBanner(1).title}}</h2>
                             <h3 class="subtitle" [innerHTML]="getBanner(1).subtitle"></h3>
-                            <!--                        <a [routerLink]="['/products']" mat-raised-button color="primary" class="mt-2 bg-color-jd">Comprar ahora2</a>-->
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-
     </div>
     <div fxLayout="row" fxLayout.gt-sm="column" fxLayout.xs="column" fxFlex="100" fxFlex.gt-sm="60">
         <!--<div fxLayout="row" fxFlexOrder="2" fxFlexOrder.gt-sm="1" fxFlex="50" fxFlex.gt-sm="33">
@@ -48,16 +46,13 @@
                 </div>
             </div>
         </div>-->
-
         <div class="banner" fxFlexOrder="1" fxFlexOrder.gt-sm="2" fxFlex="50" fxFlex.gt-sm="100"
-             [ngStyle]="getBgImage(2)">
-            <!--                <a href="https://wa.me/525551857805?text=Hola,%20me%20gustaría%20saber%20sobre%20sus%20refacciones" target="_blank" style="text-decoration: none; width: 100%;">-->
+             [ngStyle]="bannerResize[2]">
             <a [routerLink]="['/Equipos/Aspersoras']" style="text-decoration: none; width: 100%;">
                 <div class="info" fxLayout="column" fxLayoutAlign="center start">
                     <div class="px-2" fxLayout="column" fxLayoutAlign="center start">
-                        <h1 class="title" style="text-align: left;">{{getBanner(2).title}}</h1>
+                        <h2 class="title" style="text-align: left; font-size: 36px; font-weight: 500;">{{getBanner(2).title}}</h2>
                         <h3 class="subtitle" [innerHTML]="getBanner(2).subtitle" style="text-align: left;"></h3>
-                        <!--                    <a [routerLink]="['/products']" mat-raised-button color="primary" class="mt-2 bg-color-jd">Comprar ahora6</a>-->
                     </div>
                 </div>
             </a>

@@ -6,8 +6,7 @@
 </div>
 
 <mat-card *ngIf="appService.Data.cartList?.length > 0" class="p-0">
-
-  <div class="mat-table cart-table">
+  <div fxShow="false" fxShow.gt-sm class="mat-table cart-table">
     <div class="mat-header-row">
       <div class="mat-header-cell">Producto</div>
       <div class="mat-header-cell">Nombre</div>
@@ -22,8 +21,9 @@
     </div>
     <div *ngFor="let product of appService.Data.cartList" class="mat-row">
       <div class="mat-cell"><img [src]="product.images[0].small"></div>
-      <div class="mat-cell"><a [routerLink]="['/productos/catalogo', changeStringBrand(product.brand), changeString(product.productType, product.brand, product.mpn)]"
-                               class="product-name">{{product.name}}</a></div>
+      <div class="mat-cell"><a
+              [routerLink]="['/catalogo', changeStringBrand(product.brand), changeString(product.productType, product.brand, product.mpn)]"
+              class="product-name">{{product.name}}</a></div>
       <div class="mat-cell">${{product.newPrice | number : '1.2-2'}}</div>
       <div class="mat-cell text-muted">
         <app-controls [product]="product" [type]="'cart'"
@@ -37,11 +37,8 @@
           </button>
         </div>
       </div>
-
     </div>
     <div class="mat-row">
-      <div class="mat-cell"><a [routerLink]="['/']" mat-raised-button class="bg-color-jd">Continuar comprando</a>
-      </div>
       <div class="mat-cell"></div>
       <div class="mat-cell"></div>
       <div class="mat-cell text-right">
@@ -54,13 +51,89 @@
       <div class="mat-cell">
         <div fxLayout="column" fxLayoutAlign="center start" class="grand-total">
           <span>${{ grandTotal | number : '1.2-2'}}</span>
-          <!--                    <span class="text-muted">15%</span>-->
           <span class="new-price">${{grandTotal | number : '1.2-2'}}</span>
         </div>
       </div>
-      <div class="mat-cell text-center"><a [routerLink]="['/checkout']" mat-raised-button class="bg-color-jd">Pagar</a>
+      <!--<div class="mat-cell text-center">
+          <a [routerLink]="['/checkout']" mat-raised-button class="bg-color-jd">Pagar</a>
+      </div>-->
+    </div>
+  </div>
+
+
+  <div fxLayout="row wrap" fxHide="false" fxHide.gt-sm>
+    <div fxFlex="100" class="p-1">
+      <div class="mat-cell text-center">
+        <a mat-raised-button class="bg-color-jd" (click)="openDialog()">Pagar - PayPal</a>
+      </div>
+      <div class="mat-cell text-center" style="margin-top: 15px;">
+        <a [routerLink]="['/checkout']" mat-raised-button class="bg-color-jd">Pagar - Deposito Bancario</a>
       </div>
     </div>
   </div>
 
+  <div fxLayout="row wrap" fxHide="false" fxHide.gt-sm>
+    <div fxFlex="100" class="p-1">
+      <h3 class="text-muted">Carrito de compra</h3>
+      <div class="divider"></div>
+      <mat-table [dataSource]="dataSource" matSort>
+        <!-- ID Column -->
+        <ng-container matColumnDef="producto">
+          <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true"></mat-header-cell>
+          <mat-cell *matCellDef="let product" data-label="Producto"><img [src]="product.images[0].small"
+                                                                         (error)="handleImgError($event)"
+                                                                         style="width: auto; height: 140px;">
+          </mat-cell>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="nombre">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre</mat-header-cell>
+          <mat-cell *matCellDef="let product" data-label="Nombre"> {{product.name}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="precio">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Precio unitario</mat-header-cell>
+          <mat-cell *matCellDef="let product" data-label="Precio">
+            ${{product.newPrice | number : '1.2-2'}} </mat-cell>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="cantidad">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad</mat-header-cell>
+          <mat-cell *matCellDef="let product" data-label="Cantidad">
+            <!--                        {{product.cartCount}} -->
+            <app-controls [product]="product" [type]="'cart'"
+                          (onQuantityChange)="updateCart($event)"></app-controls>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="total">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Total</mat-header-cell>
+          <mat-cell *matCellDef="let product" data-label="Total">
+            ${{ (product.newPrice * product.cartCount) | number : '1.2-2'}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+
+      </mat-table>
+    </div>
+  </div>
+  <div fxLayout="row wrap">
+    <div fxFlex="100" class="p-1" fxLayout="row wrap" fxLayout.lt-sm="row-reverse wrap" fxLayoutAlign="space-around center">
+      <div class="mat-cell text-center">
+        <a [routerLink]="['/']" mat-raised-button class="bg-color-jd">Continuar comprando</a>
+      </div>
+      <div class="mat-cell text-center">
+        <a mat-raised-button class="bg-color-jd" (click)="openDialog()">Pagar - PayPal</a>
+      </div>
+      <div class="mat-cell text-center" style="margin-top: 15px;">
+        <a [routerLink]="['/checkout']" mat-raised-button class="bg-color-jd">Pagar - Deposito Bancario</a>
+      </div>
+    </div>
+  </div>
 </mat-card>

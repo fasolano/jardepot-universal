@@ -1,13 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialog, MatPaginator, MatSort, MatStepper, MatTableDataSource} from '@angular/material';
-import {Data, AppService} from '../../app.service';
+import {MatDialog, MatStepper, MatTableDataSource} from '@angular/material';
+import {AppService} from '../../app.service';
 import {Product} from '../../app.models';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {DialogComponent} from '../../shared/dialog/dialog.component';
 import { CookieService } from 'ngx-cookie-service';
-import {NgxSpinnerService} from 'ngx-spinner';
-import {Title} from '@angular/platform-browser';
+import {emailValidator} from '../../theme/utils/app-validators';
 
 @Component({
   selector: 'app-checkout',
@@ -33,7 +31,6 @@ export class CheckoutComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   displayedColumns = ['producto', 'nombre', 'precio', 'cantidad', 'total'];
   textButtonOrder = 'Crear orden de compra';
-  window;
 
 
 
@@ -41,33 +38,32 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.window = (typeof window !== "undefined") ? window : null;
     // this.dataSource = new MatTableDataSource(this.appService.Data.cartList);
     this.deliveryMethods = this.appService.getDeliveryMethods();
     this.paymentMethods = this.appService.getPaymentMethods();
-    //formularios para la compra
+    // formularios para la compra
     this.billingForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.required],
-      phone: ['', Validators.required],
-      state: ['', Validators.required],
-      city: ['', Validators.required],
-      suburb: ['', Validators.required],
-      zip: ['', Validators.required],
-      address: ['', Validators.required]
+      firstName: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]{3,50}')])],
+      lastName: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]{3,50}')])],
+      email: [null, Validators.compose([Validators.required, emailValidator ])],
+      phone: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')])],
+      state: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]{5,50}')])],
+      city: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]{5,50}')])],
+      suburb: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
+      zip: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.pattern('[0-9]*')])],
+      address: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
     });
     this.billMandatoryForm = this.formBuilder.group({
-      socialReason: ['', Validators.required],
+      socialReason: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]{5,100}')])],
       typePerson: ['', Validators.required],
       usoCFDI: ['', Validators.required],
       typePayment: ['', Validators.required],
-      rfc: ['', Validators.required],
-      email: ['', Validators.required],
-      state: ['', Validators.required],
-      city: ['', Validators.required],
-      zip: ['', Validators.required],
-      address: ['', Validators.required]
+      rfc: [null, Validators.compose([Validators.required, Validators.minLength(12), Validators.maxLength(13)])],
+      email: [null, Validators.compose([Validators.required, emailValidator ])],
+      state: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]{5,50}')])],
+      city: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]{5,50}')])],
+      zip: [null, Validators.compose([Validators.required, Validators.minLength(5), Validators.pattern('[0-9]*')])],
+      address: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
     });
     this.deliveryForm = this.formBuilder.group({
       deliveryMethod: ['', Validators.required]
@@ -111,10 +107,10 @@ export class CheckoutComponent implements OnInit {
       payment: JSON.stringify(this.paymentForm.value),
       needBilling: this.showBilling
     };
-    this.appService.createOrder(data).subscribe(data => {
+    this.appService.createOrder(data).subscribe(response => {
       this.blockButtoms = true;
       // @ts-ignore
-      if(data.data == 'success'){
+      if(response.data == 'success'){
         if (this.cookieService.check('session')) {
           this.cookieService.delete('session', '/');
         }
@@ -122,8 +118,18 @@ export class CheckoutComponent implements OnInit {
         this.verticalStepper.next();
       }else{
         // @ts-ignore
-        let url = data.data;
-        this.window.open(url, '_self');
+        if(response.data.state == 'Mercadopago'){
+          // @ts-ignore
+          this.appService.createMercadopago(response.data.order, response.data.products, response.data.client, response.data.delivery).subscribe(data =>{
+            // @ts-ignore
+            const url = data.data;
+            window.open(url, '_self');
+          });
+        }else{
+          // @ts-ignore
+          let url = response.data.url;
+          window.open(url, '_self');
+        }
       }
     });
   }

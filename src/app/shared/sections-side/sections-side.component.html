@@ -9,7 +9,7 @@
         </mat-expansion-panel-header>
         <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="filter-buttons">
             <a routerLink="/equipos/{{changeStringBrand(type.name)}}" mat-button  fxFlex="46" *ngFor="let type of productTypes" class="bg-color-jd" title="{{type.name}}">
-                {{type.name}}
+                <h2 style="font-size: 14px; font-weight: 500;">{{type.name}}</h2>
             </a>
         </div>
     </mat-expansion-panel>
@@ -36,7 +36,7 @@
         </mat-expansion-panel-header>
         <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="filter-buttons">
             <a routerLink="/{{changeStringBrand(add.name)}}/{{changeStringBrand(option.name)}}" mat-button  fxFlex="46" *ngFor="let option of add.options" class="bg-color-jd" title="{{add.name}}">
-                {{option.name}}
+                <h2 style="font-size: 14px; font-weight: 500;">{{option.name}}</h2>
             </a>
         </div>
     </mat-expansion-panel>

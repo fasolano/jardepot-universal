@@ -1,14 +1,15 @@
-import {Component, OnInit, ViewChild, HostListener, Input, Injectable, ChangeDetectorRef} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MatDialog} from '@angular/material';
-import {ProductDialogComponent} from '../../shared/products-carousel/product-dialog/product-dialog.component';
-import {AppService} from '../../app.service';
-import {Product} from '../../app.models';
-import {Settings, AppSettings} from 'src/app/app.settings';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Meta, Title} from '@angular/platform-browser';
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
-import {DialogComponent} from '../../shared/dialog/dialog.component';
+import { Component, OnInit, ViewChild, HostListener, Input, Injectable, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { ProductDialogComponent } from '../../shared/products-carousel/product-dialog/product-dialog.component';
+import { AppService } from '../../app.service';
+import { Product } from '../../app.models';
+import { Settings, AppSettings } from 'src/app/app.settings';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
     selector: 'app-products',
@@ -48,13 +49,11 @@ export class ProductsComponent implements OnInit {
     public busquedaEmpty: boolean = false;
     public textSearch: string = '';
     public searchSend: boolean = false;
-    window;
     public form: FormGroup;
     public faWhatsapp = faWhatsapp;
     public descriptionNivel2: string;
     public titleProducts: string;
     public distributions = [];
-
     constructor(public appSettings: AppSettings,
                 private activatedRoute: ActivatedRoute,
                 public appService: AppService,
@@ -62,18 +61,17 @@ export class ProductsComponent implements OnInit {
                 private router: Router,
                 public formBuilder: FormBuilder,
                 private meta: Meta,
-                public title: Title) {
+                public title: Title, public snackBar: MatSnackBar) {
         this.settings = this.appSettings.settings;
     }
 
     ngOnInit() {
-        this.window = (typeof window !== 'undefined') ? window : null;
         this.products = [];
         this.count = this.counts[0];
         this.sort = this.sortings[0];
 
         this.form = this.formBuilder.group({
-            comentario: [null, Validators.compose([Validators.minLength(4)])],
+            comentario: [null,  Validators.compose([Validators.minLength(4)])],
             nombre: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
             telefono: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')])]
         });
@@ -98,12 +96,12 @@ export class ProductsComponent implements OnInit {
                     const res = JSON.parse(JSON.stringify(data));
                     this.descriptionNivel2 = res.result.texto;
 
-                    this.meta.updateTag({name: 'description', content: res.result.metadescription.substr(0, 150)});
+                    this.meta.updateTag({name: 'description', content: res.result.metadescription.substr(0,150)});
                     this.meta.updateTag({name: 'keywords', content: res.result.keywords});
-                    this.title.setTitle(res.result.metatitle.substr(0, 70));
+                    this.title.setTitle(res.result.metatitle.substr(0,70));
                 });
                 this.titleProducts = this.nivel2;
-            } else if (params['search'] !== undefined) {
+            } else if(params['search'] !== undefined) {
                 this.busqueda = false;
                 this.busquedaEmpty = false;
                 this.appService.getProductsSearch(params['search']).subscribe(data => {
@@ -141,11 +139,11 @@ export class ProductsComponent implements OnInit {
             }
         });
 
-        if (this.window.innerWidth < 960) {
+        if (window.innerWidth < 960) {
             this.sidenavOpen = false;
         }
 
-        if (this.window.innerWidth < 1280) {
+        if (window.innerWidth < 1280) {
             this.viewCol = 33.3;
         }
 
@@ -155,19 +153,48 @@ export class ProductsComponent implements OnInit {
         this.getDistributions();
     }
 
+    public addToCart(product: Product) {
+        let currentProduct = this.appService.Data.cartList.filter(item => item.id == product.id)[0];
+        if (currentProduct) {
+            if ((currentProduct.cartCount + 1) <= product.availibilityCount) {
+                // this.busy = true;
+                product.cartCount = currentProduct.cartCount + 1;
+            } else {
+                // this.snackBar.open('You can not add more items than available. In stock ' + this.product.availibilityCount + ' items and you already added ' + currentProduct.cartCount + ' item to your cart', '×', {
+                this.snackBar.open('No puedes agregar más de este producto', '×', {
+                    panelClass: 'error',
+                    verticalPosition: 'top',
+                    duration: 5000
+                });
+                return false;
+            }
+        } else {
+            // this.busy = true;
+            product.cartCount = 1;
+        }
+        this.appService.addToCart(product).subscribe(res => {
+            this.router.navigate(['/cart']);
+        });
+    }
+
+    /*public addToCart(product){
+        this.controlsComponent.addToCart(product);
+        window.open('jardepot.com/cart', '_self');
+    }*/
+
     public handleImgError(ev: any) {
         const source = ev.srcElement;
         const imgSrc = `assets/images/productos/generico2.jpg`;
         source.src = imgSrc;
     }
 
-    public setTypeProductFilter($nivel1) {
+    public setTypeProductFilter($nivel1){
         $nivel1 = $nivel1.toLowerCase();
-        if ($nivel1 == 'accesorios y consumibles' || $nivel1 == 'equipos' || $nivel1 == 'herramientas manuales' || $nivel1 == 'refacciones' || $nivel1 == 'fumigación') {
+        if($nivel1 == "accesorios y consumibles" || $nivel1 == "equipos" || $nivel1 == "herramientas manuales" || $nivel1 == "refacciones" || $nivel1 == "fumigación"){
             this.typeProductFilter = 'marcas';
-        } else if ($nivel1 == 'marcas' || $nivel1 == 'agricultura' || $nivel1 == 'jardinería' || $nivel1 == 'fumigación') {
+        }else if($nivel1 == "marcas" || $nivel1 == "agricultura" || $nivel1 == "jardinería" || $nivel1 == "fumigación"){
             this.typeProductFilter = 'equipos';
-        } else {
+        }else{
             this.typeProductFilter = '';
         }
     }
@@ -206,6 +233,7 @@ export class ProductsComponent implements OnInit {
             this.activeFilters['range'] = [];
         }
         this.getProducts();
+        this.closeSideMenu();
     }
 
     public addCharacteristicFilter($characteristic, $filter, $event) {
@@ -231,6 +259,7 @@ export class ProductsComponent implements OnInit {
             this.activeFilters['characteristic'].push({id: characteristic, value: $characteristic, type: $filter.type});
         }
         this.getProducts();
+        this.closeSideMenu();
     }
 
     public changeString($productType, $brand, $mpn) {
@@ -270,8 +299,12 @@ export class ProductsComponent implements OnInit {
             let characteristicsFilters = this.activeFilters['characteristic'];
             characteristicsFilters = JSON.stringify(characteristicsFilters);
             this.appService.getProducts(this.nivel1, this.nivel2, brandFilters, characteristicsFilters).subscribe(data => {
-                this.products = data;
                 this.busy = 1;
+                if(brandFilters == "" && characteristicsFilters == "[]" && data.length < 1){
+                    this.router.navigate(['404']);
+                }else{
+                    this.products = data;
+                }
             });
         }
 
@@ -284,6 +317,7 @@ export class ProductsComponent implements OnInit {
             }
         });
         this.getProducts();
+        this.closeSideMenu();
     }
 
     public getSectionsProducts(nivel1, nivel2) {
@@ -294,8 +328,8 @@ export class ProductsComponent implements OnInit {
 
     @HostListener('window:resize')
     public onWindowResize(): void {
-        (this.window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true;
-        (this.window.innerWidth < 1280) ? this.viewCol = 33.3 : this.viewCol = 25;
+        (window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true;
+        (window.innerWidth < 1280) ? this.viewCol = 33.3 : this.viewCol = 25;
     }
 
     public changeCount(count) {
@@ -338,11 +372,9 @@ export class ProductsComponent implements OnInit {
     }
 
     public onPageChanged(event) {
-        if(this.window) {
-            this.page = event;
-            // this.getProducts();
-            this.window.scrollTo(0, 0);
-        }
+        this.page = event;
+        // this.getProducts();
+        window.scrollTo(0, 0);
     }
 
     public onSubmitTeLlamamos(values: Object): void {
@@ -360,6 +392,7 @@ export class ProductsComponent implements OnInit {
     public openDeliveryTermsDialog() {
         const text = 'Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM).<br>' +
             'NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>' +
+            'Las compras deben ser mayor a $3,000.00 MXN<br>' +
             'NO aplica con otras paqueterías<br>' +
             'El tiempo de entrega estimado y sujeto a existencias es de 2 a 6 días hábiles, (Mínimo/Máximo) contados a partir de las siguientes ' +
             '24 hrs de que su depósito se ha verificado y de recibir su correo con los datos completos para facturar y enviar su producto.<br><br>';
@@ -373,5 +406,11 @@ export class ProductsComponent implements OnInit {
 
     public getDistributions() {
         this.distributions = this.appService.getDistributions();
+    }
+
+    public closeSideMenu(){
+        if(!this.sidenavOpen){
+            this.sidenav.close();
+        }
     }
 }

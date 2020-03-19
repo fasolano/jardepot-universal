@@ -6,7 +6,7 @@
                 <mat-list-item *ngFor="let type of productsType" fxFlex="50" ngClass.lt-sm="mt-2">
                     <a title="Aspersoras" class="link-type" fxLayoutAlign="start center" routerLink="/Equipos/{{changeString(type.name)}}">
                         <mat-icon class="fn-color-jd bold">keyboard_arrow_right</mat-icon>
-                        <span class="link-obscure">{{type.name}}</span>
+                        <span class="link-obscure"><h2 style="font-size: 16px;">{{type.name}}</h2></span>
                     </a>
                 </mat-list-item>
             </mat-list>
@@ -19,7 +19,7 @@
                 <mat-list-item *ngFor="let brand of brands" fxFlex="50" ngClass.lt-sm="mt-2">
                     <a title="Aspersoras" class="link-type" fxLayoutAlign="start center" routerLink="/Marcas/{{changeString(brand.name)}}">
                         <mat-icon class="fn-color-jd bold">keyboard_arrow_right</mat-icon>
-                        <span class="link-obscure">{{brand.name}}</span>
+                        <span class="link-obscure"><h2 style="font-size: 16px;">{{brand.name}}</h2></span>
                     </a>
                 </mat-list-item>
             </mat-list>
@@ -38,8 +38,8 @@
                     <mat-list-item *ngFor="let option of add.options" fxFlex="50" ngClass.lt-sm="mt-2">
                         <a title="" class="link-type" fxLayoutAlign="start center" routerLink="/{{changeString(add.name)}}/{{changeString(option.name)}}">
                             <mat-icon class="fn-color-jd bold">keyboard_arrow_right</mat-icon>
-                            <span *ngIf="option.name == 'Cascos y caretas' || option.name == 'Protección anticorte'" class="link-obscure" title="{{ option.name}}">{{ option.name | truncate :9 }}</span>
-                            <span *ngIf="option.name != 'Cascos y caretas' && option.name != 'Protección anticorte'" class="link-obscure" >{{ option.name }}</span>
+                            <span *ngIf="option.name == 'Cascos y caretas' || option.name == 'Protección anticorte'" class="link-obscure" title="{{ option.name}}"><h2 style="font-size: 16px;">{{ option.name | truncate :9 }}</h2></span>
+                            <span *ngIf="option.name != 'Cascos y caretas' && option.name != 'Protección anticorte'" class="link-obscure" ><h2 style="font-size: 16px;">{{ option.name }}</h2></span>
                         </a>
                     </mat-list-item>
                 </mat-list>
