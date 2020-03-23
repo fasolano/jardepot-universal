@@ -31,9 +31,9 @@ export class AppService {
     public cookieValue: any = 'UNKNOWN';
 
     public url = 'assets/data/';
-    // public urlAPI = 'https://jardepot.com/jardepotAPI';
+    public urlAPI = 'https://jardepot.com/jardepotAPI';
     // public urlAPI = 'https://seragromex.com/jardepotAPI';
-    public urlAPI = 'http://maquinariadejardineria.com.mx/jardepotAPI';
+    // public urlAPI = 'http://maquinariadejardineria.com.mx/jardepotAPI';
     // public urlAPI = 'http://localhost/jardepotAPI';
     // public urlAPI = 'http://192.168.1.88/jardepotAPI';
 

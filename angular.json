@@ -4,8 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "emporium": {
-
-
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {

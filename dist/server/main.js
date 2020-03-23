@@ -2519,6 +2519,8 @@ class Data {
 }
 exports.Data = Data;
 class AppService {
+    // public urlAPI = 'https://seragromex.com/jardepotAPI';
+    // public urlAPI = 'http://maquinariadejardineria.com.mx/jardepotAPI';
     // public urlAPI = 'http://localhost/jardepotAPI';
     // public urlAPI = 'http://192.168.1.88/jardepotAPI';
     constructor(http, snackBar, cookieService, route) {
@@ -2535,9 +2537,7 @@ class AppService {
         );
         this.cookieValue = 'UNKNOWN';
         this.url = 'assets/data/';
-        // public urlAPI = 'https://jardepot.com/jardepotAPI';
-        // public urlAPI = 'https://seragromex.com/jardepotAPI';
-        this.urlAPI = 'http://maquinariadejardineria.com.mx/jardepotAPI';
+        this.urlAPI = 'https://jardepot.com/jardepotAPI';
     }
     getCategories() {
         return this.http.get(this.url + 'categories.json');
