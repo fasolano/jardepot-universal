@@ -2519,8 +2519,6 @@ class Data {
 }
 exports.Data = Data;
 class AppService {
-    // public urlAPI = 'https://seragromex.com/jardepotAPI';
-    // public urlAPI = 'http://maquinariadejardineria.com.mx/jardepotAPI';
     // public urlAPI = 'http://localhost/jardepotAPI';
     // public urlAPI = 'http://192.168.1.88/jardepotAPI';
     constructor(http, snackBar, cookieService, route) {
@@ -2537,7 +2535,9 @@ class AppService {
         );
         this.cookieValue = 'UNKNOWN';
         this.url = 'assets/data/';
-        this.urlAPI = 'https://jardepot.com/jardepotAPI';
+        // public urlAPI = 'https://jardepot.com/jardepotAPI';
+        // public urlAPI = 'https://seragromex.com/jardepotAPI';
+        this.urlAPI = 'https:/api.jardepot.com';
     }
     getCategories() {
         return this.http.get(this.url + 'categories.json');
@@ -2545,50 +2545,44 @@ class AppService {
     getProductsRelated(product) {
         const headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         const params = new http_1.HttpParams().set('product', product);
-        return this.http.get(this.urlAPI + '/public/api/products/related', { headers, params });
+        return this.http.get(this.urlAPI + '/api/products/related', { headers, params });
     }
     getProducts(nivel1, nivel2, brandFilter, characteristicFilter) {
         const headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         const params = new http_1.HttpParams().set('nivel1', nivel1).set('nivel2', this.filterHilo(nivel2)).set('brands', brandFilter).set('characteristics', characteristicFilter);
-        return this.http.get(this.urlAPI + '/public/api/products', { headers, params });
+        return this.http.get(this.urlAPI + '/api/products', { headers, params });
     }
     getSectionsProducts(nivel1, nivel2) {
         let headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let params = new http_1.HttpParams().set('nivel1', nivel1).set('nivel2', this.filterHilo(nivel2));
-        return this.http.get(this.urlAPI + '/public/api/products/sections', { headers, params });
+        return this.http.get(this.urlAPI + '/api/products/sections', { headers, params });
     }
     getProductByName(product) {
         let headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let params = new http_1.HttpParams().set('product', product);
-        return this.http.get(this.urlAPI + '/public/api/product', { headers, params });
+        return this.http.get(this.urlAPI + '/api/product', { headers, params });
     }
     getBanners() {
         return this.http.get(this.url + 'banners.json');
     }
     getMenu() {
-        let headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        let params = '';
-        return this.http.get(this.urlAPI + '/public/api/menu/navbar', { headers });
+        return this.http.get(this.urlAPI + '/api/menu/navbar', {});
     }
     getProductTypes() {
-        let headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        let params = '';
-        return this.http.get(this.urlAPI + '/public/api/menu/productsTypes', { headers });
+        return this.http.get(this.urlAPI + '/api/menu/productsTypes', {});
     }
     getBrands() {
-        let headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        let params = '';
-        return this.http.get(this.urlAPI + '/public/api/menu/brands', { headers });
+        return this.http.get(this.urlAPI + '/api/menu/brands', {});
     }
     getAdditional() {
         let headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let params = '';
-        return this.http.get(this.urlAPI + '/public/api/menu/additional', { headers });
+        return this.http.get(this.urlAPI + '/api/menu/additional', {});
     }
     getFilters(productType) {
         let headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let params = new http_1.HttpParams().set('productType', this.filterHilo(productType));
-        return this.http.get(this.urlAPI + '/public/api/products/filters', { headers, params });
+        return this.http.get(this.urlAPI + '/api/products/filters', { headers, params });
     }
     addToCompare(product) {
         let message, status;
@@ -2637,11 +2631,11 @@ class AppService {
             status = 'success';
             this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
             const params = { 'product': JSON.stringify(product), 'quantity': product.cartCount, 'sessionCookie': session };
-            return this.http.post(this.urlAPI + '/public/api/cart/addProduct', params);
+            return this.http.post(this.urlAPI + '/api/cart/addProduct', params);
         }
         else {
             const headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-            this.http.get(this.urlAPI + '/public/api/session', { headers }).subscribe(data => {
+            this.http.get(this.urlAPI + '/api/session', { headers }).subscribe(data => {
                 this.cookieValue = data;
                 this.cookieService.set('session', JSON.stringify(data), null, '/');
                 this.addToCart(product);
@@ -2655,14 +2649,14 @@ class AppService {
         status = 'error';
         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
         const params = new http_1.HttpParams().set('product', product.name).set('sessionCookie', session);
-        this.http.delete(this.urlAPI + '/public/api/cart/removeProduct', { params }).subscribe(res => {
+        this.http.delete(this.urlAPI + '/api/cart/removeProduct', { params }).subscribe(res => {
         });
     }
     getProductsCart() {
         let session = this.cookieService.get('session');
         let headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let params = new http_1.HttpParams().set('sessionCookie', session);
-        return this.http.get(this.urlAPI + '/public/api/cart/products', { headers, params });
+        return this.http.get(this.urlAPI + '/api/cart/products', { headers, params });
     }
     resetProductCartCount(product) {
         this.removeFromCart(product);
@@ -2696,7 +2690,7 @@ class AppService {
     getProductLevels($productType) {
         let headers = new http_1.HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let params = new http_1.HttpParams().set('productType', this.filterHilo($productType));
-        return this.http.get(this.urlAPI + '/public/api/product/levels', { headers, params });
+        return this.http.get(this.urlAPI + '/api/product/levels', { headers, params });
     }
     errorHandl(error) {
         let errorMessage = '';
@@ -2713,29 +2707,29 @@ class AppService {
     getProductsSearch(valorSearch) {
         let session = this.cookieService.get('session');
         let params = new http_1.HttpParams().set('valorSearch', valorSearch);
-        return this.http.get(this.urlAPI + '/public/api/products/search', { params });
+        return this.http.get(this.urlAPI + '/api/products/search', { params });
     }
     getProductsOffer() {
-        return this.http.get(this.urlAPI + '/public/api/products/offer');
+        return this.http.get(this.urlAPI + '/api/products/offer');
     }
     createOrder(forms) {
         let session = this.cookieService.get('session');
         const params = { 'forms': JSON.stringify(forms), 'sessionCookie': session };
-        return this.http.post(this.urlAPI + '/public/api/checkout/createOrder', params);
+        return this.http.post(this.urlAPI + '/api/checkout/createOrder', params);
     }
     createMercadopago(order, products, client, delivery) {
         const params = { 'order': JSON.stringify(order), 'products': JSON.stringify(products), 'client': JSON.stringify(client), 'delivery': JSON.stringify(delivery) };
-        return this.http.post('https://fasolano.com/jardepotAPI/public/api/checkout/mercadopago', params);
+        return this.http.post('https://fasolano.com/jardepotAPI/api/checkout/mercadopago', params);
     }
     confirmMercadopago($data) {
         const params = { 'data': $data };
-        return this.http.post('https://fasolano.com/jardepotAPI/public/api/confirm/mercadopago', params);
+        return this.http.post('https://fasolano.com/jardepotAPI/api/confirm/mercadopago', params);
     }
     enviarBusqueda(forms, busqueda) {
         //  let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let session = this.cookieService.get('session');
         const params = { 'forms': JSON.stringify(forms), 'textoBuscado': busqueda, 'sessionCookie': session };
-        return this.http.post(this.urlAPI + '/public/api/products/sendSearch', params);
+        return this.http.post(this.urlAPI + '/api/products/sendSearch', params);
     }
     sendConfirmationPayment($state, $payment, $data, $token) {
         let session = "";
@@ -2743,11 +2737,11 @@ class AppService {
             session = this.cookieService.get('session');
         }
         const params = { 'state': $state, 'payment': $payment, 'data': $data, 'token': $token, 'sessionCookie': session };
-        return this.http.post(this.urlAPI + '/public/api/confirm/checkout', params);
+        return this.http.post(this.urlAPI + '/api/confirm/checkout', params);
     }
     getDescriptionNivel2(nivel1, nivel2) {
         let params = new http_1.HttpParams().set('nivel1', nivel1).set('nivel2', this.filterHilo(nivel2));
-        return this.http.get(this.urlAPI + '/public/api/products/getDescriptionNivel2', { params });
+        return this.http.get(this.urlAPI + '/api/products/getDescriptionNivel2', { params });
     }
     filterHilo(productType) {
         let productType1;
@@ -2761,7 +2755,7 @@ class AppService {
     }
     defineBreadcrumb($params, $previousUrl, $component) {
         let params = new http_1.HttpParams().set('params', $params).set('previousUrl', $previousUrl).set('component', $component);
-        return this.http.get(this.urlAPI + '/public/api/menu/breadcrumb', { params });
+        return this.http.get(this.urlAPI + '/api/menu/breadcrumb', { params });
     }
     payPalPayment($id) {
         let products = [];
