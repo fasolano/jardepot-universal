@@ -61,7 +61,7 @@ var HomeComponent = /** @class */ (function () {
         this.banners = [];
         this.brands = [];
         this.additional = [];
-        this.text = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM, FEDEX).<br>" +
+        this.text = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM).<br>" +
             "NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>" +
             "NO aplica con otras paqueterías<br>" +
             "El tiempo de entrega estimado y sujeto a existencias es de 2 a 6 días hábiles, (Mínimo/Máximo) contados a partir de las siguientes " +
@@ -124,7 +124,7 @@ var HomeComponent = /** @class */ (function () {
         });
     };
     HomeComponent.prototype.openDeliveryTermsDialog = function () {
-        var textBody = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM, FEDEX).<br>" +
+        var textBody = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM).<br>" +
             "NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>" +
             'Las compras deben ser mayor a $3,000.00 MXN<br>' +
             "NO aplica con otras paqueterías<br>" +

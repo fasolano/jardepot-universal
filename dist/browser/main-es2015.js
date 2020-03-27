@@ -107,7 +107,7 @@ module.exports = "<div [innerHTML]=\"jsonLD\"></div>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"dialog-container\" fxLayout=\"column\" ngStyle.gt-sm=\"width: 700px;\">\n    <div class=\"close-btn-outer\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <h2>Pagar con Paypal</h2>\n        <button mat-mini-fab color=\"warn\" (click)=\"close()\">\n            <mat-icon>close</mat-icon>\n        </button>\n    </div>\n    <div mat-dialog-content style=\"max-height: 80vh;\">\n        <div>*Se agregará una comisión del 4% por método de pago Paypal</div>\n        <div fxShow=\"{{deliveryComission}}\">*El total de tu cuenta es menor a $3,000.00 se agregará un cargo extra de $300.00 por envio envio</div>\n        <form [formGroup]=\"clientForm\">\n            <div fxLayout=\"row wrap\">\n                <div fxFlex=\"50\" fxFlex.lt-sm=\"100\" class=\"px-1\">\n                    <mat-form-field appearance=\"outline\" class=\"w-100\">\n                        <mat-label>Nombre(s)</mat-label>\n                        <input matInput placeholder=\"Nombre(s)\" formControlName=\"firstName\" maxlength=\"50\" required (keyup)=\"showButtonPaypal()\">\n                        <mat-error *ngIf=\"clientForm.controls.firstName.errors?.required\">\n                            Nombre es requerido\n                        </mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.firstName.hasError('minlength')\">\n                            El nombre es muy corto, mínimo 3 caracteres\n                        </mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.firstName.hasError('pattern')\">\n                            Escribe en nombre válido\n                        </mat-error>\n                    </mat-form-field>\n                </div>\n                <div fxFlex=\"50\" fxFlex.lt-sm=\"100\" class=\"px-1\">\n                    <mat-form-field appearance=\"outline\" class=\"w-100\">\n                        <mat-label>Apellidos</mat-label>\n                        <input matInput placeholder=\"Apellido\" formControlName=\"lastName\" maxlength=\"50\" required (keyup)=\"showButtonPaypal()\">\n                        <mat-error *ngIf=\"clientForm.controls.lastName.errors?.required\">Apellido es requerido\n                        </mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.lastName.hasError('minlength')\">\n                            El apellido es muy corto, mínimo 3 caracteres\n                        </mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.lastName.hasError('pattern')\">\n                            Escribe un apellido válido\n                        </mat-error>\n                    </mat-form-field>\n                </div>\n                <div fxFlex=\"50\" fxFlex.lt-sm=\"100\" class=\"px-1\">\n                    <mat-form-field appearance=\"outline\" class=\"w-100\">\n                        <mat-label>Email</mat-label>\n                        <input matInput placeholder=\"Email\" formControlName=\"email\" required (keyup)=\"showButtonPaypal()\">\n                        <mat-error *ngIf=\"clientForm.controls.email.errors?.required\">Correo electrónico es requerido</mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.email.hasError('invalidEmail')\">El Correo electrónico es invalido</mat-error>\n                    </mat-form-field>\n                </div>\n                <div fxFlex=\"50\" fxFlex.lt-sm=\"100\" class=\"px-1\">\n                    <mat-form-field appearance=\"outline\" class=\"w-100\">\n                        <mat-label>Teléfono (10 dígitos)</mat-label>\n                        <input matInput placeholder=\"Teléfono\" formControlName=\"phone\" maxlength=\"10\" required (keyup)=\"showButtonPaypal()\">\n                        <mat-error *ngIf=\"clientForm.controls.phone.errors?.required\">Teléfono es requerido</mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.phone.hasError('pattern')\">\n                            El teléfono es invalido, ingresa números\n                        </mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.phone.hasError('minlength')\">\n                            El teléfono es muy corto, son 10 números\n                        </mat-error>\n                    </mat-form-field>\n                </div>\n            </div>\n        </form>\n        <div class=\"py-1 text-muted\" fxLayout=\"row\" fxFlexAlign=\"end end\">\n            <div fxFlex=\"100\">\n                <div id=\"text-container\" fxShow=\"{{showButton}}\">Por favor rellena todos los campos</div>\n                <div id=\"paypal-button-container\" fxHide=\"{{showButton}}\"></div>\n            </div>\n        </div>\n    </div>\n</div>\n"
+module.exports = "<div class=\"dialog-container\" fxLayout=\"column\" ngStyle.gt-sm=\"width: 700px;\">\n    <div class=\"close-btn-outer\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <h2>Pagar con Paypal</h2>\n        <button mat-mini-fab color=\"warn\" (click)=\"close()\">\n            <mat-icon>close</mat-icon>\n        </button>\n    </div>\n    <div mat-dialog-content style=\"max-height: 80vh;\">\n        <div>*Se agregará una comisión del 4% por método de pago Paypal</div>\n        <div fxShow=\"{{deliveryComission}}\">*El total de tu cuenta es menor a $3,000.00 se agregará un cargo extra de $300.00 por envío </div>\n        <div fxLayout=\"row wrap\" style=\"margin-top: 20px;margin-bottom: 20px;\">\n            <div fxFlex=\"100\" class=\"px-1\">\n                <mat-checkbox (change)=\"chageTerms($event)\">Acepto terminos y condiciones</mat-checkbox>\n                <a (click)=\"openDeliveryTermsDialog()\" style=\"margin-left: 10px; cursor: pointer; text-decoration: underline blue; color: blue;\">Consultalos aquí</a>\n            </div>\n        </div>\n        <form [formGroup]=\"clientForm\">\n            <div fxLayout=\"row wrap\">\n                <div fxFlex=\"50\" fxFlex.lt-sm=\"100\" class=\"px-1\">\n                    <mat-form-field appearance=\"outline\" class=\"w-100\">\n                        <mat-label>Nombre(s)</mat-label>\n                        <input matInput placeholder=\"Nombre(s)\" formControlName=\"firstName\" maxlength=\"50\" required (keyup)=\"showButtonPaypal()\">\n                        <mat-error *ngIf=\"clientForm.controls.firstName.errors?.required\">\n                            Nombre es requerido\n                        </mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.firstName.hasError('minlength')\">\n                            El nombre es muy corto, mínimo 3 caracteres\n                        </mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.firstName.hasError('pattern')\">\n                            Escribe en nombre válido\n                        </mat-error>\n                    </mat-form-field>\n                </div>\n                <div fxFlex=\"50\" fxFlex.lt-sm=\"100\" class=\"px-1\">\n                    <mat-form-field appearance=\"outline\" class=\"w-100\">\n                        <mat-label>Apellidos</mat-label>\n                        <input matInput placeholder=\"Apellido\" formControlName=\"lastName\" maxlength=\"50\" required (keyup)=\"showButtonPaypal()\">\n                        <mat-error *ngIf=\"clientForm.controls.lastName.errors?.required\">Apellido es requerido\n                        </mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.lastName.hasError('minlength')\">\n                            El apellido es muy corto, mínimo 3 caracteres\n                        </mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.lastName.hasError('pattern')\">\n                            Escribe un apellido válido\n                        </mat-error>\n                    </mat-form-field>\n                </div>\n                <div fxFlex=\"50\" fxFlex.lt-sm=\"100\" class=\"px-1\">\n                    <mat-form-field appearance=\"outline\" class=\"w-100\">\n                        <mat-label>Email</mat-label>\n                        <input matInput placeholder=\"Email\" formControlName=\"email\" required (keyup)=\"showButtonPaypal()\">\n                        <mat-error *ngIf=\"clientForm.controls.email.errors?.required\">Correo electrónico es requerido</mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.email.hasError('invalidEmail')\">El Correo electrónico es invalido</mat-error>\n                    </mat-form-field>\n                </div>\n                <div fxFlex=\"50\" fxFlex.lt-sm=\"100\" class=\"px-1\">\n                    <mat-form-field appearance=\"outline\" class=\"w-100\">\n                        <mat-label>Teléfono (10 dígitos)</mat-label>\n                        <input matInput placeholder=\"Teléfono\" formControlName=\"phone\" maxlength=\"10\" required (keyup)=\"showButtonPaypal()\">\n                        <mat-error *ngIf=\"clientForm.controls.phone.errors?.required\">Teléfono es requerido</mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.phone.hasError('pattern')\">\n                            El teléfono es invalido, ingresa números\n                        </mat-error>\n                        <mat-error *ngIf=\"clientForm.controls.phone.hasError('minlength')\">\n                            El teléfono es muy corto, son 10 números\n                        </mat-error>\n                    </mat-form-field>\n                </div>\n            </div>\n        </form>\n        <div class=\"py-1 text-muted\" fxLayout=\"row\" fxFlexAlign=\"end end\">\n            <div fxFlex=\"100\">\n                <div id=\"text-container\">\n                    <span fxShow=\"{{showButton}}\">Por favor rellena todos los campos</span>\n                    <br>\n                    <span fxShow=\"{{terms}}\">Acepta los terminos y condiciones</span>\n                </div>\n                <div id=\"paypal-button-container\" fxHide=\"{{showButton || terms}}\"></div>\n            </div>\n        </div>\n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -610,7 +610,7 @@ Data.ctorParameters = () => [
     { type: Number }
 ];
 let AppService = class AppService {
-    // public urlAPI = 'http://localhost/jardepotAPI';
+    // public urlAPI = 'http://localhost/jardepotAPI/public';
     // public urlAPI = 'http://192.168.1.88/jardepotAPI';
     constructor(http, snackBar, cookieService, route) {
         this.http = http;
@@ -773,8 +773,8 @@ let AppService = class AppService {
         return [
             // {value: 'ocurre', name: 'Envio a Ocurre', desc: '$100.00 MXN / Entrega de 2 a 6 días hábiles *Compras mayores a 2500 gratis', cost:100, min:2500},
             { value: 'domicilio', name: 'Envio a domicilio', desc: '$300.00 MXN / Entrega de 2 a 6 días hábiles *Compras mayores a $3,000.00 gratis y en área de cobertura', cost: 300, min: 3000 },
-            { value: 'cuernavaca', name: 'Entrega en sucursal Cuernavaca', desc: 'GRATIS / Entrega de 1 a 2 días hábiles *La entrega extender a 6 días hábiles', cost: 0, min: 0 },
-            { value: 'pachuca', name: 'Entrega en sucursal Pachuca', desc: 'GRATIS / Entrega de 1 a 2 días hábiles *La entrega extender a 6 días hábiles', cost: 0, min: 0 }
+            { value: 'cuernavaca', name: 'Entrega en sucursal Cuernavaca', desc: 'GRATIS / Entrega de 1 a 2 días hábiles *En algunos casos la entrega puede extenderse hasta 7 días hábiles en cuyo caso se lo haremos saber de inmediato.', cost: 0, min: 0 },
+            { value: 'pachuca', name: 'Entrega en sucursal Pachuca', desc: 'GRATIS / Entrega de 1 a 2 días hábiles *En algunos casos la entrega puede extenderse hasta 7 días hábiles en cuyo caso se lo haremos saber de inmediato.', cost: 0, min: 0 }
         ];
     }
     getPaymentMethods() {
@@ -1082,7 +1082,7 @@ let PagesComponent = class PagesComponent {
         if (this.appService.getCookie('session') != "") {
             this.appService.getProductsCart().subscribe(res => {
                 if (res == null) {
-                    this.cookieService.delete('session', '/');
+                    this.appService.deleteCookie('session');
                 }
                 else {
                     this.appService.Data.cartList = JSON.parse(res[0]);
@@ -1894,6 +1894,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _theme_utils_app_validators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../theme/utils/app-validators */ "./src/app/theme/utils/app-validators.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _shared_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../shared/dialog/dialog.component */ "./src/app/shared/dialog/dialog.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1909,15 +1910,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 let PaypalButtonComponent = class PaypalButtonComponent {
-    constructor(appService, formBuilder, dialogRef, router) {
+    constructor(appService, formBuilder, dialogRef, router, dialog) {
         this.appService = appService;
         this.formBuilder = formBuilder;
         this.dialogRef = dialogRef;
         this.router = router;
+        this.dialog = dialog;
         this.output = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.showButton = true;
         this.deliveryComission = true;
+        this.terms = true;
     }
     ngOnInit() {
         this.deliveryComission = this.appService.Data.totalPrice < 3000;
@@ -1972,18 +1976,36 @@ let PaypalButtonComponent = class PaypalButtonComponent {
     showButtonPaypal() {
         this.showButton = this.clientForm.invalid;
     }
+    chageTerms(event) {
+        this.terms = !event.checked;
+    }
     removeObject() {
         this._ref.destroy();
     }
     close() {
         this.dialogRef.close();
     }
+    openDeliveryTermsDialog() {
+        const textBody = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM).<br>" +
+            "NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>" +
+            'Las compras deben ser mayor a $3,000.00 MXN<br>' +
+            "NO aplica con otras paqueterías<br>" +
+            "El tiempo de entrega estimado y sujeto a existencias es de 2 a 6 días hábiles, (Mínimo/Máximo) contados a partir de las siguientes " +
+            "24 hrs de que su depósito se ha verificado y de recibir su correo con los datos completos para facturar y enviar su producto.<br><br>";
+        const dialogRef = this.dialog.open(_shared_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_6__["DialogComponent"], {
+            panelClass: 'generic-dialog',
+            direction: 'ltr'
+        });
+        dialogRef.componentInstance.title = 'Condiciones de envíos Gratis:';
+        dialogRef.componentInstance.body = textBody;
+    }
 };
 PaypalButtonComponent.ctorParameters = () => [
     { type: _app_service__WEBPACK_IMPORTED_MODULE_1__["AppService"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
     { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialogRef"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
+    { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] }
 ];
 __decorate([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
@@ -1996,7 +2018,8 @@ PaypalButtonComponent = __decorate([
         styles: [__webpack_require__(/*! ./paypal-button.component.scss */ "./src/app/shared/paypal-button/paypal-button.component.scss")]
     }),
     __metadata("design:paramtypes", [_app_service__WEBPACK_IMPORTED_MODULE_1__["AppService"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialogRef"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
+        _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+        _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"]])
 ], PaypalButtonComponent);
 
 

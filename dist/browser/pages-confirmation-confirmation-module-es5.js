@@ -75,7 +75,7 @@ var ConfirmationComponent = /** @class */ (function () {
                     _this.state = _this.state == 'completed' ? 'success' : _this.state;
                     _this.appService.sendConfirmationPayment(_this.state, 'button', JSON.stringify(_this.data), params['token']).subscribe(function (response) {
                         if (_this.cookieService.check('session')) {
-                            _this.cookieService.delete('session', '/');
+                            _this.appService.deleteCookie('session');
                         }
                         _this.done = true;
                         // @ts-ignore
@@ -95,7 +95,7 @@ var ConfirmationComponent = /** @class */ (function () {
                             // @ts-ignore
                             _this.appService.sendConfirmationPayment(_this.state, _this.payment, JSON.stringify(_this.data), responseMP.data).subscribe(function (response) {
                                 if (_this.cookieService.check('session')) {
-                                    _this.cookieService.delete('session', '/');
+                                    _this.appService.deleteCookie('session');
                                 }
                                 _this.done = true;
                                 // @ts-ignore
@@ -107,7 +107,7 @@ var ConfirmationComponent = /** @class */ (function () {
                     else {
                         _this.appService.sendConfirmationPayment(_this.state, _this.payment, JSON.stringify(_this.data), "").subscribe(function (response) {
                             if (_this.cookieService.check('session')) {
-                                _this.cookieService.delete('session', '/');
+                                _this.appService.deleteCookie('session');
                             }
                             _this.done = true;
                             // @ts-ignore

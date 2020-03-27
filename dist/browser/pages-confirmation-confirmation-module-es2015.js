@@ -74,7 +74,7 @@ let ConfirmationComponent = class ConfirmationComponent {
                     this.state = this.state == 'completed' ? 'success' : this.state;
                     this.appService.sendConfirmationPayment(this.state, 'button', JSON.stringify(this.data), params['token']).subscribe(response => {
                         if (this.cookieService.check('session')) {
-                            this.cookieService.delete('session', '/');
+                            this.appService.deleteCookie('session');
                         }
                         this.done = true;
                         // @ts-ignore
@@ -94,7 +94,7 @@ let ConfirmationComponent = class ConfirmationComponent {
                             // @ts-ignore
                             this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), responseMP.data).subscribe(response => {
                                 if (this.cookieService.check('session')) {
-                                    this.cookieService.delete('session', '/');
+                                    this.appService.deleteCookie('session');
                                 }
                                 this.done = true;
                                 // @ts-ignore
@@ -106,7 +106,7 @@ let ConfirmationComponent = class ConfirmationComponent {
                     else {
                         this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), "").subscribe(response => {
                             if (this.cookieService.check('session')) {
-                                this.cookieService.delete('session', '/');
+                                this.appService.deleteCookie('session');
                             }
                             this.done = true;
                             // @ts-ignore
