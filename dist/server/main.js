@@ -7398,7 +7398,7 @@ exports.View_ProductsComponent_0 = View_ProductsComponent_0;
 function View_ProductsComponent_Host_0(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 1, "app-products", [], null, [["window", "resize"]], function (_v, en, $event) { var ad = true; if (("window:resize" === en)) {
         var pd_0 = (i1.ɵnov(_v, 1).onWindowResize() !== false);
         ad = (pd_0 && ad);
-    } return ad; }, View_ProductsComponent_0, RenderType_ProductsComponent)), i1.ɵdid(1, 114688, null, 0, i57.ProductsComponent, [i58.AppSettings, i33.ActivatedRoute, i37.AppService, i59.MatDialog, i33.Router, i13.FormBuilder, i23.Meta, i23.Title, i38.MatSnackBar], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
+    } return ad; }, View_ProductsComponent_0, RenderType_ProductsComponent)), i1.ɵdid(1, 114688, null, 0, i57.ProductsComponent, [i58.AppSettings, i33.ActivatedRoute, i37.AppService, i59.MatDialog, i33.Router, i13.FormBuilder, i23.Meta, i23.Title, i38.MatSnackBar, i39.CookieService], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
 exports.View_ProductsComponent_Host_0 = View_ProductsComponent_Host_0;
 var ProductsComponentNgFactory = i1.ɵccf("app-products", i57.ProductsComponent, View_ProductsComponent_Host_0, {}, {}, []);
 exports.ProductsComponentNgFactory = ProductsComponentNgFactory;
@@ -7449,6 +7449,7 @@ const platform_browser_1 = __webpack_require__(/*! @angular/platform-browser */ 
 const free_brands_svg_icons_1 = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "@fortawesome/free-brands-svg-icons");
 const dialog_component_1 = __webpack_require__(/*! ../../shared/dialog/dialog.component */ "./src/app/shared/dialog/dialog.component.ts");
 const material_2 = __webpack_require__(/*! @angular/material */ "@angular/material");
+const ngx_cookie_service_1 = __webpack_require__(/*! ngx-cookie-service */ "ngx-cookie-service");
 const i0 = __webpack_require__(/*! @angular/core */ "@angular/core");
 const i1 = __webpack_require__(/*! ../../app.settings */ "./src/app/app.settings.ts");
 const i2 = __webpack_require__(/*! @angular/router */ "@angular/router");
@@ -7457,8 +7458,9 @@ const i4 = __webpack_require__(/*! @angular/material/dialog */ "@angular/materia
 const i5 = __webpack_require__(/*! @angular/forms */ "@angular/forms");
 const i6 = __webpack_require__(/*! @angular/platform-browser */ "@angular/platform-browser");
 const i7 = __webpack_require__(/*! @angular/material/snack-bar */ "@angular/material/snack-bar");
+const i8 = __webpack_require__(/*! ngx-cookie-service */ "ngx-cookie-service");
 class ProductsComponent {
-    constructor(appSettings, activatedRoute, appService, dialog, router, formBuilder, meta, title, snackBar) {
+    constructor(appSettings, activatedRoute, appService, dialog, router, formBuilder, meta, title, snackBar, cookieService) {
         this.appSettings = appSettings;
         this.activatedRoute = activatedRoute;
         this.appService = appService;
@@ -7468,6 +7470,7 @@ class ProductsComponent {
         this.meta = meta;
         this.title = title;
         this.snackBar = snackBar;
+        this.cookieService = cookieService;
         this.busy = 1;
         this.sidenavOpen = true;
         this.viewType = 'grid';
@@ -7598,9 +7601,20 @@ class ProductsComponent {
             // this.busy = true;
             product.cartCount = 1;
         }
-        this.appService.addToCart(product).subscribe(res => {
-            this.router.navigate(['/cart']);
-        });
+        if (this.cookieService.check('session')) {
+            this.appService.addToCart(product).subscribe(res => {
+                this.router.navigate(['/cart']);
+            });
+        }
+        else {
+            this.appService.setCookieApp().subscribe(data => {
+                this.appService.cookieValue = data;
+                this.appService.setCookie('session', JSON.stringify(data), 3, '/');
+                this.appService.addToCart(product).subscribe(res => {
+                    this.router.navigate(['/cart']);
+                });
+            });
+        }
     }
     /*public addToCart(product){
         this.controlsComponent.addToCart(product);
@@ -7823,7 +7837,7 @@ class ProductsComponent {
         }
     }
 }
-ProductsComponent.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function ProductsComponent_Factory() { return new ProductsComponent(i0.ɵɵinject(i1.AppSettings), i0.ɵɵinject(i2.ActivatedRoute), i0.ɵɵinject(i3.AppService), i0.ɵɵinject(i4.MatDialog), i0.ɵɵinject(i2.Router), i0.ɵɵinject(i5.FormBuilder), i0.ɵɵinject(i6.Meta), i0.ɵɵinject(i6.Title), i0.ɵɵinject(i7.MatSnackBar)); }, token: ProductsComponent, providedIn: "root" });
+ProductsComponent.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function ProductsComponent_Factory() { return new ProductsComponent(i0.ɵɵinject(i1.AppSettings), i0.ɵɵinject(i2.ActivatedRoute), i0.ɵɵinject(i3.AppService), i0.ɵɵinject(i4.MatDialog), i0.ɵɵinject(i2.Router), i0.ɵɵinject(i5.FormBuilder), i0.ɵɵinject(i6.Meta), i0.ɵɵinject(i6.Title), i0.ɵɵinject(i7.MatSnackBar), i0.ɵɵinject(i8.CookieService)); }, token: ProductsComponent, providedIn: "root" });
 exports.ProductsComponent = ProductsComponent;
 
 
