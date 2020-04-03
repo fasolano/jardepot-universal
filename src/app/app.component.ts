@@ -28,11 +28,11 @@ export class AppComponent {
 
     ngAfterViewInit() {
         if (this.window){
-            this.router.events.subscribe(event => {
+            /*this.router.events.subscribe(event => {
                 if (event instanceof NavigationEnd) {
                     this.window.scrollTo(0, 0);
                 }
-            });
+            });*/
         }
     }
 }

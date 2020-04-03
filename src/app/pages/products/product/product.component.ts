@@ -56,12 +56,11 @@ export class ProductComponent implements OnInit {
     }
 
     ngOnInit() {
-
         this.window = (typeof window !== "undefined") ? window : null;
         this.sub = this.activatedRoute.params.subscribe(params => {
-            setTimeout(() => {
+            /*setTimeout(() => {
                 this.scrollToTop();
-            }, 300);
+            }, 300);*/
 
             this.getProductByName(params.product);
             this.getRelatedProducts(params.product);
@@ -76,7 +75,14 @@ export class ProductComponent implements OnInit {
         /*this.getBrands();
         this.getProductTypes();
         this.getAdditional();*/
-        this.createForm();
+        this.form = this.formBuilder.group({
+            comentario: [null, Validators.minLength(4)],
+            nombre: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+            telefono: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')])],
+            email: [null, Validators.compose([Validators.required, emailValidator])],
+            whatsapp: [null, Validators.compose([Validators.minLength(10), Validators.pattern('[0-9]*')])],
+            producto: [this.productName, Validators.compose([Validators.required])],
+        });
         this.getDistributions();
     }
 
@@ -106,24 +112,6 @@ export class ProductComponent implements OnInit {
     public onWindowResize(): void {
         (this.window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true;
     }
-
-    /*public getBrands() {
-        this.appService.getBrands().subscribe(data => {
-            this.brands = data;
-        });
-    }
-
-    public getAdditional() {
-        this.appService.getAdditional().subscribe(data => {
-            this.additional = data;
-        });
-    }
-
-    public getProductTypes() {
-        this.appService.getProductTypes().subscribe(data => {
-            this.productTypes = data;
-        });
-    }*/
 
     public getRelatedProducts(product: any) {
         this.appService.getProductsRelated(product).subscribe(data => {
@@ -191,7 +179,7 @@ export class ProductComponent implements OnInit {
             y = offsetY / image.offsetHeight * 100;
             zoomer = this.zoomViewer.nativeElement.children[0];
             if (zoomer) {
-                zoomer.style.backgroundImage = 'url(' + image.currentSrc + ')';
+                zoomer.style.backgroundImage = 'url(https://jardepot.com/' + this.zoomImage + ')';
                 zoomer.style.backgroundPosition = x + '% ' + y + '%';
                 zoomer.style.display = 'block';
                 zoomer.style.height = image.height + 'px';
@@ -259,24 +247,25 @@ export class ProductComponent implements OnInit {
         dialogRef.componentInstance.body = text;
     }
 
-    public scrollToTop() {
-        if(this.window){
+    /*public scrollToTop() {
+        // this.window = (typeof window !== "undefined") ? window : null;
+        if(window){
             const scrollDuration = 20;
-            const scrollStep = -this.window.pageYOffset / (scrollDuration / 20);
+            const scrollStep = -window.pageYOffset / (scrollDuration / 20);
             const scrollInterval = setInterval(() => {
-                if (this.window.pageYOffset !== 0) {
-                    this.window.scrollBy(0, scrollStep);
+                if (window.pageYOffset !== 0) {
+                    window.scrollBy(0, scrollStep);
                 } else {
                     clearInterval(scrollInterval);
                 }
             }, 10);
-            if (this.window.innerWidth <= 768) {
+            if (window.innerWidth <= 768) {
                 setTimeout(() => {
-                    this.window.scrollTo(0, 0);
+                    window.scrollTo(0, 0);
                 });
             }
         }
-    }
+    }*/
 
     public getDistributions() {
         this.distributions = this.appService.getDistributions();

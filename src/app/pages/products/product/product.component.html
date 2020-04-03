@@ -53,7 +53,7 @@
                     <div fxFlex="100" fxLayout="row wrap" fxFlex.gt-sm="60" ngClass.gt-sm="m-0 p-3"
                          ngClass.sm="mt-2" ngClass.xs="mt-2">
 
-                        <div fxFlex="100" fxFlex.gt-md="65" fxLayout="column" style="padding-left: 10px; padding-right: 25px; margin-bottom: 15px;">
+                        <div fxFlex="100" fxLayout="column" style="padding-left: 10px; padding-right: 25px; margin-bottom: 15px;">
                             <div #zoomViewer fxShow="false" fxShow.gt-md>
                                 <mat-card *ngIf="zoomImage" class="zoom-viewer mat-elevation-z18"
                                           [ngStyle]="{'background-image': 'url(' + zoomImage + ')'}"></mat-card>
@@ -69,7 +69,7 @@
                                     <fa-icon [icon]="faWhatsapp" style="font-size: 20px;"></fa-icon> Pregunta por refacciones
                                 </a>
                             </div>
-                            <p class="py-1 lh" style=" font-size: 17px;font-weight: 500; text-align: justify">{{product?.description}}</p>
+                            <h2 class="py-1 lh" style=" font-size: 17px;font-weight: 500; text-align: justify">{{product?.description}}</h2>
                             <h3 class="old-price text-muted" >
                                 <span *ngIf="product?.oldPrice && product?.stock">${{product?.oldPrice | number : '1.2-2'}}</span>
                             </h3>
@@ -78,9 +78,34 @@
                                 <!--                            <p><span class="fw-500 fn-color-jd">Categoría: </span><span></span></p>-->
                                 <p *ngIf="product?.inventory > 0 && product?.stock" class="fn-color-inStock" ><mat-icon class="mat-icon-sm m-0 fn-color-inStock">flash_on</mat-icon>&nbsp;Envío de volada </p>
                             </div>
+
+                            <!--                        ********************************    -->
+                            <!--                        Se divide la zona de pago-->
+                            <!--                        ********************************    -->
+                            <!--                                <div class="mat-elevation-z6 shopping-area">-->
+                            <!--<div class="py-2 text-shopping">
+                                <h2 class="new-price" *ngIf="product?.stock"><span style="color: #de1f21;"> ${{product?.newPrice | number : '1.2-2'}} </span><span class="text-bold-tiny">IVA incluido</span></h2>
+                            </div>-->
+                            <!--                                <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">local_shipping</mat-icon> Envío Gratis <a style="color: rgba(0, 0, 0, 0.87);" href="javascript: void(0)" (click)="openDeliveryTermsDialog()">*Condiciones</a></p>-->
+
+                            <app-controls [product]="product" [type]="'product'" [align]="'start end'"></app-controls>
+
+
+                            <!--<div style="font-weight: bold !important;">
+                                <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">monetization_on</mat-icon> Pagos seguros con </p>
+                                <ul style="list-style-type: disc; padding-left: 2em;">
+                                    <li>Paypal</li>
+                                    <li>Mercado pago</li>
+                                    <li>Depósito bancario</li>
+                                </ul>
+                            </div>-->
+                            <!--                                </div>-->
+                            <!--                            <div class="divider mt-1"></div>-->
+                            <!--                            <div class="divider"></div>-->
+
                             <div class="divider" sltyle="height: 2px;"></div>
                             <div style="font-weight: bold !important;">
-                                <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">local_shipping</mat-icon> Envío Gratis. <a style="color: rgba(0, 0, 0, 0.87);" href="javascript: void(0)" (click)="openDeliveryTermsDialog()">*Condiciones</a></p>
+                                <p *ngIf="product"> <mat-icon class="mat-icon-sm m-0 fn-color-jd">local_shipping</mat-icon> Envio gratis a partir de $3,000 de compra. <a style="color: rgba(0, 0, 0, 0.87);" href="javascript: void(0)" (click)="openDeliveryTermsDialog()">*Condiciones</a></p>
                                 <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">perm_phone_msg</mat-icon> Soporte y asesoria </p>
                                 <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">build</mat-icon> Garantía de Fabrica </p>
                                 *Sujeto a existencias.
@@ -94,31 +119,6 @@
                                     <fa-icon [icon]="faWhatsapp" style="font-size: 20px;"></fa-icon> Pregunta por refacciones
                                 </a>
                             </div>
-                        </div>
-                        <!--                        ********************************    -->
-                        <!--                        Se divide la zona de pago-->
-                        <!--                        ********************************    -->
-                        <div fxFlex="100" fxFlex.gt-md="35" fxLayout="column">
-                            <div class="mat-elevation-z6 shopping-area">
-                                <div class="py-2 text-shopping">
-                                    <h2 class="new-price" *ngIf="product?.stock"><span style="color: #de1f21;"> ${{product?.newPrice | number : '1.2-2'}} </span><span class="text-bold-tiny">IVA incluido</span></h2>
-                                </div>
-                                <!--                                <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">local_shipping</mat-icon> Envío Gratis <a style="color: rgba(0, 0, 0, 0.87);" href="javascript: void(0)" (click)="openDeliveryTermsDialog()">*Condiciones</a></p>-->
-                                <div class="py-1">
-                                    <app-controls [product]="product" [type]="'product'" [align]="'start end'"></app-controls>
-                                </div>
-
-                                <div style="font-weight: bold !important;">
-                                    <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">monetization_on</mat-icon> Pagos seguros con </p>
-                                    <ul style="list-style-type: disc; padding-left: 2em;">
-                                        <li>Paypal</li>
-                                        <!--                                        <li>Mercado pago</li>-->
-                                        <li>Depósito bancario</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!--                            <div class="divider mt-1"></div>-->
-                            <!--                            <div class="divider"></div>-->
                         </div>
                     </div>
                 </div>
@@ -232,7 +232,7 @@
                         <div class="content">
                             <p style="color: rgba(0, 0, 0, 0.87) !important;">Envío Gratis</p>
                             <span class="text-muted m-0" *ngIf="product">En compras superiores a $3,000 pesos.</span>
-                            <a style="color: rgba(0, 0, 0, 0.87);" href="javascript: void(0)" (click)="openDeliveryTermsDialog()">*Condiciones</a>
+                            <a style="color: rgba(0, 0, 0, 0.87);" href="javascript: void(0)" (click)="openDeliveryTermsDialog()" *ngIf="product">*Condiciones</a>
                         </div>
                     </mat-card>
                 </div>
@@ -258,8 +258,6 @@
             </div>
             <app-brands-carousel [brands]="distributions"></app-brands-carousel>
         </div>
-
     </mat-sidenav-content>
-
 </mat-sidenav-container>
 

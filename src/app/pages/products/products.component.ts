@@ -10,6 +10,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
 import { MatSnackBar } from '@angular/material';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-products',
@@ -61,7 +62,7 @@ export class ProductsComponent implements OnInit {
                 private router: Router,
                 public formBuilder: FormBuilder,
                 private meta: Meta,
-                public title: Title, public snackBar: MatSnackBar) {
+                public title: Title, public snackBar: MatSnackBar, public cookieService: CookieService) {
         this.settings = this.appSettings.settings;
     }
 
@@ -172,9 +173,19 @@ export class ProductsComponent implements OnInit {
             // this.busy = true;
             product.cartCount = 1;
         }
-        this.appService.addToCart(product).subscribe(res => {
-            this.router.navigate(['/cart']);
-        });
+        if(this.cookieService.check('session')){
+            this.appService.addToCart(product).subscribe(res => {
+                this.router.navigate(['/cart']);
+            });
+        }else{
+            this.appService.setCookieApp().subscribe(data => {
+                this.appService.cookieValue = data;
+                this.appService.setCookie( 'session', JSON.stringify(data), 3, '/');
+                this.appService.addToCart(product).subscribe(res => {
+                    this.router.navigate(['/cart']);
+                });
+            });
+        }
     }
 
     /*public addToCart(product){

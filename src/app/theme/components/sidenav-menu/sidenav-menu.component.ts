@@ -19,7 +19,7 @@ export class SidenavMenuComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.parentMenu = this.menuItems.filter(item => item.parentId == this.menuParentId);
+        // this.parentMenu = this.menuItems.filter(item => item.parentId == this.menuParentId);
         this.appService.getMenu().subscribe(data => {
             this.menuTopBar = data;
         });

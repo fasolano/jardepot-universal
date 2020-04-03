@@ -159,8 +159,8 @@
         "app-shell": {
           "builder": "@angular-devkit/build-angular:app-shell",
           "options": {
-            "browserTarget": "emporium:build",
-            "serverTarget": "emporium:server",
+            "browserTarget": "emporium:build:production",
+            "serverTarget": "emporium:server:production",
             "route": "shell"
           },
           "configurations": {

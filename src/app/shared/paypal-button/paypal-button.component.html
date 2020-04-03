@@ -7,8 +7,14 @@
     </div>
     <div mat-dialog-content style="max-height: 80vh;">
         <div>*Se agregará una comisión del 4% por método de pago Paypal</div>
-        <div fxShow="{{deliveryComission}}">*El total de tu cuenta es menor a $3,000.00 se agregará un cargo extra de $300.00 por envio envio</div>
-        <form [formGroup]="clientForm">
+        <div fxShow="{{deliveryComission}}">*El total de tu cuenta es menor a $3,000.00 se agregará un cargo extra de $300.00 por envío </div>
+        <div fxLayout="row wrap" style="margin-top: 20px;margin-bottom: 20px;">
+            <div fxFlex="100" class="px-1">
+                <mat-checkbox (change)="chageTerms($event)">Acepto terminos y condiciones</mat-checkbox>
+                <a (click)="openDeliveryTermsDialog()" style="margin-left: 10px; cursor: pointer; text-decoration: underline blue; color: blue;">Consultalos aquí</a>
+            </div>
+        </div>
+        <form *ngIf="clientForm" [formGroup]="clientForm">
             <div fxLayout="row wrap">
                 <div fxFlex="50" fxFlex.lt-sm="100" class="px-1">
                     <mat-form-field appearance="outline" class="w-100">
@@ -64,8 +70,12 @@
         </form>
         <div class="py-1 text-muted" fxLayout="row" fxFlexAlign="end end">
             <div fxFlex="100">
-                <div id="text-container" fxShow="{{showButton}}">Por favor rellena todos los campos</div>
-                <div id="paypal-button-container" fxHide="{{showButton}}"></div>
+                <div id="text-container">
+                    <span fxShow="{{showButton}}">Por favor rellena todos los campos</span>
+                    <br>
+                    <span fxShow="{{terms}}">Acepta los terminos y condiciones</span>
+                </div>
+                <div id="paypal-button-container" fxHide="{{showButton || terms}}"></div>
             </div>
         </div>
     </div>

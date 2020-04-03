@@ -27,7 +27,7 @@
         </bdi>
     </div>
     <div fxFlex.gt-md="100" fxFlex="50" class="area-btn-shopping">
-        <button mat-button matTooltip="Agregar" class="btn-shopping" [disabled]="busy" *ngIf="product?.availibilityCount > 0" (click)="addToCart(product)"><!--<mat-icon>shopping_cart</mat-icon> -->Agregar al carrito</button>
+        <button mat-button matTooltip="Agregar" class="btn-shopping" [disabled]="busy" *ngIf="product?.availibilityCount > 0" (click)="addToCartAndNavigate(product)">Agregar al carrito</button>
     </div>
 </div>
 

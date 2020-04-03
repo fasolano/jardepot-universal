@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     public productTypes: Array<any>;
     public additional = [];
     json;
-    public text = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM, FEDEX).<br>" +
+    public text = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM).<br>" +
         "NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>" +
         "NO aplica con otras paqueterías<br>" +
         "El tiempo de entrega estimado y sujeto a existencias es de 2 a 6 días hábiles, (Mínimo/Máximo) contados a partir de las siguientes " +
@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
     }
 
     public openDeliveryTermsDialog(){
-        const textBody = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM, FEDEX).<br>" +
+        const textBody = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM).<br>" +
             "NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>" +
             'Las compras deben ser mayor a $3,000.00 MXN<br>' +
             "NO aplica con otras paqueterías<br>" +

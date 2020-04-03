@@ -73,20 +73,19 @@ export class PagesComponent implements OnInit, AfterViewInit  {
     }
 
     ngOnInit() {
-        this._compiler.clearCache();
+        this.formSearch = this.fb.group({
+            valorSearch: [null, Validators.required]
+        });
+        // this._compiler.clearCache();
         this.getProductsCart();
         this.sidenavMenuItems = this.sidenavMenuService.getSidenavMenuItems();
         this.getBrands();
         this.getProductTypes();
         this.getAdditional();
-        this.createForm();
     }
 
     createForm() {
-        this.formSearch = this.fb.group({
-            valorSearch: [null, Validators.required],
-            // userNum: null, userDate: [null, Validators.required],
-        });
+
     }
 
     public getBrands() {
@@ -99,15 +98,10 @@ export class PagesComponent implements OnInit, AfterViewInit  {
     }
 
     public getProductsCart() {
-
-        /*total = [];
-        grandTotal = 0;
-        cartItemCount = [];
-        cartItemCountTotal = 0;*/
         if (this.cookieService.check('session')) {
             this.appService.getProductsCart().subscribe(res => {
                 if(res == null){
-                    this.cookieService.delete('session', '/');
+                    this.appService.deleteCookie('session');
                 }else{
                     this.appService.Data.cartList = JSON.parse(res[0]);
                     this.appService.Data.totalPrice = null;
@@ -250,7 +244,9 @@ export class PagesComponent implements OnInit, AfterViewInit  {
                 this.busy = false;
                 product.cartCount = 1;
             }
-            this.appService.addToCart(product);
+            this.appService.addToCart(product).subscribe(res => {
+                this.router.navigate(['/cart']);
+            });
             setTimeout(() => { this.busy = true; }, 500);
         }
     }

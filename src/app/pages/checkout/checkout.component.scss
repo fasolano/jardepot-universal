@@ -43,22 +43,21 @@
     }
 }
 
-.mat-step-header:nth-child(9) {
+.mat-step-header:nth-child(7) {
     pointer-events: none !important;
 }
 
-#cdk-step-label-1-4 {
+#cdk-step-label-1-3 {
     pointer-events: none !important;
 }
 
-::ng-deep .mat-horizontal-stepper-header:nth-child(9){
+::ng-deep .mat-horizontal-stepper-header:nth-child(7){
     pointer-events: none !important;
 }
 
-::ng-deep #cdk-step-label-1-4{
+::ng-deep #cdk-step-label-1-3{
     pointer-events: none !important;
 }
-
 
 @media screen and (max-width: 960px) {
     .mat-table {

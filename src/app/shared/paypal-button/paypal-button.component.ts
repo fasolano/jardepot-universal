@@ -2,8 +2,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AppService} from '../../app.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {emailValidator} from '../../theme/utils/app-validators';
-import {MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 import {Router} from '@angular/router';
+import {DialogComponent} from '../../shared/dialog/dialog.component';
 
 @Component({
     selector: 'app-paypal-button',
@@ -14,12 +15,14 @@ export class PaypalButtonComponent implements OnInit {
 
     @Output() output = new EventEmitter();
     _ref:any;
-    clientForm: FormGroup;
+    clientForm: FormGroup = null;
     showButton: boolean = true;
     deliveryComission: boolean = true;
+    terms = true;
 
     constructor(private appService: AppService, public formBuilder: FormBuilder, public dialogRef: MatDialogRef<PaypalButtonComponent>,
-                private router: Router) {
+                private router: Router,
+                public dialog: MatDialog,) {
     }
 
     ngOnInit() {
@@ -42,6 +45,7 @@ export class PaypalButtonComponent implements OnInit {
         this.appService.Data.cartList.forEach(product=>{
             products.push(product.name);
         });
+        total = Number((total).toFixed(2));
             // @ts-ignore
         paypal.Buttons({
             createOrder: function(data, actions) {
@@ -79,6 +83,9 @@ export class PaypalButtonComponent implements OnInit {
         this.showButton = this.clientForm.invalid;
     }
 
+    public chageTerms(event){
+        this.terms = !event.checked;
+    }
 
     public removeObject(){
         this._ref.destroy();
@@ -86,6 +93,21 @@ export class PaypalButtonComponent implements OnInit {
 
     public close(): void {
         this.dialogRef.close();
+    }
+
+    public openDeliveryTermsDialog(){
+        const textBody = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM).<br>" +
+            "NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>" +
+            'Las compras deben ser mayor a $3,000.00 MXN<br>' +
+            "NO aplica con otras paqueterías<br>" +
+            "El tiempo de entrega estimado y sujeto a existencias es de 2 a 6 días hábiles, (Mínimo/Máximo) contados a partir de las siguientes " +
+            "24 hrs de que su depósito se ha verificado y de recibir su correo con los datos completos para facturar y enviar su producto.<br><br>";
+        const dialogRef = this.dialog.open(DialogComponent, {
+            panelClass: 'generic-dialog',
+            direction: 'ltr'
+        });
+        dialogRef.componentInstance.title = 'Condiciones de envíos Gratis:';
+        dialogRef.componentInstance.body = textBody;
     }
 
 }

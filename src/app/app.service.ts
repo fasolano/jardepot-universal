@@ -31,10 +31,10 @@ export class AppService {
     public cookieValue: any = 'UNKNOWN';
 
     public url = 'assets/data/';
-    public urlAPI = 'https://jardepot.com/jardepotAPI';
+    // public urlAPI = 'https://jardepot.com/jardepotAPI/public';
     // public urlAPI = 'https://seragromex.com/jardepotAPI';
-    // public urlAPI = 'http://maquinariadejardineria.com.mx/jardepotAPI';
-    // public urlAPI = 'http://localhost/jardepotAPI';
+    public urlAPI = 'https://api.jardepot.com';
+    // public urlAPI = 'http://localhost/jardepotAPI/public';
     // public urlAPI = 'http://192.168.1.88/jardepotAPI';
 
     constructor(public http: HttpClient, public snackBar: MatSnackBar, private cookieService: CookieService, private route: Router) {
@@ -47,26 +47,26 @@ export class AppService {
     public getProductsRelated(product): Observable<Product[]>{
         const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         const params = new HttpParams().set('product', product);
-        return this.http.get<Product[]>(this.urlAPI+'/public/api/products/related', {headers, params});
+        return this.http.get<Product[]>(this.urlAPI+'/api/products/related', {headers, params});
     }
 
     public getProducts(nivel1, nivel2, brandFilter, characteristicFilter): Observable<Product[]>{
         const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         const params = new HttpParams().set('nivel1',nivel1).set('nivel2', this.filterHilo(nivel2)).set('brands', brandFilter).set('characteristics', characteristicFilter);
-        return this.http.get<Product[]>(this.urlAPI+'/public/api/products', {headers, params});
+        return this.http.get<Product[]>(this.urlAPI+'/api/products', {headers, params});
     }
 
     public getSectionsProducts(nivel1, nivel2): Observable<Product[]>{
         let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = new HttpParams().set('nivel1',nivel1).set('nivel2', this.filterHilo(nivel2));
-        return this.http.get<Product[]>(this.urlAPI+'/public/api/products/sections', {headers, params});
+        return this.http.get<Product[]>(this.urlAPI+'/api/products/sections', {headers, params});
     }
 
     public getProductByName(product): Observable<Product> {
 
         let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = new HttpParams().set('product',product);
-        return this.http.get<Product>(this.urlAPI+'/public/api/product',{headers, params});
+        return this.http.get<Product>(this.urlAPI+'/api/product',{headers, params});
     }
 
     public getBanners(): Observable<any[]> {
@@ -76,31 +76,31 @@ export class AppService {
     public getMenu() {
         let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = '';
-        return this.http.get<any[]>(this.urlAPI+'/public/api/menu/navbar', { headers });
+        return this.http.get<any[]>(this.urlAPI+'/api/menu/navbar', { headers });
     }
 
     public getProductTypes() {
         let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = '';
-        return this.http.get<any[]>(this.urlAPI+'/public/api/menu/productsTypes', { headers });
+        return this.http.get<any[]>(this.urlAPI+'/api/menu/productsTypes', { headers });
     }
 
     public getBrands() {
         let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = '';
-        return this.http.get<any[]>(this.urlAPI+'/public/api/menu/brands', { headers });
+        return this.http.get<any[]>(this.urlAPI+'/api/menu/brands', { headers });
     }
 
     public getAdditional() {
         let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = '';
-        return this.http.get<any[]>(this.urlAPI+'/public/api/menu/additional', { headers });
+        return this.http.get<any[]>(this.urlAPI+'/api/menu/additional', { headers });
     }
 
     public getFilters(productType){
         let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = new HttpParams().set('productType', this.filterHilo(productType) );
-        return this.http.get<any[]>(this.urlAPI+'/public/api/products/filters', { headers, params});
+        return this.http.get<any[]>(this.urlAPI+'/api/products/filters', { headers, params});
     }
 
     public addToCompare(product: Product) {
@@ -155,15 +155,15 @@ export class AppService {
             this.snackBar.open(message, '×', {panelClass: [status], verticalPosition: 'top', duration: 3000});
             const params = { 'product' : JSON.stringify(product), 'quantity' : product.cartCount, 'sessionCookie' : session };
 
-            return this.http.post(this.urlAPI+'/public/api/cart/addProduct', params)
+            return this.http.post(this.urlAPI+'/api/cart/addProduct', params);
         } else {
-            const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
-            this.http.get(this.urlAPI + '/public/api/session', {headers}).subscribe(data => {
-                this.cookieValue = data;
-                this.cookieService.set( 'session', JSON.stringify(data), null, '/' );
-                this.addToCart(product);
-            });
+
         }
+    }
+
+    public setCookieApp(){
+        const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+        return this.http.get(this.urlAPI + '/api/session', {headers});
     }
 
     public removeFromCart(product: Product){
@@ -174,7 +174,7 @@ export class AppService {
         status = 'error';
         this.snackBar.open(message, '×', {panelClass: [status], verticalPosition: 'top', duration: 3000});
         const params = new HttpParams().set('product', product.name).set('sessionCookie', session);
-        this.http.delete(this.urlAPI+'/public/api/cart/removeProduct', {params}).subscribe(res => {
+        this.http.delete(this.urlAPI+'/api/cart/removeProduct', {params}).subscribe(res => {
         });
     }
 
@@ -182,7 +182,7 @@ export class AppService {
         let session = this.cookieService.get('session');
         let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = new HttpParams().set('sessionCookie', session );
-        return this.http.get(this.urlAPI+'/public/api/cart/products', {headers, params});
+        return this.http.get(this.urlAPI+'/api/cart/products', {headers, params});
     }
 
     public resetProductCartCount(product: Product) {
@@ -205,8 +205,8 @@ export class AppService {
         return [
             // {value: 'ocurre', name: 'Envio a Ocurre', desc: '$100.00 MXN / Entrega de 2 a 6 días hábiles *Compras mayores a 2500 gratis', cost:100, min:2500},
             {value: 'domicilio', name: 'Envio a domicilio', desc: '$300.00 MXN / Entrega de 2 a 6 días hábiles *Compras mayores a $3,000.00 gratis y en área de cobertura', cost:300, min:3000},
-            {value: 'cuernavaca', name: 'Entrega en sucursal Cuernavaca', desc: 'GRATIS / Entrega de 1 a 2 días hábiles *La entrega extender a 6 días hábiles', cost:0, min:0},
-            {value: 'pachuca', name: 'Entrega en sucursal Pachuca', desc: 'GRATIS / Entrega de 1 a 2 días hábiles *La entrega extender a 6 días hábiles', cost:0, min:0}
+            {value: 'cuernavaca', name: 'Entrega en sucursal Cuernavaca', desc: 'GRATIS / Entrega de 1 a 2 días hábiles *En algunos casos la entrega puede extenderse hasta 7 días hábiles en cuyo caso se lo haremos saber de inmediato.', cost:0, min:0},
+            {value: 'pachuca', name: 'Entrega en sucursal Pachuca', desc: 'GRATIS / Entrega de 1 a 2 días hábiles *En algunos casos la entrega puede extenderse hasta 7 días hábiles en cuyo caso se lo haremos saber de inmediato.', cost:0, min:0}
         ];
     }
 
@@ -221,7 +221,7 @@ export class AppService {
     public getProductLevels($productType) {
         let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = new HttpParams().set('productType', this.filterHilo($productType) );
-        return this.http.get<any[]>(this.urlAPI+'/public/api/product/levels', { headers, params });
+        return this.http.get<any[]>(this.urlAPI+'/api/product/levels', { headers, params });
     }
 
     errorHandl(error) {
@@ -239,34 +239,34 @@ export class AppService {
     public getProductsSearch(valorSearch){
         let session = this.cookieService.get('session');
         let params = new HttpParams().set('valorSearch', valorSearch );
-        return this.http.get<Product[]>(this.urlAPI+'/public/api/products/search', {params});
+        return this.http.get<Product[]>(this.urlAPI+'/api/products/search', {params});
     }
 
     public getProductsOffer(){
-        return this.http.get<Product[]>(this.urlAPI+'/public/api/products/offer');
+        return this.http.get<Product[]>(this.urlAPI+'/api/products/offer');
     }
 
     public createOrder(forms) {
         let session = this.cookieService.get('session');
         const params = {'forms': JSON.stringify(forms), 'sessionCookie': session};
-        return this.http.post(this.urlAPI+'/public/api/checkout/createOrder', params);
+        return this.http.post(this.urlAPI+'/api/checkout/createOrder', params);
     }
 
     public createMercadopago(order, products, client, delivery){
         const params = {'order': JSON.stringify(order), 'products': JSON.stringify(products), 'client': JSON.stringify(client), 'delivery': JSON.stringify(delivery)};
-        return this.http.post('https://fasolano.com/jardepotAPI/public/api/checkout/mercadopago', params);
+        return this.http.post('https://fasolano.com/jardepotAPI/api/checkout/mercadopago', params);
     }
 
     public confirmMercadopago($data){
         const params = {'data':$data};
-        return this.http.post('https://fasolano.com/jardepotAPI/public/api/confirm/mercadopago', params);
+        return this.http.post('https://fasolano.com/jardepotAPI/api/confirm/mercadopago', params);
     }
 
     public enviarBusqueda(forms, busqueda) {
         //  let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let session = this.cookieService.get('session');
         const params = {'forms': JSON.stringify(forms), 'textoBuscado': busqueda, 'sessionCookie': session};
-        return this.http.post(this.urlAPI+'/public/api/products/sendSearch', params);
+        return this.http.post(this.urlAPI+'/api/products/sendSearch', params);
     }
 
     public sendConfirmationPayment($state, $payment, $data, $token){
@@ -275,12 +275,12 @@ export class AppService {
             session = this.cookieService.get('session');
         }
         const params = {'state':$state, 'payment':$payment, 'data':$data, 'token': $token, 'sessionCookie':session};
-        return this.http.post(this.urlAPI+'/public/api/confirm/checkout', params);
+        return this.http.post(this.urlAPI+'/api/confirm/checkout', params);
     }
 
     public getDescriptionNivel2(nivel1, nivel2) {
         let params = new HttpParams().set('nivel1', nivel1 ).set('nivel2', this.filterHilo(nivel2) );
-        return this.http.get(this.urlAPI+'/public/api/products/getDescriptionNivel2', {params});
+        return this.http.get(this.urlAPI+'/api/products/getDescriptionNivel2', {params});
     }
 
     public filterHilo(productType) {
@@ -295,7 +295,7 @@ export class AppService {
 
     public defineBreadcrumb($params, $previousUrl, $component){
         let params = new HttpParams().set('params', $params ).set('previousUrl', $previousUrl).set('component', $component);
-        return this.http.get(this.urlAPI+'/public/api/menu/breadcrumb', {params});
+        return this.http.get(this.urlAPI+'/api/menu/breadcrumb', {params});
     }
 
     public payPalPayment($id){
@@ -312,6 +312,41 @@ export class AppService {
             products.push(product)
         });
         return products;
+    }
+
+    public getCookie(name: string) {
+        let documento = (typeof document !== "undefined") ? document : null;
+        if(documento){
+            let ca: Array<string> = documento.cookie.split(';');
+            let caLen: number = ca.length;
+            let cookieName = `${name}=`;
+            let c: string;
+
+            for (let i: number = 0; i < caLen; i += 1) {
+                c = ca[i].replace(/^\s+/g, '');
+                if (c.indexOf(cookieName) == 0) {
+                    return c.substring(cookieName.length, c.length);
+                }
+            }
+            return '';
+        }
+        return '';
+    }
+
+    public deleteCookie(name) {
+        this.setCookie(name, '', -1);
+    }
+
+    public setCookie(name: string, value: string, expireDays: number, path: string = '') {
+        let documento = (typeof document !== "undefined") ? document : null;
+        if(documento){
+            let d:Date = new Date();
+            d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
+            let expires:string = `expires=${d.toUTCString()}`;
+            let cpath:string = path ? `; path=${path}` : '';
+            documento.cookie = `${name}=${value}; ${expires}${cpath}`;
+        }
+
     }
 
 }

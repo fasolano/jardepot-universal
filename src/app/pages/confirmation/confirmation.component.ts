@@ -17,6 +17,7 @@ export class ConfirmationComponent implements OnInit {
     public payment: string;
     public framengData: string[];
     public done = false;
+    public billingForPaypal = "";
 
     constructor(private activatedRoute: ActivatedRoute, private appService: AppService, private spinner: NgxSpinnerService, private cookieService: CookieService) {}
 
@@ -31,11 +32,12 @@ export class ConfirmationComponent implements OnInit {
             this.activatedRoute.queryParams.subscribe(getParams => {
                 this.data = getParams;
                 if (this.data != ""){
+                    this.billingForPaypal = this.data.status.toLocaleLowerCase();
                     this.state = this.data.status.toLocaleLowerCase();
                     this.state = this.state == 'completed' ? 'success':this.state;
                     this.appService.sendConfirmationPayment(this.state, 'button', JSON.stringify(this.data), params['token']).subscribe(response => {
                         if (this.cookieService.check('session')) {
-                            this.cookieService.delete('session', '/');
+                            this.appService.deleteCookie('session');
                         }
                         this.done = true;
                         // @ts-ignore
@@ -54,7 +56,7 @@ export class ConfirmationComponent implements OnInit {
                             // @ts-ignore
                             this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), responseMP.data).subscribe(response => {
                                 if (this.cookieService.check('session')) {
-                                    this.cookieService.delete('session', '/');
+                                    this.appService.deleteCookie('session');
                                 }
                                 this.done = true;
                                 // @ts-ignore
@@ -65,7 +67,7 @@ export class ConfirmationComponent implements OnInit {
                     }else{
                         this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), "").subscribe(response => {
                             if (this.cookieService.check('session')) {
-                                this.cookieService.delete('session', '/');
+                                this.appService.deleteCookie('session');
                             }
                             this.done = true;
                             // @ts-ignore
