@@ -156,7 +156,7 @@
                                 <img class="img-product" [src]="product.images[0].medium" (error)="handleImgError($event)" style="max-height: 231px;"
                                      title="{{product?.productType+' '+product?.brand+' '+product?.mpn}}" alt="{{product.productType+' '+product.brand+' '+product.mpn}}">
                             </div>
-                            <img src="../assets/images/otros/gratis.png" class="free-delivery">
+                            <img *ngIf="product.newPrice > 2999" src="../assets/images/otros/gratis.png" class="free-delivery">
                         </div>
                     </a>
                     <h4 class="category text-muted">{{ (appService.Data.categories | filterById : product.categoryId)?.name }}</h4>
@@ -219,7 +219,7 @@
                                     <img [src]="product.images[0].medium" title="{{product?.productType+' '+product?.brand+' '+product?.mpn}}"
                                          alt="{{product.productType+' '+product.brand+' '+product.mpn}}" (error)="handleImgError($event)">
                                     <div style="position: absolute; right: 0px; bottom: 0px;">
-                                        <img src="../assets/images/otros/gratis.png">
+                                        <img *ngIf="product.newPrice > 2999" src="../assets/images/otros/gratis.png">
                                     </div>
                                 </div>
                             </a>
