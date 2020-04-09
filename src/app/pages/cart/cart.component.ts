@@ -124,7 +124,9 @@ export class CartComponent implements OnInit {
 
                 });
             });
-            this.appService.addToCart(productTemp);
+            this.appService.addToCart(productTemp).subscribe($data=>{
+
+            });
         }
     }
 

@@ -33,29 +33,59 @@ export class PaypalButtonComponent implements OnInit {
             email: [null, Validators.compose([Validators.required, emailValidator ])],
             phone: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')])]
         });
-        let total = this.appService.Data.totalPrice;
-        //se evalua si lleva comisión de envio
-        total += this.deliveryComission? 300:0;
-        //Se agrega la comisión de paypal
-        total = total * 1.04;
+        let total = 0;
         const router = this.router;
         const modal = this.dialogRef;
         const form = this.clientForm;
         let products = [];
         this.appService.Data.cartList.forEach(product=>{
-            products.push(product.name);
+            // products.push(product.name);
+            let price = product.newPrice * 1.04;
+            price = Number((price).toFixed(2));
+            products.push({
+                name: product.name,
+                unit_amount: {
+                    currency_code: "MXN",
+                    value: price
+                },
+                quantity: product.cartCount
+            });
+            total += price * product.cartCount;
         });
-        total = Number((total).toFixed(2));
+
+        //se evalua si lleva comisión de envio
+        if(this.deliveryComission){
+            total += 300;
+            products.push({
+                name: "Costo de envio",
+                unit_amount: {
+                    currency_code: "MXN",
+                    value: "300.00"
+                },
+                quantity: "1"
+            });
+        }
+        //Se agrega la comisión de paypal
             // @ts-ignore
         paypal.Buttons({
             createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [
                         {
-                            reference_id: "PAGOJD",
+                            reference_id: "PAGO-JD",
+                            description: "Compra en linea JarDepot",
+                            soft_descriptor: "Compra en JarDepot",
                             amount: {
-                                value: total
-                            }
+                                currency_code: "MXN",
+                                value: total,
+                                breakdown: {
+                                    item_total: {
+                                        currency_code: "MXN",
+                                        value: total
+                                    }
+                                }
+                            },
+                            items:products
                         }
                     ]
                 });
