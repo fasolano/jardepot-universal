@@ -24,7 +24,7 @@
                             <img *ngIf="image" [src]="image" (mousemove)="onMouseMove($event)" title="{{product?.productType+' '+product?.brand+' '+product?.mpn}}"
                                  (mouseleave)="onMouseLeave($event)" alt="{{product?.productType+' '+product?.brand+' '+product?.mpn}}" (error)="handleImgError($event)"
                                  style="max-width: 100%;"/>
-                            <img src="../assets/images/otros/gratis.png" class="free-delivery">
+                            <img *ngIf="product?.newPrice > 3000" src="../assets/images/otros/gratis.png" class="free-delivery">
                         </mat-card>
 
                         <div class="small-carousel">
