@@ -1,15 +1,26 @@
+<ngx-json-ld [json]="json"></ngx-json-ld>
 <div fxLayout="row wrap" *ngIf="router.url != '/'">
     <div fxFlex="100">
-        <mat-card fxLayout="row" class="breadcrumb light-block">
-            <a *ngIf="router.url != '/'" routerLink="/" class="breadcrumb-item" fxLayout="row" fxLayoutAlign="start center" (click)="closeSubMenus()">
-                <mat-icon>home</mat-icon>
-                <span class="breadcrumb-title">Inicio</span>
-            </a>
-            <div *ngFor="let breadcrumb of breadcrumbs; let i = index;" class="breadcrumb-item" fxLayout="row" fxLayoutAlign="start center">
-                <a *ngIf="i < (breadcrumbs.length - 2)">{{breadcrumb.name}}</a>
-                <a *ngIf="i == (breadcrumbs.length - 2) && breadcrumb.url == '/'" [routerLink]="[breadcrumb.url, breadcrumb.level1, breadcrumb.level2]">{{breadcrumb.name}}</a>
-                <a *ngIf="i == (breadcrumbs.length - 2) && breadcrumb.url != '/'" >{{breadcrumb.name}}</a>
-                <span *ngIf="i == (breadcrumbs.length - 1)" class="active"><b>{{breadcrumb.name}}</b></span>
+        <mat-card fxLayout="row wrap" class="breadcrumb light-block">
+            <div fxLayout="row" fxFlex.lt-md="100">
+                <a *ngIf="router.url != '/'" routerLink="/" class="breadcrumb-item" fxLayout="row" fxLayoutAlign="start center" (click)="closeSubMenus()">
+                    <mat-icon>home</mat-icon>
+                    <span class="breadcrumb-title">Inicio</span>
+                </a>
+                <div *ngFor="let breadcrumb of breadcrumbs; let i = index;" class="breadcrumb-item" fxLayout="row" fxLayoutAlign="start center">
+                    <a *ngIf="i < (breadcrumbs.length - 2)">{{breadcrumb.name}}</a>
+                    <a *ngIf="i == (breadcrumbs.length - 2) && breadcrumb.url == '/'" [routerLink]="[breadcrumb.url, breadcrumb.level1, breadcrumb.level2]">{{breadcrumb.name}}</a>
+                    <a *ngIf="i == (breadcrumbs.length - 2) && breadcrumb.url != '/'" >{{breadcrumb.name}}</a>
+                    <span *ngIf="i == (breadcrumbs.length - 1)" class="active"><b>{{breadcrumb.name}}</b></span>
+                </div>
+            </div>
+
+            <div class="contenedor" style="margin-left: 25px; font-size: 25px; font-weight: bold; color: #f68600;">
+                <ul>
+                    <li>!Quédate en casa¡ Nosotros te lo enviamos...</li>
+                    <li>Tu equipo siempre contigo.</li>
+                    <li>!Quédate en casa¡ Nosotros te lo enviamos...</li>
+                </ul>
             </div>
         </mat-card>
     </div>

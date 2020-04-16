@@ -25,6 +25,7 @@ export class BreadcrumbComponent {
         level2: string;
     }[] = [];
     window;
+    public json;
 
     public settings: Settings;
     constructor(public appSettings:AppSettings,
@@ -35,13 +36,32 @@ export class BreadcrumbComponent {
                 public sidenavMenuService:SidenavMenuService){
         this.window = (typeof window !== "undefined") ? window : null;
         this.settings = this.appSettings.settings;
+        /*this.json = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://jardepot.com"
+            },{
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Science Fiction",
+                "item": "https://example.com/books/sciencefiction"
+            },{
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Award Winners"
+            }]
+        };*/
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 this.breadcrumbs = [];
                 this.parseRoute(this.router.routerState.snapshot.root);
                 this.previousUrl = event.url;
             }
-        })
+        });
     }
 
     private parseRoute(node: ActivatedRouteSnapshot) {
