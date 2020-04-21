@@ -14,9 +14,11 @@ export class HomeComponent implements OnInit {
 
     public distributions = [];
     public banners = [];
+    public bannersShow = false;
     public brands = [];
     public productTypes: Array<any>;
     public additional = [];
+    public window;
     json;
     public text = "Los envíos gratuitos que ofrece JarDepot son a la cobertura terrestre normal de las paqueterías con las que tenemos convenio (ODM).<br>" +
         "NO aplica a zonas extendidas (En extra coberturas se le indicará la diferencia a pagar para su consideración).<br>" +
@@ -31,7 +33,12 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getBanners();
+        this.window = (typeof window !== 'undefined') ? window : null;
+        if (this.window) {
+            if (this.window.innerWidth >= 960) {
+                this.bannersShow = true;
+            }
+        }
         this.getDistributions();
         this.getBrands();
         this.getProductTypes();
@@ -58,10 +65,6 @@ export class HomeComponent implements OnInit {
             this.meta.updateTag({name: 'keywords', content: res.result.keywords});
             this.title.setTitle(res.result.metatitle.substr(0,70));
         });
-    }
-
-    public getBanners() {
-
     }
 
     public getDistributions() {

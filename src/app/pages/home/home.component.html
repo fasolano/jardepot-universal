@@ -1,7 +1,7 @@
 
 
 <ngx-json-ld [json]="json"></ngx-json-ld>
-<app-banners></app-banners>
+<app-banners *ngIf="bannersShow"></app-banners>
 
 <div fxLayout="row wrap" class="info-bar" fxShow="" fxHide.lt-md="">
     <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-xs="50">
