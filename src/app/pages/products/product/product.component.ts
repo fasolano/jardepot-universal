@@ -43,7 +43,8 @@ export class ProductComponent implements OnInit {
     json;
     faWhatsapp = faWhatsapp;
     public distributions = [];
-    window;
+    public window;
+    public carrouselsShow = false;
 
     constructor(public appService: AppService,
                 private activatedRoute: ActivatedRoute,
@@ -57,6 +58,12 @@ export class ProductComponent implements OnInit {
 
     ngOnInit() {
         this.window = (typeof window !== "undefined") ? window : null;
+
+        if (this.window) {
+            if (this.window.innerWidth >= 960) {
+                this.carrouselsShow = true;
+            }
+        }
         this.sub = this.activatedRoute.params.subscribe(params => {
             /*setTimeout(() => {
                 this.scrollToTop();

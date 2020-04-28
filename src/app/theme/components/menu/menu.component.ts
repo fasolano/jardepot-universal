@@ -22,8 +22,12 @@ export class MenuComponent implements OnInit {
         });
     }
 
+    public removeAccents(str){
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+
     public changeString($strign) {
-        return $strign.replace(/ /g, '-').toLowerCase();
+        return this.removeAccents($strign.replace(/ /g, '-').toLowerCase());
     }
 
 

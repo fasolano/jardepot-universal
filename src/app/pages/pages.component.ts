@@ -84,10 +84,6 @@ export class PagesComponent implements OnInit, AfterViewInit  {
         this.getAdditional();
     }
 
-    createForm() {
-
-    }
-
     public getBrands() {
         this.appService.getBrands().subscribe(data => {
             this.brands = data;

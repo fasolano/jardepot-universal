@@ -39,8 +39,12 @@ export class SidenavMenuComponent implements OnInit {
 
     }
 
-    public changeString($string) {
-        return $string.replace(/ /g, '-');
+    public removeAccents(str){
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+
+    public changeString($strign) {
+        return this.removeAccents($strign.replace(/ /g, '-').toLowerCase());
     }
 
 }

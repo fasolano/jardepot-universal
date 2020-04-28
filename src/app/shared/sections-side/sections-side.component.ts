@@ -39,8 +39,17 @@ export class SectionsSideComponent implements OnInit {
         });
     }
 
+
+    public removeAccents(str){
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+
+    public changeString($strign) {
+        return this.removeAccents($strign.replace(/ /g, '-').toLowerCase());
+    }
+
     public changeStringBrand($brand){
-        return $brand.replace(/ /g, "-").toLowerCase();
+        return this.removeAccents($brand.replace(/ /g, "-").toLowerCase());
     }
 
 }

@@ -46,5 +46,5 @@
 
 <app-sections-panel [productTypes]="productTypes" [brands]="brands" [additional]="additional"></app-sections-panel>
 
-<app-brands-carousel [brands]="distributions"></app-brands-carousel>
+<app-brands-carousel *ngIf="bannersShow" [brands]="distributions"></app-brands-carousel>
 

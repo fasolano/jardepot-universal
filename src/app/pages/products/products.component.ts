@@ -55,6 +55,9 @@ export class ProductsComponent implements OnInit {
     public descriptionNivel2: string;
     public titleProducts: string;
     public distributions = [];
+    public window;
+    public carrouselsShow = false;
+
     constructor(public appSettings: AppSettings,
                 private activatedRoute: ActivatedRoute,
                 public appService: AppService,
@@ -67,6 +70,14 @@ export class ProductsComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.window = (typeof window !== "undefined") ? window : null;
+
+        if (this.window) {
+            if (this.window.innerWidth >= 960) {
+                this.carrouselsShow = true;
+            }
+        }
         this.products = [];
         this.count = this.counts[0];
         this.sort = this.sortings[0];
@@ -140,12 +151,14 @@ export class ProductsComponent implements OnInit {
             }
         });
 
-        if (window.innerWidth < 960) {
-            this.sidenavOpen = false;
-        }
+        if (this.window){
+            if (this.window.innerWidth < 960) {
+                this.sidenavOpen = false;
+            }
 
-        if (window.innerWidth < 1280) {
-            this.viewCol = 33.3;
+            if (this.window.innerWidth < 1280) {
+                this.viewCol = 33.3;
+            }
         }
 
         this.getBrands();

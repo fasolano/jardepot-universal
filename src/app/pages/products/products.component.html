@@ -400,7 +400,7 @@
             </div>
         </div>
 
-        <app-brands-carousel [brands]="distributions"></app-brands-carousel>
+        <app-brands-carousel *ngIf="carrouselsShow" [brands]="distributions"></app-brands-carousel>
 
     </mat-sidenav-content>
 
