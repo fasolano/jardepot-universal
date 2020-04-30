@@ -18,10 +18,17 @@ export class ConfirmationComponent implements OnInit {
     public framengData: string[];
     public done = false;
     public billingForPaypal = "";
+    public window;
 
     constructor(private activatedRoute: ActivatedRoute, private appService: AppService, private spinner: NgxSpinnerService, private cookieService: CookieService) {}
 
     ngOnInit() {
+
+        this.window = (typeof window !== "undefined") ? window : null;
+
+        if (this.window) {
+            this.window.scrollTo(0, 0);
+        }
         this.sub = this.activatedRoute.params.subscribe(params => {
             let temp: string;
             this.state = params['state'];

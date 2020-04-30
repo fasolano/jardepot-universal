@@ -63,7 +63,6 @@ export class AppService {
     }
 
     public getProductByName(product): Observable<Product> {
-
         let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         let params = new HttpParams().set('product',product);
         return this.http.get<Product>(this.urlAPI+'/api/product',{headers, params});

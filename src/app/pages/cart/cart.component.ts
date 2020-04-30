@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
     componentRef: ComponentRef<any>;
     dataSource: MatTableDataSource<any>;
     displayedColumns = ['producto', 'nombre', 'precio', 'cantidad', 'total'];
+    public window;
     @ViewChild('paypalCont',{read: ViewContainerRef, static: true}) container: any;
 
     constructor(public appService: AppService, private _cfr: ComponentFactoryResolver, public dialog: MatDialog) {
@@ -44,6 +45,11 @@ export class CartComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.window = (typeof window !== "undefined") ? window : null;
+
+        if (this.window) {
+            this.window.scrollTo(0, 0);
+        }
         this.appService.Data.cartList.forEach(product => {
             this.total.push({"id":product.id, "total":product.cartCount * product.newPrice});
             this.grandTotal += product.cartCount * product.newPrice;

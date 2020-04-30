@@ -11,8 +11,15 @@ export class BrandsCarouselComponent {
   @Input('brands') brands: Array<any> = [];
 
   public config: SwiperConfigInterface = {};
+  public window;
 
   constructor() {
+
+    this.window = (typeof window !== "undefined") ? window : null;
+
+    if (this.window) {
+      this.window.scrollTo(0, 0);
+    }
   }
 
   ngAfterViewInit() {

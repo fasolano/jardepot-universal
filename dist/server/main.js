@@ -3133,6 +3133,10 @@ class CartComponent {
         });
     }
     ngOnInit() {
+        this.window = (typeof window !== "undefined") ? window : null;
+        if (this.window) {
+            this.window.scrollTo(0, 0);
+        }
         this.appService.Data.cartList.forEach(product => {
             this.total.push({ "id": product.id, "total": product.cartCount * product.newPrice });
             this.grandTotal += product.cartCount * product.newPrice;
@@ -4678,6 +4682,10 @@ class CheckoutComponent {
         this.textButtonOrder = 'Crear orden de compra';
     }
     ngOnInit() {
+        this.window = (typeof window !== "undefined") ? window : null;
+        if (this.window) {
+            this.window.scrollTo(0, 0);
+        }
         // this.dataSource = new MatTableDataSource(this.appService.Data.cartList);
         this.deliveryMethods = this.appService.getDeliveryMethods();
         this.paymentMethods = this.appService.getPaymentMethods();
@@ -5023,6 +5031,10 @@ class ConfirmationComponent {
         this.billingForPaypal = "";
     }
     ngOnInit() {
+        this.window = (typeof window !== "undefined") ? window : null;
+        if (this.window) {
+            this.window.scrollTo(0, 0);
+        }
         this.sub = this.activatedRoute.params.subscribe(params => {
             let temp;
             this.state = params['state'];
@@ -5322,6 +5334,7 @@ class HomeComponent {
     ngOnInit() {
         this.window = (typeof window !== 'undefined') ? window : null;
         if (this.window) {
+            this.window.scrollTo(0, 0);
             if (this.window.innerWidth >= 960) {
                 this.bannersShow = true;
             }
@@ -5724,6 +5737,10 @@ class NotExistComponent {
         this.settings = this.appSettings.settings;
     }
     ngOnInit() {
+        this.window = (typeof window !== "undefined") ? window : null;
+        if (this.window) {
+            this.window.scrollTo(0, 0);
+        }
         this.form = this.formBuilder.group({
             comentario: [null, forms_1.Validators.compose([forms_1.Validators.minLength(4)])],
             nombre: [null, forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(4)])],
@@ -6818,15 +6835,16 @@ class ProductComponent {
     }
     ngOnInit() {
         this.window = (typeof window !== "undefined") ? window : null;
-        if (this.window) {
-            if (this.window.innerWidth >= 960) {
-                this.carrouselsShow = true;
-            }
-        }
         this.sub = this.activatedRoute.params.subscribe(params => {
             /*setTimeout(() => {
                 this.scrollToTop();
             }, 300);*/
+            if (this.window) {
+                this.window.scrollTo(0, 0);
+                if (this.window.innerWidth >= 960) {
+                    this.carrouselsShow = true;
+                }
+            }
             this.getProductByName(params.product);
             this.getRelatedProducts(params.product);
             this.productName = params.product;
@@ -7529,6 +7547,9 @@ class ProductsComponent {
             telefono: [null, forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(10), forms_1.Validators.pattern('[0-9]*')])]
         });
         this.sub = this.activatedRoute.params.subscribe(params => {
+            if (this.window) {
+                this.window.scrollTo(0, 0);
+            }
             this.moveToFirstPage();
             this.activeFilters['brand'] = [];
             this.activeFilters['characteristic'] = [];
@@ -7824,9 +7845,9 @@ class ProductsComponent {
         });
     }
     onPageChanged(event) {
-        this.page = event;
-        // this.getProducts();
-        window.scrollTo(0, 0);
+        if (this.window) {
+            this.page = event;
+        }
     }
     onSubmitTeLlamamos(values) {
         if (this.form.valid) {
@@ -8266,6 +8287,10 @@ class BrandsCarouselComponent {
     constructor() {
         this.brands = [];
         this.config = {};
+        this.window = (typeof window !== "undefined") ? window : null;
+        if (this.window) {
+            this.window.scrollTo(0, 0);
+        }
     }
     ngAfterViewInit() {
         this.config = {

@@ -36,6 +36,12 @@ export class NotExistComponent implements OnInit {
 
 
     ngOnInit() {
+
+        this.window = (typeof window !== "undefined") ? window : null;
+
+        if (this.window) {
+            this.window.scrollTo(0, 0);
+        }
         this.form = this.formBuilder.group({
             comentario: [null,  Validators.compose([Validators.minLength(4)])],
             nombre: [null, Validators.compose([Validators.required, Validators.minLength(4)])],

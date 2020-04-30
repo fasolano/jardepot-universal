@@ -89,6 +89,9 @@ export class ProductsComponent implements OnInit {
         });
 
         this.sub = this.activatedRoute.params.subscribe(params => {
+            if (this.window) {
+                this.window.scrollTo(0, 0);
+            }
             this.moveToFirstPage();
             this.activeFilters['brand'] = [];
             this.activeFilters['characteristic'] = [];
@@ -396,9 +399,9 @@ export class ProductsComponent implements OnInit {
     }
 
     public onPageChanged(event) {
-        this.page = event;
-        // this.getProducts();
-        window.scrollTo(0, 0);
+        if (this.window) {
+            this.page = event;
+        }
     }
 
     public onSubmitTeLlamamos(values: Object): void {

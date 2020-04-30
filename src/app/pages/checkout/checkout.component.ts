@@ -31,12 +31,19 @@ export class CheckoutComponent implements OnInit {
     dataSource: MatTableDataSource<any>;
     displayedColumns = ['producto', 'nombre', 'precio', 'cantidad', 'total'];
     textButtonOrder = 'Crear orden de compra';
+    public window;
 
 
     constructor(public appService: AppService, public formBuilder: FormBuilder, public dialog: MatDialog, private cookieService: CookieService) {
     }
 
     ngOnInit() {
+
+        this.window = (typeof window !== "undefined") ? window : null;
+
+        if (this.window) {
+            this.window.scrollTo(0, 0);
+        }
         // this.dataSource = new MatTableDataSource(this.appService.Data.cartList);
         this.deliveryMethods = this.appService.getDeliveryMethods();
         this.paymentMethods = this.appService.getPaymentMethods();
