@@ -7749,13 +7749,13 @@ class ProductsComponent {
         this.closeSideMenu();
     }
     changeString($productType, $brand, $mpn) {
-        $brand = $brand.replace(/ /g, '_').toLowerCase();
-        $mpn = $mpn.replace(/-/g, '_').toLowerCase();
-        $productType = $productType.replace(/ /g, '_').toLowerCase();
+        $brand = $brand.replace(/ /g, '-').toLowerCase();
+        //$mpn = $mpn.replace(/-/g, '_').toLowerCase();
+        $productType = $productType.replace(/ /g, '-').toLowerCase();
         return $productType + '-' + $brand + '-' + $mpn;
     }
     changeStringBrand($brand) {
-        return $brand.replace(/ /g, '_').toLowerCase();
+        return $brand.replace(/ /g, '-').toLowerCase();
     }
     getBrands() {
         this.appService.getBrands().subscribe(data => {
