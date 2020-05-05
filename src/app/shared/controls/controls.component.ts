@@ -124,7 +124,8 @@ export class ControlsComponent implements OnInit {
         if (currentProduct) {
             if ((currentProduct.cartCount + 1) <= product.availibilityCount) {
                 // this.busy = true;
-                product.cartCount = currentProduct.cartCount + 1;
+                    product.cartCount = currentProduct.cartCount + this.count;
+
             } else {
                 // this.snackBar.open('You can not add more items than available. In stock ' + this.product.availibilityCount + ' items and you already added ' + currentProduct.cartCount + ' item to your cart', '×', {
                 this.snackBar.open('No puedes agregar más de este producto', '×', {
@@ -135,8 +136,7 @@ export class ControlsComponent implements OnInit {
                 return false;
             }
         } else {
-            // this.busy = true;
-            product.cartCount = 1;
+            product.cartCount = this.count;
         }
         if(this.cookieService.check('session')){
             this.appService.addToCart(product).subscribe(res => {

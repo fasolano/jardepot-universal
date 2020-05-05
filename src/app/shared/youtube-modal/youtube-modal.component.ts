@@ -11,14 +11,15 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class YoutubeModalComponent implements OnInit {
 
   _ref:any;
-  //@Input('product') product: Product = null;
   public product: Product;
   public url;
 
   constructor(public dialogRef: MatDialogRef<YoutubeModalComponent>, private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.url = this._sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.product.video}`);
+    if (this.product.video){
+      this.url = this._sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.product.video}`);
+    }
   }
 
   public removeObject(){
