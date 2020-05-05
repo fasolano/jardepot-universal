@@ -11,6 +11,7 @@
         <div fxLayout="row wrap" fxFlex="100">
             <div fxLayout="column"  fxFlex="100">
                 <h1>{{product?.name}}</h1>
+                <button *ngIf="product.video" style="width: 120px; margin-bottom: 10px;" mat-raised-button class="bg-color-jd" (click)="openYoutubeDialog()"><mat-icon>videocam</mat-icon> Ver video</button>
                 <div fxLayout="row wrap" fxFlex="100">
                     <div fxFlex="100" fxFlex.gt-sm="40">
                         <mat-card class="product-image" style="overflow: hidden;">

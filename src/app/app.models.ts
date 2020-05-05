@@ -24,5 +24,6 @@ export class Product {
               public metaTitle: string,
               public idSeccion: number,
               public cartCount: number,
-              public keywords: string) { }
+              public keywords: string,
+              public video: string = "") { }
 }

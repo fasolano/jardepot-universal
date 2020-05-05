@@ -61,6 +61,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { JsonLdComponent } from './json-ld/json-ld.component';
 import {PaypalButtonComponent} from './paypal-button/paypal-button.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { YoutubeModalComponent } from './youtube-modal/youtube-modal.component';
 
 @NgModule({
     imports: [
@@ -152,7 +153,8 @@ import {ReactiveFormsModule} from '@angular/forms';
         SectionsSideComponent,
         DialogComponent,
         JsonLdComponent,
-        PaypalButtonComponent
+        PaypalButtonComponent,
+        YoutubeModalComponent
     ],
     declarations: [
         ControlsComponent,
@@ -166,14 +168,16 @@ import {ReactiveFormsModule} from '@angular/forms';
         SectionsSideComponent,
         DialogComponent,
         JsonLdComponent,
-        PaypalButtonComponent
+        PaypalButtonComponent,
+        YoutubeModalComponent
     ],
     entryComponents: [
         ProductDialogComponent,
         TelephoneDialogComponent,
         DialogComponent,
         JsonLdComponent,
-        PaypalButtonComponent
+        PaypalButtonComponent,
+        YoutubeModalComponent
     ],
     providers: [
         {provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}

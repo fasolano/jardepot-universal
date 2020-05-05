@@ -11,6 +11,7 @@ import {Title, Meta} from '@angular/platform-browser';
 import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import {DialogComponent} from '../../../shared/dialog/dialog.component';
 import {ProductDialogComponent} from '../../../shared/products-carousel/product-dialog/product-dialog.component';
+import {YoutubeModalComponent} from "../../../shared/youtube-modal/youtube-modal.component";
 
 @Component({
     selector: 'app-product',
@@ -49,6 +50,7 @@ export class ProductComponent implements OnInit {
     constructor(public appService: AppService,
                 private activatedRoute: ActivatedRoute,
                 public dialog: MatDialog,
+                public dialogYoutube: MatDialog,
                 public formBuilder: FormBuilder,
                 private cd: ChangeDetectorRef,
                 private router: Router,
@@ -253,6 +255,15 @@ export class ProductComponent implements OnInit {
         });
         dialogRef.componentInstance.title = 'Condiciones de envíos Gratis:';
         dialogRef.componentInstance.body = text;
+    }
+
+    public openYoutubeDialog() {
+        const dialogRef = this.dialogYoutube.open(YoutubeModalComponent, {
+            panelClass: 'generic-dialog',
+            direction: 'ltr',
+
+        });
+        dialogRef.componentInstance.product = this.product;
     }
 
     /*public scrollToTop() {

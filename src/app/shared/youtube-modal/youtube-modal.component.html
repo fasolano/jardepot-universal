@@ -1,0 +1,13 @@
+<div class="dialog-container" fxLayout="column" style="width: 100%" ngStyle.gt-sm="width: 700px;">
+    <div class="close-btn-outer" fxLayout="row" fxLayoutAlign="space-between center">
+        <h2>Video ilustrativo</h2>
+        <button mat-mini-fab color="warn" (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div mat-dialog-content ngStyle.gt-sm="width: 700px;" style="max-height: 80vh; width: 250px;">
+        <div class="videoWrapper">
+            <iframe [src]='url' frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
