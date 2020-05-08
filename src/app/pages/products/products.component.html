@@ -174,7 +174,7 @@
                                 ${{product.newPrice | number : '1.2-2'}}
                             </p>
                             <div  fxLayout="row" fxLayoutAlign="center" style="margin-top: 10px; margin-bottom: 10px;">
-                                <button class="btn-comprar" (click)="addToCart(product)" style="cursor: pointer"><mat-icon class="mat-icon-sm m-0">shopping_cart</mat-icon> Comprar</button>
+                                <button class="btn-comprar" (click)="addToCart(product)" style="cursor: pointer; min-height: 27px;"><mat-icon class="mat-icon-sm m-0">shopping_cart</mat-icon> Comprar</button>
                             </div>
                             <p>
                                 <span *ngIf="product?.inventory > 0" class="fn-color-inStock"><mat-icon class="mat-icon-sm m-0">flash_on</mat-icon>&nbsp;Envío de volada</span>&nbsp;

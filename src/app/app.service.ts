@@ -33,8 +33,8 @@ export class AppService {
     public url = 'assets/data/';
     // public urlAPI = 'https://jardepot.com/jardepotAPI/public';
     // public urlAPI = 'https://seragromex.com/jardepotAPI';
-    // public urlAPI = 'https://api.jardepot.com';
-    public urlAPI = 'http://localhost/jardepotAPI/public';
+    public urlAPI = 'https://api.jardepot.com';
+    // public urlAPI = 'http://localhost/jardepotAPI/public';
     // public urlAPI = 'http://192.168.1.88/jardepotAPI';
 
     constructor(public http: HttpClient, public snackBar: MatSnackBar, private cookieService: CookieService, private route: Router) {
