@@ -45,14 +45,12 @@ export const routes = [
         ProductZoomComponent,
         ProductDialogComponent,
         YoutubeModalComponent,
-        ProductsCarouselComponent,
-        PaypalButtonComponent
+        ProductsCarouselComponent
     ],
     entryComponents: [
         ProductZoomComponent,
         ProductDialogComponent,
-        YoutubeModalComponent,
-        PaypalButtonComponent
+        YoutubeModalComponent
     ]
 })
 export class ProductsModule {
