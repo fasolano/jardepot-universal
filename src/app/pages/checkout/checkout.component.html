@@ -623,7 +623,7 @@
         <form *ngIf="deliveryForm" [formGroup]="deliveryForm" class="p-2">
             <mat-radio-group formControlName="deliveryMethod" fxLayout="column" fxLayoutAlign="center" required
                              name="methods">
-                <mat-radio-button *ngFor="let method of deliveryMethods" color="primary" [value]="method" class="mt-1">
+                <mat-radio-button *ngFor="let method of deliveryMethods" color="primary" [value]="method" class="mt-1" (change)="calculateTotal()">
                     <b>{{method.name}}</b>
                     <p style="white-space: normal;">{{method.desc}}</p>
                 </mat-radio-button>
