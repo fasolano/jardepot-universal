@@ -6,6 +6,7 @@ import {NotExistComponent} from './not-exist.component';
 import {NgxJsonLdModule} from '@ngx-lite/json-ld';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {SectionsSideComponent} from "../../shared/sections-side/sections-side.component";
 
 
 export const routes = [
@@ -23,7 +24,7 @@ export const routes = [
         NgxJsonLdModule
     ],
     declarations: [
-        NotExistComponent
+        NotExistComponent,
     ]
 })
 

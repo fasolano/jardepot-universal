@@ -11,7 +11,7 @@ import {Title, Meta} from '@angular/platform-browser';
 import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import {DialogComponent} from '../../../shared/dialog/dialog.component';
 import {ProductDialogComponent} from '../../../shared/products-carousel/product-dialog/product-dialog.component';
-import {YoutubeModalComponent} from "../../../shared/youtube-modal/youtube-modal.component";
+import {YoutubeModalComponent} from "../../../theme/components/youtube-modal/youtube-modal.component";
 
 @Component({
     selector: 'app-product',

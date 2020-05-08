@@ -291,7 +291,7 @@ export class ProductsComponent implements OnInit {
 
     public changeString($productType, $brand, $mpn) {
         $brand = $brand.replace(/ /g, '-').toLowerCase();
-        //$mpn = $mpn.replace(/-/g, '_').toLowerCase();
+        $mpn = $mpn.toLowerCase();
         $productType = $productType.replace(/ /g, '-').toLowerCase();
         return $productType + '-' + $brand + '-' + $mpn;
     }

@@ -47,18 +47,18 @@ export class ProductDialogComponent implements OnInit {
   }
 
   public changeString($productType, $brand, $mpn){
-    $brand = $brand.replace(/ /g, "_");
-    $mpn = $mpn.replace(/-/g, "_");
-    $productType = $productType.replace(/ /g, "_");
+    $brand = $brand.replace(/ /g, "-").toLowerCase();
+    $mpn = $mpn.toLowerCase();
+    $productType = $productType.replace(/ /g, "-").toLowerCase();
     return $productType + '-' + $brand + '-' + $mpn;
   }
 
   public changeStringBrand($brand){
-    return $brand.replace(/ /g, "_");
+    return $brand.replace(/ /g, "-");
   }
   public handleImgError(ev: any) {
     const source = ev.srcElement;
-    const imgSrc = `assets/images/images/generico2.jpg`;
+    const imgSrc = `assets/images/productos/generico2.jpg`;
     source.src = imgSrc;
   }
 }

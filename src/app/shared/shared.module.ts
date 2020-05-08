@@ -4,7 +4,6 @@ import {RouterModule} from '@angular/router';
 import {SwiperModule} from 'ngx-swiper-wrapper';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {
-    MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
@@ -51,7 +50,7 @@ import {ControlsComponent} from './controls/controls.component';
 import {BrandsCarouselComponent} from './brands-carousel/brands-carousel.component';
 import {ProductsCarouselComponent} from './products-carousel/products-carousel.component';
 import {ProductDialogComponent} from './products-carousel/product-dialog/product-dialog.component';
-import {BannersComponent} from './banners/banners.component';
+import {BannersComponent} from '../theme/components/banners/banners.component';
 import { TelephoneDialogComponent } from '../theme/components/menu/telephone-dialog/telephone-dialog.component';
 import { SectionsPanelComponent } from './sections-panel/sections-panel.component';
 import { TelephoneBarComponent } from './telephone-bar/telephone-bar.component';
@@ -61,7 +60,8 @@ import { DialogComponent } from './dialog/dialog.component';
 import { JsonLdComponent } from './json-ld/json-ld.component';
 import {PaypalButtonComponent} from './paypal-button/paypal-button.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import { YoutubeModalComponent } from './youtube-modal/youtube-modal.component';
+import { YoutubeModalComponent } from '../theme/components/youtube-modal/youtube-modal.component';
+import {FooterComponent} from "../theme/components/footer/footer.component";
 
 @NgModule({
     imports: [
@@ -69,7 +69,6 @@ import { YoutubeModalComponent } from './youtube-modal/youtube-modal.component';
         RouterModule,
         SwiperModule,
         FlexLayoutModule,
-        MatAutocompleteModule,
         MatButtonModule,
         MatButtonToggleModule,
         MatCardModule,
@@ -109,7 +108,6 @@ import { YoutubeModalComponent } from './youtube-modal/youtube-modal.component';
         RouterModule,
         SwiperModule,
         FlexLayoutModule,
-        MatAutocompleteModule,
         MatButtonModule,
         MatButtonToggleModule,
         MatCardModule,
@@ -139,45 +137,31 @@ import { YoutubeModalComponent } from './youtube-modal/youtube-modal.component';
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        MatStepperModule,
         PerfectScrollbarModule,
-        PipesModule,
-        ControlsComponent,
         BrandsCarouselComponent,
-        ProductsCarouselComponent,
-        ProductDialogComponent,
         BannersComponent,
         SectionsPanelComponent,
         TelephoneDialogComponent,
         TelephoneBarComponent,
-        SectionsSideComponent,
         DialogComponent,
         JsonLdComponent,
-        PaypalButtonComponent,
-        YoutubeModalComponent
+        SectionsSideComponent,
+        ControlsComponent
     ],
     declarations: [
-        ControlsComponent,
         BrandsCarouselComponent,
-        ProductsCarouselComponent,
-        ProductDialogComponent,
         TelephoneDialogComponent,
         BannersComponent,
         TelephoneBarComponent,
         SectionsPanelComponent,
-        SectionsSideComponent,
         DialogComponent,
         JsonLdComponent,
-        PaypalButtonComponent,
-        YoutubeModalComponent
+        ControlsComponent,
+        SectionsSideComponent,
     ],
     entryComponents: [
-        ProductDialogComponent,
-        TelephoneDialogComponent,
         DialogComponent,
-        JsonLdComponent,
-        PaypalButtonComponent,
-        YoutubeModalComponent
+        TelephoneDialogComponent,
     ],
     providers: [
         {provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}

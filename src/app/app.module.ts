@@ -28,6 +28,8 @@ import {RouterModule} from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
+import {ControlsComponent} from "./shared/controls/controls.component";
+import {SectionsSideComponent} from "./shared/sections-side/sections-side.component";
 
 @NgModule({
     imports: [
@@ -53,7 +55,7 @@ import { NgxJsonLdModule } from '@ngx-lite/json-ld';
         MenuComponent,
         SidenavMenuComponent,
         BreadcrumbComponent,
-        FooterComponent
+        FooterComponent,
     ],
     providers: [
         AppSettings,

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {Product} from "../../app.models";
+import {Product} from "../../../app.models";
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({

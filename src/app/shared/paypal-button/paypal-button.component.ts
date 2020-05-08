@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {emailValidator} from '../../theme/utils/app-validators';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {Router} from '@angular/router';
-import {DialogComponent} from '../../shared/dialog/dialog.component';
+import {DialogComponent} from '../dialog/dialog.component';
 
 @Component({
     selector: 'app-paypal-button',

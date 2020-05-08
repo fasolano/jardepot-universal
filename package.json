@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:client-and-server-bundles": "ng build --prod && ng run emporium:server:production",
+    "build:client-and-server-bundles": "ng build --prod --stats-json && ng run emporium:server:production",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
     "compile:server": "tsc -p server.tsconfig.json",
     "serve:ssr": "node dist/server",
@@ -50,6 +50,7 @@
     "zone.js": "0.10.1"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^9.1.0",
     "@angular-devkit/build-angular": "0.802.1",
     "@angular/cli": "8.2.1",
     "@angular/compiler-cli": "8.2.1",
@@ -71,6 +72,7 @@
     "protractor": "5.4.2",
     "ts-node": "8.3.0",
     "tslint": "5.18.0",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "webpack-bundle-analyzer": "^3.7.0"
   }
 }
