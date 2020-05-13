@@ -2517,7 +2517,6 @@ class Data {
 }
 exports.Data = Data;
 class AppService {
-    // public urlAPI = 'http://localhost/jardepotAPI/public';
     // public urlAPI = 'http://192.168.1.88/jardepotAPI';
     constructor(http, snackBar, cookieService, route) {
         this.http = http;
@@ -2535,7 +2534,8 @@ class AppService {
         this.url = 'assets/data/';
         // public urlAPI = 'https://jardepot.com/jardepotAPI/public';
         // public urlAPI = 'https://seragromex.com/jardepotAPI';
-        this.urlAPI = 'https://api.jardepot.com';
+        // public urlAPI = 'https://api.jardepot.com';
+        this.urlAPI = 'http://localhost/jardepotAPI/public';
     }
     getCategories() {
         return this.http.get(this.url + 'categories.json');
