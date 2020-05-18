@@ -2534,7 +2534,7 @@ class AppService {
         this.cookieValue = 'UNKNOWN';
         this.url = 'assets/data/';
         // public urlAPI = 'https://jardepot.com/jardepotAPI/public';
-        // public urlAPI = 'https://seragromex.com/jardepotAPI';
+        // public urlAPI = 'https://seragromex.mx/';
         this.urlAPI = 'https://api.jardepot.com';
     }
     getCategories() {
@@ -6569,7 +6569,7 @@ function View_ProductComponent_5(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 
     } return ad; }, null, null)), (_l()(), i1.ɵeld(8, 0, null, 0, 0, "div", [["class", "swiper-lazy-preloader"]], null, null, null, null, null))], function (_ck, _v) { var currVal_1 = "center center"; _ck(_v, 4, 0, currVal_1); var currVal_2 = "height: 100px;"; _ck(_v, 6, 0, currVal_2); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = (i1.ɵnov(_v, 2)._animationMode === "NoopAnimations"); _ck(_v, 1, 0, currVal_0); var currVal_3 = _v.context.$implicit.small; var currVal_4 = i1.ɵinlineInterpolate(1, "", ((((((_co.product == null) ? null : _co.product.productType) + " ") + ((_co.product == null) ? null : _co.product.brand)) + " ") + ((_co.product == null) ? null : _co.product.mpn)), ""); var currVal_5 = i1.ɵinlineInterpolate(1, "", ((((((_co.product == null) ? null : _co.product.productType) + " ") + ((_co.product == null) ? null : _co.product.brand)) + " ") + ((_co.product == null) ? null : _co.product.mpn)), ""); _ck(_v, 7, 0, currVal_3, currVal_4, currVal_5); }); }
 function View_ProductComponent_6(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 6, "mat-card", [["class", "zoom-viewer mat-elevation-z18 mat-card"]], [[2, "_mat-animation-noopable", null]], null, null, i8.View_MatCard_0, i8.RenderType_MatCard)), i1.ɵprd(512, null, i12.ɵNgStyleImpl, i12.ɵNgStyleR2Impl, [i1.ElementRef, i1.KeyValueDiffers, i1.Renderer2]), i1.ɵdid(2, 278528, null, 0, i12.NgStyle, [i12.ɵNgStyleImpl], { ngStyle: [0, "ngStyle"] }, null), i1.ɵpod(3, { "background-image": 0 }), i1.ɵdid(4, 933888, null, 0, i13.DefaultStyleDirective, [i1.ElementRef, i11.StyleUtils, i11.MediaMarshaller, i12.ɵNgStyleImpl, i14.DomSanitizer, [6, i12.NgStyle], [2, i11.SERVER_TOKEN], i1.PLATFORM_ID], { ngStyle: [0, "ngStyle"] }, null), i1.ɵpod(5, { "background-image": 0 }), i1.ɵdid(6, 49152, null, 0, i9.MatCard, [[2, i5.ANIMATION_MODULE_TYPE]], null, null)], function (_ck, _v) { var _co = _v.component; var currVal_1 = _ck(_v, 3, 0, (("url(" + _co.zoomImage) + ")")); _ck(_v, 2, 0, currVal_1); var currVal_2 = _ck(_v, 5, 0, (("url(" + _co.zoomImage) + ")")); _ck(_v, 4, 0, currVal_2); }, function (_ck, _v) { var currVal_0 = (i1.ɵnov(_v, 6)._animationMode === "NoopAnimations"); _ck(_v, 0, 0, currVal_0); }); }
 function View_ProductComponent_7(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 2, "span", [], null, null, null, null, null)), (_l()(), i1.ɵted(1, null, ["$", ""])), i1.ɵppd(2, 2)], null, function (_ck, _v) { var _co = _v.component; var currVal_0 = i1.ɵunv(_v, 1, 0, _ck(_v, 2, 0, i1.ɵnov(_v.parent, 0), ((_co.product == null) ? null : _co.product.oldPrice), "1.2-2")); _ck(_v, 1, 0, currVal_0); }); }
-function View_ProductComponent_8(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 5, "h1", [["class", "new-price"]], null, null, null, null, null)), (_l()(), i1.ɵeld(1, 0, null, null, 2, "span", [["style", "color: #de1f21;"]], null, null, null, null, null)), (_l()(), i1.ɵted(2, null, [" $", " "])), i1.ɵppd(3, 2), (_l()(), i1.ɵeld(4, 0, null, null, 1, "span", [["class", "text-bold-tiny"]], null, null, null, null, null)), (_l()(), i1.ɵted(-1, null, ["IVA incluido"]))], null, function (_ck, _v) { var _co = _v.component; var currVal_0 = i1.ɵunv(_v, 2, 0, _ck(_v, 3, 0, i1.ɵnov(_v.parent, 0), ((_co.product == null) ? null : _co.product.newPrice), "1.2-2")); _ck(_v, 2, 0, currVal_0); }); }
+function View_ProductComponent_8(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 5, "h1", [["class", "new-price"]], null, null, null, null, null)), (_l()(), i1.ɵeld(1, 0, null, null, 2, "span", [["style", "color: #de1f21;"]], null, null, null, null, null)), (_l()(), i1.ɵted(2, null, [" $", " "])), i1.ɵppd(3, 2), (_l()(), i1.ɵeld(4, 0, null, null, 1, "span", [["class", "text-bold-tiny"]], null, null, null, null, null)), (_l()(), i1.ɵted(5, null, [" ", ""]))], null, function (_ck, _v) { var _co = _v.component; var currVal_0 = i1.ɵunv(_v, 2, 0, _ck(_v, 3, 0, i1.ɵnov(_v.parent, 0), ((_co.product == null) ? null : _co.product.newPrice), "1.2-2")); _ck(_v, 2, 0, currVal_0); var currVal_1 = _co.textIVA; _ck(_v, 5, 0, currVal_1); }); }
 function View_ProductComponent_9(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 4, "p", [["class", "fn-color-inStock"]], null, null, null, null, null)), (_l()(), i1.ɵeld(1, 0, null, null, 2, "mat-icon", [["class", "mat-icon-sm m-0 fn-color-inStock mat-icon notranslate"], ["role", "img"]], [[2, "mat-icon-inline", null], [2, "mat-icon-no-color", null]], null, null, i6.View_MatIcon_0, i6.RenderType_MatIcon)), i1.ɵdid(2, 9158656, null, 0, i7.MatIcon, [i1.ElementRef, i7.MatIconRegistry, [8, null], [2, i7.MAT_ICON_LOCATION]], null, null), (_l()(), i1.ɵted(-1, 0, ["flash_on"])), (_l()(), i1.ɵted(-1, null, ["\u00A0Env\u00EDo de volada "]))], function (_ck, _v) { _ck(_v, 2, 0); }, function (_ck, _v) { var currVal_0 = i1.ɵnov(_v, 2).inline; var currVal_1 = (((i1.ɵnov(_v, 2).color !== "primary") && (i1.ɵnov(_v, 2).color !== "accent")) && (i1.ɵnov(_v, 2).color !== "warn")); _ck(_v, 1, 0, currVal_0, currVal_1); }); }
 function View_ProductComponent_10(_l) { return i1.ɵvid(0, [(_l()(), i1.ɵeld(0, 0, null, null, 6, "p", [], null, null, null, null, null)), (_l()(), i1.ɵeld(1, 0, null, null, 2, "mat-icon", [["class", "mat-icon-sm m-0 fn-color-jd mat-icon notranslate"], ["role", "img"]], [[2, "mat-icon-inline", null], [2, "mat-icon-no-color", null]], null, null, i6.View_MatIcon_0, i6.RenderType_MatIcon)), i1.ɵdid(2, 9158656, null, 0, i7.MatIcon, [i1.ElementRef, i7.MatIconRegistry, [8, null], [2, i7.MAT_ICON_LOCATION]], null, null), (_l()(), i1.ɵted(-1, 0, ["local_shipping"])), (_l()(), i1.ɵted(-1, null, [" Envio gratis a partir de $3,000 de compra. "])), (_l()(), i1.ɵeld(5, 0, null, null, 1, "a", [["href", "javascript: void(0)"], ["style", "color: rgba(0, 0, 0, 0.87);"]], null, [[null, "click"]], function (_v, en, $event) { var ad = true; var _co = _v.component; if (("click" === en)) {
         var pd_0 = (_co.openDeliveryTermsDialog() !== false);
@@ -6821,6 +6821,7 @@ class ProductComponent {
         this.faWhatsapp = free_brands_svg_icons_1.faWhatsapp;
         this.distributions = [];
         this.carrouselsShow = false;
+        this.textIVA = "";
     }
     ngOnInit() {
         this.window = (typeof window !== "undefined") ? window : null;
@@ -6893,6 +6894,12 @@ class ProductComponent {
                 return;
             }
             this.product = data;
+            if (this.product.productType == "Aspersora" || this.product.productType == "Motosierra" || this.product.productType == "Motobomba" || this.product.productType == "Parihuela") {
+                this.textIVA = "Producto con IVA tasa 0% para uso exclusivamente Agrícola";
+            }
+            else {
+                this.textIVA = "IVA incluido";
+            }
             this.json = {
                 '@context': 'http://schema.org',
                 '@type': 'Product',

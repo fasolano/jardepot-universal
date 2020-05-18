@@ -74,7 +74,7 @@
                             <h3 class="old-price text-muted" >
                                 <span *ngIf="product?.oldPrice && product?.stock">${{product?.oldPrice | number : '1.2-2'}}</span>
                             </h3>
-                            <h1 class="new-price" *ngIf="product?.stock"><span style="color: #de1f21;"> ${{product?.newPrice | number : '1.2-2'}} </span><span class="text-bold-tiny">IVA incluido</span></h1>
+                            <h1 class="new-price" *ngIf="product?.stock"><span style="color: #de1f21;"> ${{product?.newPrice | number : '1.2-2'}} </span><span class="text-bold-tiny"> {{textIVA}}</span></h1>
                             <div class="py-1 lh">
                                 <!--                            <p><span class="fw-500 fn-color-jd">Categoría: </span><span></span></p>-->
                                 <p *ngIf="product?.inventory > 0 && product?.stock" class="fn-color-inStock" ><mat-icon class="mat-icon-sm m-0 fn-color-inStock">flash_on</mat-icon>&nbsp;Envío de volada </p>

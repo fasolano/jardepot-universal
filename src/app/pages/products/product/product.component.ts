@@ -46,6 +46,7 @@ export class ProductComponent implements OnInit {
     public distributions = [];
     public window;
     public carrouselsShow = false;
+    public textIVA = "";
 
     constructor(public appService: AppService,
                 private activatedRoute: ActivatedRoute,
@@ -138,6 +139,11 @@ export class ProductComponent implements OnInit {
                 return;
             }
             this.product = data;
+            if(this.product.productType == "Aspersora" || this.product.productType == "Motosierra" || this.product.productType == "Motobomba" || this.product.productType == "Parihuela"){
+                this.textIVA = "Producto con IVA tasa 0% para uso exclusivamente Agrícola";
+            }else{
+                this.textIVA = "IVA incluido";
+            }
             this.json = {
                 '@context': 'http://schema.org',
                 '@type': 'Product',
