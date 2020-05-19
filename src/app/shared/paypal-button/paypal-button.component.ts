@@ -40,7 +40,8 @@ export class PaypalButtonComponent implements OnInit {
         let products = [];
         this.appService.Data.cartList.forEach(product=>{
             // products.push(product.name);
-            let price = product.newPrice * 1.04;
+            // let price = product.newPrice * 1.04;
+            let price = product.newPrice;
             price = Number((price).toFixed(2));
             products.push({
                 name: product.name,
