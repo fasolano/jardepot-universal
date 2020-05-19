@@ -42,25 +42,37 @@
                          </button>
                      </span>
                     <div class="top-menu" fxLayout="row">
-                         <span class="" fxLayoutAlign="center center" style="cursor: pointer;font-size: 24px"
-                               ngStyle.md="font-size: 22px" (click)="openTelephoneDialog()">
-                           &nbsp;  <mat-icon class="mat-icon-sm">call</mat-icon>Más teléfonos <mat-icon
-                                 class="mat-icon-sm">arrow_drop_down</mat-icon>
+                         <span class="" fxLayoutAlign="center center" style="cursor: pointer;font-size: 40px"
+                               ngStyle.md="font-size: 22px" (click)="openTelephoneDialog()" fxHide.lt-md="">
+                           &nbsp;  + <mat-icon class="mat-icon">call</mat-icon> <mat-icon
+                                 class="mat-icon">arrow_drop_down</mat-icon>
+                         </span>
+                         <span class="" fxLayoutAlign="center center" style="cursor: pointer;font-size: 28px"
+                               ngStyle.md="font-size: 22px" (click)="openTelephoneDialog()" fxHide.gt-sm="">
+                           &nbsp;  <mat-icon class="mat-icon">call</mat-icon> Más Teléfonos <mat-icon
+                                 class="mat-icon">arrow_drop_down</mat-icon>
                          </span>
                     </div>
-                    <div fxFlex="80" fxLayout="row wrap" fxShow="false" fxShow.gt-sm
-                         style="font-size: 28px; margin-left: 10px;" ngStyle.md="font-size: 25px">
-                        <div fxFlex="35" fxFlex.lt-lg="42" ngStyle.md="font-size: 22px;" >
+                    <div fxFlex="90" fxLayout="row wrap" fxShow="false" fxShow.gt-sm
+                         style="font-size: 25px; margin-left: 10px;" ngStyle.md="font-size: 25px">
+                        <div fxFlex="32" ngStyle.md="font-size: 22px;"  fxLayoutAlign="center center">
                             Llámanos al: <a href="tel:8002129225" style="text-decoration: none;"><mat-icon class="mat-icon">call</mat-icon>(800)212 9225</a>
                         </div>
-                        <div fxFlex="21" fxFlex.lt-lg="27" ngStyle.md="font-size: 18px;"  style="font-size: 20px;">
-                            CDMX <mat-icon class="mat-icon-sm">call</mat-icon>(55) 4996 8849
+                        <div fxFlex="17" ngStyle.md="font-size: 18px;"  style="font-size: 20px;">
+                            CDMX <br>
+                            <mat-icon class="mat-icon-sm">call</mat-icon>(55) 4996 8849
                         </div>
-                        <div fxFlex="21" fxFlex.lt-lg="25" ngStyle.md="font-size: 18px; margin-left: 10px;" style="font-size: 20px;">
-                            GDL <mat-icon class="mat-icon-sm">call</mat-icon>(33) 1728 3353
+                        <div fxFlex="17" ngStyle.md="font-size: 18px;" style="font-size: 20px;">
+                            GDL <br>
+                            <mat-icon class="mat-icon-sm">call</mat-icon>(33) 1728 3353
                         </div>
-                        <div fxFlex="21" fxFlex.lt-lg="25" style="font-size: 20px;">
-                            EDOMX <mat-icon class="mat-icon-sm">call</mat-icon>(722) 648 1040
+                        <div fxFlex="17" style="font-size: 20px;">
+                            EDOMX <br>
+                            <mat-icon class="mat-icon-sm">call</mat-icon>(722) 648 1040
+                        </div>
+                        <div fxFlex="17" style="font-size: 20px;">
+                            Mayoreo <br>
+                            <mat-icon class="mat-icon-sm">call</mat-icon>(55) 8759 8891
                         </div>
                     </div>
                     <!--<span class=""  >
