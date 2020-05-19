@@ -32,7 +32,7 @@ export class AppService {
 
     public url = 'assets/data/';
     // public urlAPI = 'https://jardepot.com/jardepotAPI/public';
-    public urlAPI = 'https://seragromex.mx/';
+    public urlAPI = 'https://jardepot.mx';
     // public urlAPI = 'https://api.jardepot.com';
     // public urlAPI = 'http://localhost/jardepotAPI/public';
     // public urlAPI = 'http://192.168.1.88/jardepotAPI';

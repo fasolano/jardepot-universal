@@ -2535,7 +2535,7 @@ class AppService {
         this.cookieValue = 'UNKNOWN';
         this.url = 'assets/data/';
         // public urlAPI = 'https://jardepot.com/jardepotAPI/public';
-        this.urlAPI = 'https://seragromex.mx/';
+        this.urlAPI = 'https://jardepot.mx';
     }
     getCategories() {
         return this.http.get(this.url + 'categories.json');
