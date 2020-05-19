@@ -2517,6 +2517,7 @@ class Data {
 }
 exports.Data = Data;
 class AppService {
+    // public urlAPI = 'https://api.jardepot.com';
     // public urlAPI = 'http://localhost/jardepotAPI/public';
     // public urlAPI = 'http://192.168.1.88/jardepotAPI';
     constructor(http, snackBar, cookieService, route) {
@@ -2534,8 +2535,7 @@ class AppService {
         this.cookieValue = 'UNKNOWN';
         this.url = 'assets/data/';
         // public urlAPI = 'https://jardepot.com/jardepotAPI/public';
-        // public urlAPI = 'https://seragromex.mx/';
-        this.urlAPI = 'https://api.jardepot.com';
+        this.urlAPI = 'https://seragromex.mx/';
     }
     getCategories() {
         return this.http.get(this.url + 'categories.json');
