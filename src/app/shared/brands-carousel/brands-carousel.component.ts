@@ -14,12 +14,6 @@ export class BrandsCarouselComponent {
   public window;
 
   constructor() {
-
-    this.window = (typeof window !== "undefined") ? window : null;
-
-    if (this.window) {
-      this.window.scrollTo(0, 0);
-    }
   }
 
   ngAfterViewInit() {

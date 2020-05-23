@@ -25,7 +25,7 @@
                 </div>
                 <div class="divider mt-2"></div>
                 <div class="icons">
-                    <app-controls [product]="product" [type]="'carousel'" (onOpenProductDialog)="openProductDialog(product)"></app-controls>
+                    <app-controls *ngIf="product" [product]="product" [type]="'carousel'" (onOpenProductDialog)="openProductDialog(product)"></app-controls>
                 </div>
             </mat-card>
         </div>

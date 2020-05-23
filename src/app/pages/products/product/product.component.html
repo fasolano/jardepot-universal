@@ -89,7 +89,7 @@
                             </div>-->
                             <!--                                <p> <mat-icon class="mat-icon-sm m-0 fn-color-jd">local_shipping</mat-icon> Envío Gratis <a style="color: rgba(0, 0, 0, 0.87);" href="javascript: void(0)" (click)="openDeliveryTermsDialog()">*Condiciones</a></p>-->
 
-                            <app-controls [product]="product" [type]="'product'" [align]="'start end'"></app-controls>
+                            <app-controls *ngIf="product" [product]="product" [type]="'product'" [align]="'start end'"></app-controls>
 
 
                             <!--<div style="font-weight: bold !important;">

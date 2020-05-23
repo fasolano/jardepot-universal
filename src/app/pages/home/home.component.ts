@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.window = (typeof window !== 'undefined') ? window : null;
         if (this.window) {
-            this.window.scrollTo(0, 0);
+            //this.window.scrollTo(0, 0);
             if (this.window.innerWidth >= 960) {
                 this.bannersShow = true;
             }

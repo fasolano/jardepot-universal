@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import {SwiperConfigInterface, SwiperDirective} from 'ngx-swiper-wrapper';
 import {Data, AppService} from '../../../app.service';
@@ -33,7 +33,7 @@ export class ProductComponent implements OnInit {
     public image: any;
     public zoomImage: any;
     private sub: any;
-    public form: FormGroup;
+    public form: FormGroup = null;
     public relatedProducts: Array<Product>;
     public brands = [];
     public productTypes = [];
@@ -76,6 +76,14 @@ export class ProductComponent implements OnInit {
             this.getProductByName(params.product);
             this.getRelatedProducts(params.product);
             this.productName = params.product;
+            this.form = this.formBuilder.group({
+                comentario: ['', Validators.minLength(4)],
+                nombre: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+                telefono: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')])],
+                email: ['', Validators.compose([Validators.required, emailValidator])],
+                whatsapp: ['', Validators.compose([Validators.minLength(10), Validators.pattern('[0-9]*')])],
+                producto: [this.productName, Validators.compose([Validators.required])],
+            });
             // this.scrollToTop();
         });
 
@@ -86,14 +94,7 @@ export class ProductComponent implements OnInit {
         /*this.getBrands();
         this.getProductTypes();
         this.getAdditional();*/
-        this.form = this.formBuilder.group({
-            comentario: [null, Validators.minLength(4)],
-            nombre: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
-            telefono: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.pattern('[0-9]*')])],
-            email: [null, Validators.compose([Validators.required, emailValidator])],
-            whatsapp: [null, Validators.compose([Validators.minLength(10), Validators.pattern('[0-9]*')])],
-            producto: [this.productName, Validators.compose([Validators.required])],
-        });
+
         this.getDistributions();
     }
 
