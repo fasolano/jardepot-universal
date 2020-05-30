@@ -23,13 +23,11 @@ import {AppSettings} from './app.settings';
 import {AppService} from './app.service';
 import {AppInterceptor} from './theme/utils/app-interceptor';
 import {FooterComponent} from './theme/components/footer/footer.component';
-import { CookieService } from 'ngx-cookie-service';
+import {CookieService} from 'ngx-cookie-service';
 import {RouterModule} from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { NgxJsonLdModule } from '@ngx-lite/json-ld';
-import {ControlsComponent} from "./shared/controls/controls.component";
-import {SectionsSideComponent} from "./shared/sections-side/sections-side.component";
+import {NgxJsonLdModule} from '@ngx-lite/json-ld';
 
 @NgModule({
     imports: [

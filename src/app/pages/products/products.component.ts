@@ -228,6 +228,9 @@ export class ProductsComponent implements OnInit {
 
     public moveToFirstPage() {
         this.page = 1;
+        if (this.window) {
+            this.window.scrollTo(0, 0);
+        }
         return;
     }
 
@@ -400,6 +403,7 @@ export class ProductsComponent implements OnInit {
 
     public onPageChanged(event) {
         if (this.window) {
+            this.window.scrollTo(0, 0);
             this.page = event;
         }
     }
