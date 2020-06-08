@@ -140,8 +140,9 @@ export class ProductComponent implements OnInit {
                 return;
             }
             this.product = data;
-            if(this.product.productType == "Aspersora" || this.product.productType == "Motosierra" || this.product.productType == "Motobomba" || this.product.productType == "Parihuela"){
-                this.textIVA = "Producto con IVA tasa 0% para uso exclusivamente Agrícola";
+            if(this.product.productType == "Aspersora" || this.product.productType == "Motosierra" || this.product.productType == "Motobomba"
+                || this.product.productType == "Parihuela" || this.product.productType == "Termonebulizadora" || this.product.productType == "Nebulizadora"){
+                this.textIVA = "Producto para uso agrícola precio con IVA tasa 0%";
             }else{
                 this.textIVA = "IVA incluido";
             }
