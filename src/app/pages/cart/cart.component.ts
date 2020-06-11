@@ -7,6 +7,7 @@ import { Data, AppService } from '../../app.service';
 import { Product } from '../../app.models';
 import { PaypalButtonComponent } from '../../shared/paypal-button/paypal-button.component';
 import {MatDialog, MatTableDataSource} from '@angular/material';
+import {MercadoButtonComponent} from "../../shared/mercado-button/mercado-button.component";
 
 @Component({
     selector: 'app-cart',
@@ -21,6 +22,7 @@ export class CartComponent implements OnInit {
     componentRef: ComponentRef<any>;
     dataSource: MatTableDataSource<any>;
     displayedColumns = ['producto', 'nombre', 'precio', 'cantidad', 'total'];
+    mercadopago = true;
     public window;
     @ViewChild('paypalCont',{read: ViewContainerRef, static: true}) container: any;
 
@@ -40,6 +42,11 @@ export class CartComponent implements OnInit {
             if(res != null){
                 let listProducts: Product[] = JSON.parse(res[0]);
                 this.dataSource = new MatTableDataSource(listProducts);
+                listProducts.forEach(product => {
+                    if(product.inventory < 1 || product.cartCount > product.inventory){
+                        this.mercadopago = false;
+                    }
+                });
             }
         });
     }
@@ -55,6 +62,15 @@ export class CartComponent implements OnInit {
             this.grandTotal += product.cartCount * product.newPrice;
             this.cartItemCount.push({"id":product.id, "soldQuantity":product.cartCount});
             this.cartItemCountTotal += product.cartCount;
+        });
+    }
+
+    public updatePayment(){
+        this.mercadopago = true;
+        this.appService.Data.cartList.forEach(product => {
+            if(product.inventory < 1 || product.cartCount > product.inventory){
+                this.mercadopago = false;
+            }
         });
     }
 
@@ -131,7 +147,7 @@ export class CartComponent implements OnInit {
                 });
             });
             this.appService.addToCart(productTemp).subscribe($data=>{
-
+                this.updatePayment();
             });
         }
     }
@@ -150,6 +166,7 @@ export class CartComponent implements OnInit {
             this.appService.resetProductCartCount(product);
             this.appService.removeFromCart(product);
         }
+        this.updatePayment();
     }
 
     public clear() {
@@ -159,10 +176,18 @@ export class CartComponent implements OnInit {
         this.appService.Data.cartList.length = 0;
         this.appService.Data.totalPrice = 0;
         this.appService.Data.totalCartCount = 0;
+        this.updatePayment();
     }
 
     public openDialog(){
         this.dialog.open(PaypalButtonComponent, {
+            panelClass: 'generic-dialog',
+            direction: 'ltr'
+        });
+    }
+
+    public openDialogMercado(){
+        this.dialog.open(MercadoButtonComponent, {
             panelClass: 'generic-dialog',
             direction: 'ltr'
         });

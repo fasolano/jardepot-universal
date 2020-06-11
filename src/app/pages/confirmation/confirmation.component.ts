@@ -38,7 +38,7 @@ export class ConfirmationComponent implements OnInit {
             this.data = this.framengData[1];
             this.activatedRoute.queryParams.subscribe(getParams => {
                 this.data = getParams;
-                if (this.data != ""){
+                if (this.data != "" && this.payment != 'MercadoPago'){
                     this.billingForPaypal = this.data.status.toLocaleLowerCase();
                     this.state = this.data.status.toLocaleLowerCase();
                     this.state = this.state == 'completed' ? 'success':this.state;
@@ -56,12 +56,13 @@ export class ConfirmationComponent implements OnInit {
                         }
                         this.spinner.hide();
                     });
-                }else if(JSON.stringify(this.data) == "{}"){
-                    setTimeout(() => { this.spinner.show(); }, 1000);
+                }else if(this.payment == 'MercadoPago'){
+                    //setTimeout(() => { this.spinner.show(); }, 1000);
                     if(this.payment == 'MercadoPago'){
-                        this.appService.confirmMercadopago(JSON.stringify(this.data)).subscribe(responseMP =>{
+                        this.appService.confirmMercadopago(this.data).subscribe(responseMP =>{
+                            console.log(responseMP);
                             // @ts-ignore
-                            this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), responseMP.data).subscribe(response => {
+                            /*this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), responseMP.data).subscribe(response => {
                                 if (this.cookieService.check('session')) {
                                     this.appService.deleteCookie('session');
                                 }
@@ -69,7 +70,7 @@ export class ConfirmationComponent implements OnInit {
                                 // @ts-ignore
                                 this.state = response.data;
                                 this.spinner.hide();
-                            });
+                            });*/
                         });
                     }else{
                         this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), "").subscribe(response => {

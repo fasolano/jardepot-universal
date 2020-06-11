@@ -75,9 +75,20 @@
                                 <span *ngIf="product?.oldPrice && product?.stock">${{product?.oldPrice | number : '1.2-2'}}</span>
                             </h3>
                             <h1 class="new-price" *ngIf="product?.stock"><span style="color: #de1f21;"> ${{product?.newPrice | number : '1.2-2'}} </span><span class="text-bold-tiny"> {{textIVA}}</span></h1>
+                            <div *ngIf="!product.stock" fxLayout="row" class="prices">
+                                <div fxLayout="column" fxLayoutAlign="center">
+                                    <p class="text-muted" style="font-weight: 900; font-size: 15px;">
+                                        Consulta precio y existencia Llámanos al teléfono
+                                    </p>
+                                    <p style="font-weight: 900; font-size: 18px; color: #de1f21;">
+                                        800 2129225
+                                    </p>
+                                </div>
+                            </div>
                             <div class="py-1 lh">
                                 <!--                            <p><span class="fw-500 fn-color-jd">Categoría: </span><span></span></p>-->
                                 <p *ngIf="product?.inventory > 0 && product?.stock" class="fn-color-inStock" ><mat-icon class="mat-icon-sm m-0 fn-color-inStock">flash_on</mat-icon>&nbsp;Envío de volada </p>
+
                             </div>
 
                             <!--                        ********************************    -->
@@ -139,7 +150,7 @@
                                     <div *ngIf="sendComment == false" class="full-desc lh" style="color: black !important;">
                                         <h3 class="mt-2">Dejanos tus datos para que un asesor te contacte.</h3>
                                         <div class="divider"></div>
-                                        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxLayout="row wrap">
+                                        <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxLayout="row wrap">
                                             <div fxFlex="100" fxFlex.gt-sm="50" class="px-1 mt-2">
                                                 <mat-form-field appearance="outline" class="w-100">
                                                     <mat-label>Nombre Completo</mat-label>

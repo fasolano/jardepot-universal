@@ -6,6 +6,7 @@ import {CartComponent} from './cart.component';
 import {ControlsComponent} from "../../shared/controls/controls.component";
 import {PaypalButtonComponent} from "../../shared/paypal-button/paypal-button.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MercadoButtonComponent} from "../../shared/mercado-button/mercado-button.component";
 
 export const routes = [
     {path: '', component: CartComponent, pathMatch: 'full'}
@@ -21,10 +22,12 @@ export const routes = [
     ],
     declarations: [
         CartComponent,
-        PaypalButtonComponent
+        PaypalButtonComponent,
+        MercadoButtonComponent
     ],
     entryComponents: [
-        PaypalButtonComponent
+        PaypalButtonComponent,
+        MercadoButtonComponent
     ]
 })
 export class CartModule {

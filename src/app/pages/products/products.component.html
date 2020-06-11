@@ -165,8 +165,8 @@
                         {{product.productType}}<br>
                         {{product.brand}} {{product.mpn}}
                     </a>
-                    <div fxLayout="row" fxLayoutAlign="center" class="prices" style="height: 110px;">
-                        <div fxLayout="column" fxLayoutAlign="center" *ngIf="product.stock">
+                    <div *ngIf="product.stock" fxLayout="row" fxLayoutAlign="center" class="prices" style="height: 110px;">
+                        <div fxLayout="column" fxLayoutAlign="center">
                             <p class="old-price text-muted"><span
                                     *ngIf="product.oldPrice">${{product.oldPrice | number : '1.2-2'}}</span>
                             </p>
@@ -188,7 +188,18 @@
                         </div>
                     </div>
                     <p class="py-1 text-muted lh" [style.height]="viewCol == 25 ? '74px' : '94px'"
-                       matTooltip="{{product.description}}">{{ product.description | truncate :90 }} </p>
+                       matTooltip="{{product.description}}">{{ product.description | truncate :90 }}
+                    </p>
+                    <div *ngIf="!product.stock" fxLayout="row" fxLayoutAlign="center" class="prices" style="height: 120px;">
+                        <div fxLayout="column" fxLayoutAlign="center">
+                            <p class="text-muted" style="font-weight: 900; font-size: 15px;">
+                                Consulta precio y existencia Llámanos al teléfono
+                            </p>
+                            <p style="font-weight: 900; font-size: 18px; color: #de1f21;">
+                                800 2129225
+                            </p>
+                        </div>
+                    </div>
 
                     <div class="divider mt-2"></div>
                     <div class="icons">

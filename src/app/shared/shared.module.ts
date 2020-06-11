@@ -62,6 +62,7 @@ import {PaypalButtonComponent} from './paypal-button/paypal-button.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { YoutubeModalComponent } from '../theme/components/youtube-modal/youtube-modal.component';
 import {FooterComponent} from "../theme/components/footer/footer.component";
+import { MercadoButtonComponent } from './mercado-button/mercado-button.component';
 
 @NgModule({
     imports: [
@@ -157,7 +158,7 @@ import {FooterComponent} from "../theme/components/footer/footer.component";
         DialogComponent,
         JsonLdComponent,
         ControlsComponent,
-        SectionsSideComponent,
+        SectionsSideComponent
     ],
     entryComponents: [
         DialogComponent,

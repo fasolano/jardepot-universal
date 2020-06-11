@@ -211,10 +211,14 @@ export class AppService {
 
     public getPaymentMethods() {
         return [
-            {value: 'PayPal', name: 'Paypal', desc: 'Realiza el pago con Paypal para empezar a procesar tu pedido de forma inmediata *Genera un comisión del 4%', cost:1.04},
             {value: 'MercadoPago', name: 'Mercado Pago', desc: 'Realiza el pago con Mercado pago para empezar a procesar tu pedido de forma inmediata *Genera un comisión del 4%', cost:1.04},
             {value: 'Transferencia', name: 'Transferencia Bancaria', desc: 'Realiza transferencia bancaria y envia el comprobante', cost:1}
         ];
+        /*return [
+            {value: 'PayPal', name: 'Paypal', desc: 'Realiza el pago con Paypal para empezar a procesar tu pedido de forma inmediata *Genera un comisión del 4%', cost:1.04},
+            {value: 'MercadoPago', name: 'Mercado Pago', desc: 'Realiza el pago con Mercado pago para empezar a procesar tu pedido de forma inmediata *Genera un comisión del 4%', cost:1.04},
+            {value: 'Transferencia', name: 'Transferencia Bancaria', desc: 'Realiza transferencia bancaria y envia el comprobante', cost:1}
+        ];*/
     }
 
     public getProductLevels($productType) {
@@ -249,6 +253,7 @@ export class AppService {
         let session = this.cookieService.get('session');
         const params = {'forms': JSON.stringify(forms), 'sessionCookie': session};
         return this.http.post(this.urlAPI+'/api/checkout/createOrder', params);
+        // return this.http.post('https://fasolano.com/jardepotAPI/api/checkout/createOrder', params);
     }
 
     public createMercadopago(order, products, client, delivery){
@@ -256,9 +261,18 @@ export class AppService {
         return this.http.post('https://fasolano.com/jardepotAPI/api/checkout/mercadopago', params);
     }
 
+    public createMercadopagoLink(form){
+        let session = this.cookieService.get('session');
+        const params = {'form': JSON.stringify(form), 'sessionCookie': session};
+        // return this.http.post('https://fasolano.com/jardepotAPI/api/checkout/mercadopago', params);
+        return this.http.post(this.urlAPI+'/api/checkout/mercadopago', params);
+    }
+
     public confirmMercadopago($data){
-        const params = {'data':$data};
-        return this.http.post('https://fasolano.com/jardepotAPI/api/confirm/mercadopago', params);
+        let session = this.cookieService.get('session');
+        const params = {'data':JSON.stringify($data), 'sessionCookie': session};
+        //return this.http.post('https://fasolano.com/jardepotAPI/api/confirm/mercadopago', params);
+        return this.http.post(this.urlAPI+'/api/confirm/mercadopago', params);
     }
 
     public enviarBusqueda(forms, busqueda) {
