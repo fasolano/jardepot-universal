@@ -5,6 +5,8 @@ import {emailValidator} from '../../theme/utils/app-validators';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {Router} from '@angular/router';
 import {DialogComponent} from '../dialog/dialog.component';
+import {Product} from "../../app.models";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
     selector: 'app-paypal-button',
@@ -38,20 +40,25 @@ export class PaypalButtonComponent implements OnInit {
         const modal = this.dialogRef;
         const form = this.clientForm;
         let products = [];
-        this.appService.Data.cartList.forEach(product=>{
-            // products.push(product.name);
-            // let price = product.newPrice * 1.04;
-            let price = product.newPrice;
-            price = Number((price).toFixed(2));
-            products.push({
-                name: product.name,
-                unit_amount: {
-                    currency_code: "MXN",
-                    value: price
-                },
-                quantity: product.cartCount
-            });
-            total += price * product.cartCount;
+        this.appService.getProductsCart().subscribe(res => {
+            if(res != null){
+                let listProducts: Product[] = JSON.parse(res[0]);
+                listProducts.forEach(product => {
+                    // products.push(product.name);
+                    // let price = product.newPrice * 1.04;
+                    let price = product.newPrice;
+                    price = Number((price).toFixed(2));
+                    products.push({
+                        name: product.name,
+                        unit_amount: {
+                            currency_code: "MXN",
+                            value: price
+                        },
+                        quantity: product.cartCount
+                    });
+                    total += price * product.cartCount;
+                });
+            }
         });
 
         //se evalua si lleva comisión de envio

@@ -110,7 +110,7 @@ export class CheckoutComponent implements OnInit {
             billing: JSON.stringify(this.billingForm.value),
             billMandatory: JSON.stringify(this.billMandatoryForm.value),
             delivery: JSON.stringify(this.deliveryForm.value),
-            payment: JSON.stringify(this.paymentMethods[2]),
+            payment: JSON.stringify(this.paymentMethods[1]),
             needBilling: this.showBilling
         };
         this.appService.createOrder(data).subscribe(response => {
@@ -123,19 +123,7 @@ export class CheckoutComponent implements OnInit {
                 this.horizontalStepper.next();
                 this.verticalStepper.next();
             } else {
-                // @ts-ignore
-                if (response.data.state == 'Mercadopago') {
-                    // @ts-ignore
-                    this.appService.createMercadopago(response.data.order, response.data.products, response.data.client, response.data.delivery).subscribe(data => {
-                        // @ts-ignore
-                        const url = data.data;
-                        window.open(url, '_self');
-                    });
-                } else {
-                    // @ts-ignore
-                    let url = response.data.url;
-                    window.open(url, '_self');
-                }
+                alert("Ocurrior un error, comunicate con los teléfonos para ofrecerte ayuda");
             }
         });
     }

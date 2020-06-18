@@ -132,6 +132,9 @@
             <div *ngIf="mercadopago" class="mat-cell text-center">
                 <a mat-raised-button class="bg-color-jd" (click)="openDialog()">Pagar - PayPal</a>
             </div>
+            <div *ngIf="mercadopago" class="mat-cell text-center">
+                <a mat-raised-button class="bg-color-jd" (click)="openDialogMercado()">Pagar - Mercadopago</a>
+            </div>
             <div class="mat-cell text-center" style="margin-top: 15px;">
                 <a [routerLink]="['/checkout']" mat-raised-button class="bg-color-jd">Pagar - Deposito Bancario</a>
             </div>

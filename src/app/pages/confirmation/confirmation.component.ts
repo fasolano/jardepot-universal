@@ -57,33 +57,32 @@ export class ConfirmationComponent implements OnInit {
                         this.spinner.hide();
                     });
                 }else if(this.payment == 'MercadoPago'){
-                    //setTimeout(() => { this.spinner.show(); }, 1000);
-                    if(this.payment == 'MercadoPago'){
-                        this.appService.confirmMercadopago(this.data).subscribe(responseMP =>{
-                            console.log(responseMP);
-                            // @ts-ignore
-                            /*this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), responseMP.data).subscribe(response => {
-                                if (this.cookieService.check('session')) {
-                                    this.appService.deleteCookie('session');
-                                }
-                                this.done = true;
-                                // @ts-ignore
-                                this.state = response.data;
-                                this.spinner.hide();
-                            });*/
-                        });
-                    }else{
-                        this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), "").subscribe(response => {
-                            if (this.cookieService.check('session')) {
-                                this.appService.deleteCookie('session');
-                            }
-                            this.done = true;
-                            // @ts-ignore
-                            this.state = response.data;
-                            this.spinner.hide();
-                        });
-                    }
+                    this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), '1213123').subscribe(response =>{
+                        if (this.cookieService.check('session')) {
+                            this.appService.deleteCookie('session');
+                        }
+                        this.done = true;
+                        // @ts-ignore
+                        this.state = response.data;
+                        if(this.state == 'success'){
+                            this.appService.Data.cartList = [];
+                            this.appService.Data.totalPrice = 0;
+                            this.appService.Data.totalCartCount = 0;
+                        }
+                        this.spinner.hide();
+                    });
+                }else{
+                    this.appService.sendConfirmationPayment(this.state, this.payment, JSON.stringify(this.data), "").subscribe(response => {
+                        if (this.cookieService.check('session')) {
+                            this.appService.deleteCookie('session');
+                        }
+                        this.done = true;
+                        // @ts-ignore
+                        this.state = response.data;
+                        this.spinner.hide();
+                    });
                 }
+
             });
         });
     }
