@@ -201,4 +201,8 @@ export class CheckoutComponent implements OnInit {
         source.src = imgSrc;
     }
 
+    public ordenamientoArray(){
+
+    }
+
 }
