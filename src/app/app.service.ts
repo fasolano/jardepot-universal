@@ -196,7 +196,6 @@ export class AppService {
             {name: 'Tienda Cuernavaca', image: 'location_on', url: 'https://goo.gl/maps/X217x5HGYWMCLJqSA', type:'map'},
             {name: '', image: 'assets/images/distribucion/claroshop.jpg', url: 'https://www.claroshop.com/Tienda/124005/JarDepot.com/', type:'img'},
             {name: '', image: 'assets/images/distribucion/elektra.jpg', url: 'https://www.elektra.com.mx/husqvarna', type:'img'},
-            {name: 'Tienda Pachuca', image: 'location_on', url: 'https://g.page/JARDEPOT?share', type:'map'},
             {name: '', image: 'assets/images/distribucion/walmart.jpg', url: 'https://www.walmart.com.mx/productos?Ntt=husqvarna', type:'img'}
         ];
     }

@@ -48,8 +48,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 import {PipesModule} from '../theme/pipes/pipes.module';
 import {ControlsComponent} from './controls/controls.component';
 import {BrandsCarouselComponent} from './brands-carousel/brands-carousel.component';
-import {ProductsCarouselComponent} from './products-carousel/products-carousel.component';
-import {ProductDialogComponent} from './products-carousel/product-dialog/product-dialog.component';
 import {BannersComponent} from '../theme/components/banners/banners.component';
 import { TelephoneDialogComponent } from '../theme/components/menu/telephone-dialog/telephone-dialog.component';
 import { SectionsPanelComponent } from './sections-panel/sections-panel.component';
