@@ -75,7 +75,7 @@
                                 <span *ngIf="product?.oldPrice && product?.stock">${{product?.oldPrice | number : '1.2-2'}}</span>
                             </h3>
                             <h1 class="new-price" *ngIf="product?.stock"><span style="color: #de1f21;"> ${{product?.newPrice | number : '1.2-2'}} </span><span class="text-bold-tiny"> {{textIVA}}</span></h1>
-                            <div *ngIf="!product?.stock" fxLayout="row" class="prices">
+                            <div *ngIf="product?.stock == false" fxLayout="row" class="prices">
                                 <div fxLayout="column" fxLayoutAlign="center">
                                     <p class="text-muted" style="font-weight: 900; font-size: 15px;">
                                         Consulta precio y existencia Llámanos al teléfono
