@@ -10,7 +10,6 @@ import {ProductZoomComponent} from './product-zoom/product-zoom.component';
 import {Title, Meta} from '@angular/platform-browser';
 import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import {DialogComponent} from '../../../shared/dialog/dialog.component';
-import {ProductDialogComponent} from '../../../shared/products-carousel/product-dialog/product-dialog.component';
 import {YoutubeModalComponent} from "../../../theme/components/youtube-modal/youtube-modal.component";
 
 @Component({
@@ -140,12 +139,6 @@ export class ProductComponent implements OnInit {
                 return;
             }
             this.product = data;
-            if(this.product.productType == "Aspersora" || this.product.productType == "Motosierra" || this.product.productType == "Motobomba"
-                || this.product.productType == "Parihuela" || this.product.productType == "Termonebulizadora" || this.product.productType == "Nebulizadora"){
-                this.textIVA = "Producto para uso agrícola precio con IVA tasa 0%";
-            }else{
-                this.textIVA = "IVA incluido";
-            }
             this.json = {
                 '@context': 'http://schema.org',
                 '@type': 'Product',
@@ -159,6 +152,12 @@ export class ProductComponent implements OnInit {
                     'price': this.product.newPrice
                 }
             };
+            if(this.product.productType == "Aspersora" || this.product.productType == "Motosierra" || this.product.productType == "Motobomba"
+                || this.product.productType == "Parihuela" || this.product.productType == "Termonebulizadora" || this.product.productType == "Nebulizadora"){
+                this.textIVA = "Producto para uso agrícola precio con IVA tasa 0%";
+            }else{
+                this.textIVA = "IVA incluido";
+            }
             this.dataSheet = this.product.dataSheet;
             this.image = data.images[0].medium;
             this.zoomImage = data.images[0].big;

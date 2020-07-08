@@ -10,6 +10,7 @@
         <ngx-json-ld [json]="json"></ngx-json-ld>
         <div fxLayout="row wrap" fxFlex="100">
             <div fxLayout="column"  fxFlex="100">
+                <h1 class="new-price, precio" *ngIf="product?.stock" style="display: none;"><span style="color: #de1f21;" class="precio"> ${{product?.newPrice | number : '1.2-2'}} </span><span class="text-bold-tiny"> {{textIVA}}</span></h1>
                 <h1>{{product?.name}}</h1>
                 <button *ngIf="product?.video" style="width: 120px; margin-bottom: 10px;" mat-raised-button class="bg-color-jd" (click)="openYoutubeDialog()"><mat-icon>videocam</mat-icon> Ver video</button>
                 <div fxLayout="row wrap" fxFlex="100">
@@ -74,7 +75,7 @@
                             <h3 class="old-price text-muted" >
                                 <span *ngIf="product?.oldPrice && product?.stock">${{product?.oldPrice | number : '1.2-2'}}</span>
                             </h3>
-                            <h1 class="new-price" *ngIf="product?.stock"><span style="color: #de1f21;"> ${{product?.newPrice | number : '1.2-2'}} </span><span class="text-bold-tiny"> {{textIVA}}</span></h1>
+                            <h1 class="new-price, precio" *ngIf="product?.stock"><span style="color: #de1f21;" class="precio"> ${{product?.newPrice | number : '1.2-2'}} </span><span class="text-bold-tiny"> {{textIVA}}</span></h1>
                             <div *ngIf="product?.stock == false" fxLayout="row" class="prices">
                                 <div fxLayout="column" fxLayoutAlign="center">
                                     <p class="text-muted" style="font-weight: 900; font-size: 15px;">
