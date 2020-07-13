@@ -2349,7 +2349,8 @@ exports.routes = [
     }
 ];
 exports.routing = router_1.RouterModule.forRoot(exports.routes, {
-    preloadingStrategy: router_1.PreloadAllModules,
+// preloadingStrategy: PreloadAllModules,  // <- comment this line for activate lazy load
+// useHash: true
 });
 
 
