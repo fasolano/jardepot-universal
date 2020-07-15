@@ -5,8 +5,10 @@ import { FlexLayoutServerModule } from '@angular/flex-layout/server';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
-import { routes } from "./app.routing";
+import { Routes, RouterModule } from '@angular/router';
+import { AppShellComponent } from './app-shell/app-shell.component';
+
+const routes: Routes = [ { path: 'shell', component: AppShellComponent }];
 
 @NgModule({
   imports: [
@@ -17,6 +19,6 @@ import { routes } from "./app.routing";
     RouterModule.forRoot(routes)
   ],
   bootstrap: [AppComponent],
-  declarations: [],
+  declarations: [AppShellComponent],
 })
 export class AppServerModule {}
