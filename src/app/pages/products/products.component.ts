@@ -30,7 +30,7 @@ export class ProductsComponent implements OnInit {
     private typeProductFilter: string;
     public viewType: string = 'grid';
     public viewCol: number = 25;
-    public counts = [12, 24, 36];
+    public counts = [8, 12, 16];
     public count: any;
     public sortings = ['Más relevantes', 'Menor precio', 'Mayor precio'];
     public sort: any;
@@ -43,7 +43,6 @@ export class ProductsComponent implements OnInit {
     public sections: Array<any> = [];
     public listFilters: Array<any> = [];
     // ategoriesFilter probablemente no se utilizará
-    public categoriesFilter: Array<any> = [];
     public orderByOption: string = 'relevant';
     public activeFilters: Array<any> = [];
     public busqueda: boolean = true;
